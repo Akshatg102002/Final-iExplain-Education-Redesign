@@ -454,7 +454,19 @@ const App: React.FC = () => {
       case 'study-india': return <StudyIndiaDetailPage data={INDIA_COURSES_DETAILED[route.subPath || 'mbbs']} />;
       case 'study-abroad': return <ProgramDetailPage data={STUDY_ABROAD_DETAILED[route.subPath || 'usa']} type="country" />;
       case 'mbbs-abroad': return <MBBSDetailPage data={MBBS_ABROAD_DETAILED[route.subPath || 'russia']} />;
-      case 'exams': return <ExamPage data={EXAMS_DETAILED[route.subPath || 'neet-ug']} />;
+      case 'exams': {
+        const examAliases: Record<string, string> = {
+          'neet-pg': 'neet-ug',
+          'neet_pg': 'neet-ug',
+        };
+        const requestedExam = (route.subPath || 'neet-ug').toLowerCase();
+        const examKey = EXAMS_DETAILED[requestedExam]
+          ? requestedExam
+          : examAliases[requestedExam] && EXAMS_DETAILED[examAliases[requestedExam]]
+            ? examAliases[requestedExam]
+            : 'neet-ug';
+        return <ExamPage data={EXAMS_DETAILED[examKey]} />;
+      }
       case 'office-detail': return <OfficeDetailPage slug={route.subPath || ''} />;
       case 'college-detail': return <CollegeDetailWrapper slug={route.subPath || ''} />;
       case 'service-detail': return <ServiceDetailPage id={route.subPath} />;
