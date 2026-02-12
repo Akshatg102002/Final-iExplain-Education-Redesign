@@ -36,7 +36,7 @@ const TopBar: React.FC = () => {
   const [showFindUs, setShowFindUs] = useState(false);
   const [offices, setOffices] = useState(OFFICE_ADDRESSES);
   const [locating, setLocating] = useState(false);
-  const [userLocation, setUserLocation] = useState<{lat: number, lng: number} | null>(null);
+  const [userLocation, setUserLocation] = useState<{ lat: number, lng: number } | null>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -83,50 +83,66 @@ const TopBar: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 grid grid-cols-2 items-center text-white text-[10px] font-bold h-full">
         {/* Left Side: Locate Office */}
         <div className="flex items-center justify-start relative" ref={dropdownRef}>
-            <button 
-              onClick={() => setShowFindUs(!showFindUs)} 
-              className="flex items-center space-x-2 hover:text-brand-gold transition-colors tracking-widest uppercase bg-transparent p-0 rounded-lg whitespace-nowrap"
-            >
-              <Flags.IN className="w-3.5 h-auto rounded-sm" />
-              <span>Locate Office</span>
-              <i className={`fa-solid fa-chevron-down text-[7px] transition-transform ${showFindUs ? 'rotate-180' : ''}`}></i>
-            </button>
-            
-            {showFindUs && (
-              <div className="absolute top-full left-0 mt-3 w-64 bg-white text-brand-blue rounded-xl shadow-2xl overflow-hidden z-[300] border border-gray-100 animate-fade-in text-left">
-                <div className="p-3 bg-gray-50 border-b border-gray-100">
-                  <button 
-                    onClick={handleLocateMe}
-                    disabled={locating}
-                    className="w-full flex items-center justify-center space-x-2 bg-brand-blue text-white py-2 rounded-lg text-[9px] uppercase tracking-widest hover:bg-brand-gold transition-colors disabled:opacity-70"
-                  >
-                    {locating ? <i className="fa-solid fa-spinner fa-spin"></i> : <i className="fa-solid fa-location-crosshairs"></i>}
-                    <span>{locating ? 'Locating...' : 'Use My Location'}</span>
-                  </button>
-                </div>
-                <div className="max-h-60 overflow-y-auto">
-                  {offices.map((off: any) => (
-                    <a key={off.slug} href={`#/office/${off.slug}`} onClick={() => setShowFindUs(false)} className="block px-4 py-3 hover:bg-brand-gold/10 hover:text-brand-gold transition-colors border-b border-gray-50 last:border-0">
-                      <div className="flex justify-between items-center">
-                        <span className="text-[10px] font-black uppercase tracking-widest text-brand-blue">{off.city}</span>
-                        {off.distance && <span className="text-[8px] font-bold text-gray-400">{(off.distance).toFixed(1)} km</span>}
-                      </div>
-                      <p className="text-[9px] text-gray-500 mt-0.5 truncate">{off.address}</p>
-                    </a>
-                  ))}
-                </div>
+          <button
+            onClick={() => setShowFindUs(!showFindUs)}
+            className="flex items-center space-x-2 hover:text-brand-gold transition-colors tracking-widest uppercase bg-transparent p-0 rounded-lg whitespace-nowrap"
+          >
+            <Flags.IN className="w-3.5 h-auto rounded-sm" />
+            <span>Locate Office</span>
+            <i className={`fa-solid fa-chevron-down text-[7px] transition-transform ${showFindUs ? 'rotate-180' : ''}`}></i>
+          </button>
+
+          {showFindUs && (
+            <div className="absolute top-full left-0 mt-3 w-64 bg-white text-brand-blue rounded-xl shadow-2xl overflow-hidden z-[300] border border-gray-100 animate-fade-in text-left">
+              <div className="p-3 bg-gray-50 border-b border-gray-100">
+                <button
+                  onClick={handleLocateMe}
+                  disabled={locating}
+                  className="w-full flex items-center justify-center space-x-2 bg-brand-blue text-white py-2 rounded-lg text-[9px] uppercase tracking-widest hover:bg-brand-gold transition-colors disabled:opacity-70"
+                >
+                  {locating ? <i className="fa-solid fa-spinner fa-spin"></i> : <i className="fa-solid fa-location-crosshairs"></i>}
+                  <span>{locating ? 'Locating...' : 'Use My Location'}</span>
+                </button>
               </div>
-            )}
+              <div className="max-h-60 overflow-y-auto">
+                {offices.map((off: any) => (
+                  <a key={off.slug} href={`#/office/${off.slug}`} onClick={() => setShowFindUs(false)} className="block px-4 py-3 hover:bg-brand-gold/10 hover:text-brand-gold transition-colors border-b border-gray-50 last:border-0">
+                    <div className="flex justify-between items-center">
+                      <span className="text-[10px] font-black uppercase tracking-widest text-brand-blue">{off.city}</span>
+                      {off.distance && <span className="text-[8px] font-bold text-gray-400">{(off.distance).toFixed(1)} km</span>}
+                    </div>
+                    <p className="text-[9px] text-gray-500 mt-0.5 truncate">{off.address}</p>
+                  </a>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
-        
+
         {/* Right Side: Socials & Phone */}
         <div className="flex items-center justify-end space-x-4">
           {/* Social Icons */}
           <div className="flex items-center space-x-3 text-white/80">
-            <a href="https://facebook.com" target="_blank" rel="noreferrer" className="hover:text-brand-gold transition-colors hover:scale-110"><i className="fa-brands fa-facebook-f"></i></a>
-            <a href="https://instagram.com" target="_blank" rel="noreferrer" className="hover:text-brand-gold transition-colors hover:scale-110"><i className="fa-brands fa-instagram"></i></a>
-            <a href="https://linkedin.com" target="_blank" rel="noreferrer" className="hover:text-brand-gold transition-colors hover:scale-110"><i className="fa-brands fa-linkedin-in"></i></a>
-            <a href="https://youtube.com" target="_blank" rel="noreferrer" className="hover:text-brand-gold transition-colors hover:scale-110"><i className="fa-brands fa-youtube"></i></a>
+            <a href="https://www.facebook.com/iexplainedu" target="_blank" rel="noreferrer" className="hover:text-brand-gold transition-all hover:scale-110">
+              <i className="fa-brands fa-facebook-f"></i>
+            </a>
+
+            <a href="https://www.instagram.com/iexplaineducation" target="_blank" rel="noreferrer" className="hover:text-brand-gold transition-all hover:scale-110">
+              <i className="fa-brands fa-instagram"></i>
+            </a>
+
+            <a href="https://www.linkedin.com/company/iexplain-education/about/" target="_blank" rel="noreferrer" className="hover:text-brand-gold transition-all hover:scale-110">
+              <i className="fa-brands fa-linkedin-in"></i>
+            </a>
+
+            <a href="https://twitter.com/iexplainedu" target="_blank" rel="noreferrer" className="hover:text-brand-gold transition-all hover:scale-110">
+              <i className="fa-brands fa-twitter"></i>
+            </a>
+
+            <a href="https://www.youtube.com/@iexplaineducation" target="_blank" rel="noreferrer" className="hover:text-brand-gold transition-all hover:scale-110">
+              <i className="fa-brands fa-youtube"></i>
+            </a>
+
           </div>
 
           <div className="h-3 w-px bg-white/10 hidden sm:block"></div>
@@ -184,10 +200,10 @@ const Navbar: React.FC<NavbarProps> = ({ isDarkMode, toggleTheme, logoUrl }) => 
 
           <div className="hidden lg:flex flex-grow justify-center h-full items-center space-x-8 xl:space-x-10">
             {['HOME', 'ABOUT', 'PROGRAMS', 'SERVICES', 'BLOGS', 'CONTACT'].map(name => (
-              <div key={name} className="h-20 flex items-center" 
-                onMouseEnter={name === 'PROGRAMS' ? handleMouseEnter : undefined} 
+              <div key={name} className="h-20 flex items-center"
+                onMouseEnter={name === 'PROGRAMS' ? handleMouseEnter : undefined}
                 onMouseLeave={name === 'PROGRAMS' ? handleMouseLeave : undefined}>
-                <a href={name === 'PROGRAMS' ? undefined : name === 'HOME' ? '#' : `#/${name.toLowerCase()}`} 
+                <a href={name === 'PROGRAMS' ? undefined : name === 'HOME' ? '#' : `#/${name.toLowerCase()}`}
                   className={`text-[11px] font-bold tracking-[0.15em] transition-all py-2 border-b-2 border-transparent hover:border-brand-gold ${name === 'PROGRAMS' && isMegaOpen ? 'text-brand-gold border-brand-gold' : 'text-brand-blue dark:text-white hover:text-brand-gold'}`}>
                   {name} {name === 'PROGRAMS' && <i className="fa-solid fa-chevron-down ml-1.5 text-[8px]"></i>}
                 </a>
@@ -240,17 +256,17 @@ const Navbar: React.FC<NavbarProps> = ({ isDarkMode, toggleTheme, logoUrl }) => 
         <div className="fixed inset-0 z-[400] bg-white dark:bg-slate-900 overflow-y-auto lg:hidden animate-fade-in">
           <div className="p-6">
             <div className="flex items-center justify-between mb-8">
-               <div className="w-[140px]">
-                 <img src={logoUrl || LOGO_URL} alt="Logo" className="w-full h-auto dark:brightness-110" />
-               </div>
-               <button onClick={() => setIsMobileMenuOpen(false)} className="w-12 h-12 rounded-full bg-gray-50 dark:bg-slate-800 flex items-center justify-center text-gray-500 hover:bg-red-50 hover:text-red-500 transition-colors">
-                 <i className="fa-solid fa-xmark text-xl"></i>
-               </button>
+              <div className="w-[140px]">
+                <img src={logoUrl || LOGO_URL} alt="Logo" className="w-full h-auto dark:brightness-110" />
+              </div>
+              <button onClick={() => setIsMobileMenuOpen(false)} className="w-12 h-12 rounded-full bg-gray-50 dark:bg-slate-800 flex items-center justify-center text-gray-500 hover:bg-red-50 hover:text-red-500 transition-colors">
+                <i className="fa-solid fa-xmark text-xl"></i>
+              </button>
             </div>
-            
+
             <div className="space-y-2">
               {['HOME', 'ABOUT', 'SERVICES', 'BLOGS', 'CONTACT'].map(item => (
-                <a 
+                <a
                   key={item}
                   href={item === 'HOME' ? '#' : `#/${item.toLowerCase()}`}
                   onClick={() => setIsMobileMenuOpen(false)}
@@ -259,25 +275,25 @@ const Navbar: React.FC<NavbarProps> = ({ isDarkMode, toggleTheme, logoUrl }) => 
                   {item}
                 </a>
               ))}
-              
+
               <div className="pt-8 pb-10">
-                 <p className="text-xs font-black text-gray-400 uppercase tracking-[0.2em] mb-6">Educational Programs</p>
-                 <div className="space-y-6">
-                   {Object.keys(MEGA_MENU_DATA).map(key => (
-                     <div key={key}>
-                       <p className="font-black text-brand-gold text-sm uppercase tracking-widest mb-3 flex items-center">
-                         <i className={`${sidebarIcons[key]} mr-2`}></i> {key}
-                       </p>
-                       <div className="pl-6 space-y-3 border-l-2 border-gray-100 dark:border-slate-800">
-                         {MEGA_MENU_DATA[key as keyof typeof MEGA_MENU_DATA].slice(0, 5).map((subItem: any, i: number) => (
-                           <a key={i} href={subItem.link} onClick={() => setIsMobileMenuOpen(false)} className="block text-sm font-bold text-gray-600 dark:text-gray-400 hover:text-brand-blue dark:hover:text-white transition-colors">
-                             {subItem.name}
-                           </a>
-                         ))}
-                       </div>
-                     </div>
-                   ))}
-                 </div>
+                <p className="text-xs font-black text-gray-400 uppercase tracking-[0.2em] mb-6">Educational Programs</p>
+                <div className="space-y-6">
+                  {Object.keys(MEGA_MENU_DATA).map(key => (
+                    <div key={key}>
+                      <p className="font-black text-brand-gold text-sm uppercase tracking-widest mb-3 flex items-center">
+                        <i className={`${sidebarIcons[key]} mr-2`}></i> {key}
+                      </p>
+                      <div className="pl-6 space-y-3 border-l-2 border-gray-100 dark:border-slate-800">
+                        {MEGA_MENU_DATA[key as keyof typeof MEGA_MENU_DATA].slice(0, 5).map((subItem: any, i: number) => (
+                          <a key={i} href={subItem.link} onClick={() => setIsMobileMenuOpen(false)} className="block text-sm font-bold text-gray-600 dark:text-gray-400 hover:text-brand-blue dark:hover:text-white transition-colors">
+                            {subItem.name}
+                          </a>
+                        ))}
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
 
               <div className="pb-8">

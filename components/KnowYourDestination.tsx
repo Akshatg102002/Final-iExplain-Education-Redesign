@@ -2,6 +2,7 @@
 import React from 'react';
 import { KNOW_YOUR_DESTINATIONS } from '../constants.tsx';
 
+
 const KnowYourDestination: React.FC = () => {
   return (
     <section className="py-16 bg-white dark:bg-slate-900 font-sans">
@@ -18,22 +19,28 @@ const KnowYourDestination: React.FC = () => {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {KNOW_YOUR_DESTINATIONS.map((dest, i) => (
-            <div 
-              key={i} 
+            <div
+              key={i}
+              onClick={() => {
+                window.location.hash = dest.path;
+              }}
               className="group relative h-64 rounded-[1.5rem] overflow-hidden shadow-lg cursor-pointer transform transition-transform hover:scale-[1.02]"
             >
-              <img 
-                src={dest.image} 
-                alt={dest.name} 
-                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" 
+              <img
+                src={dest.image}
+                alt={dest.name}
+                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
               />
               <div className="absolute inset-0 bg-black/30 group-hover:bg-black/40 transition-colors"></div>
               <div className="absolute inset-0 flex items-center justify-center">
-                <h3 className="text-white text-2xl font-black tracking-tight">{dest.name}</h3>
+                <h3 className="text-white text-2xl font-black tracking-tight">
+                  {dest.name}
+                </h3>
               </div>
             </div>
           ))}
         </div>
+
       </div>
     </section>
   );

@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { POPULAR_COLLEGES, COUNTRY_ICONS } from '../constants.tsx';
 import { 
@@ -40,6 +39,30 @@ const PopularColleges: React.FC = () => {
     fetchColleges();
   }, []);
 
+  // Get countries that have colleges for the current tab
+  const availableCountries = React.useMemo(() => {
+    const countriesWithColleges = new Set(
+      colleges
+        .filter(c => c.category === activeTab)
+        .map(c => c.country)
+    );
+    
+    return COUNTRY_ICONS.filter(country => countriesWithColleges.has(country.name));
+  }, [colleges, activeTab]);
+
+  // Auto-select first available country when tab changes
+  useEffect(() => {
+    if (availableCountries.length > 0) {
+      // Check if current selected country is available in new tab
+      const isCurrentCountryAvailable = availableCountries.some(c => c.name === selectedCountry);
+      
+      if (!isCurrentCountryAvailable) {
+        // Select first available country
+        setSelectedCountry(availableCountries[0].name);
+      }
+    }
+  }, [activeTab, availableCountries]);
+
   const filteredColleges = colleges.filter(c => 
     c.category === activeTab && c.country === selectedCountry
   );
@@ -75,7 +98,7 @@ const PopularColleges: React.FC = () => {
         {/* Country Selector Slider */}
         <div className="relative mb-12">
           <div className="flex items-center justify-center space-x-8 overflow-x-auto no-scrollbar pb-6 px-4">
-            {COUNTRY_ICONS.map((country) => (
+            {availableCountries.map((country) => (
               <button
                 key={country.name}
                 onClick={() => setSelectedCountry(country.name)}

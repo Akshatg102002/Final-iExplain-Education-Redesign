@@ -215,6 +215,32 @@ export interface FAQItem {
   answer: string;
 }
 
+export interface EntranceExamData {
+  title: string;
+  heroImage: string;
+  intro: string;
+  examParts: string[]; // e.g. ["JEE Main", "JEE Advanced"]
+  additionalNote?: string;
+  eligibility: {
+    title: string;
+    points: string[];
+  };
+  syllabus: {
+    maths?: string[];
+    physics?: {
+      sectionA: string[];
+      sectionB: string[]; // Experiments
+    };
+    chemistry?: {
+      physical: string[];
+      inorganic: string[];
+      organic: string[];
+    };
+    general?: string[]; // Fallback for other exams
+  };
+  preparationTips: string[];
+}
+
 export interface GalleryItem {
   url: string;
   caption: string;

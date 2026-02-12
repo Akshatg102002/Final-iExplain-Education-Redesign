@@ -42,12 +42,6 @@ const Roadmap: React.FC = () => {
             </div>
           ))}
         </div>
-
-        <div className="text-center">
-          <button className="px-10 py-4 bg-brand-blue text-white rounded-2xl font-black text-[10px] uppercase tracking-[0.2em] hover:bg-brand-gold hover:scale-105 transition-all shadow-xl">
-            Book Your Flight To Study Abroad
-          </button>
-        </div>
       </div>
     </section>
   );
