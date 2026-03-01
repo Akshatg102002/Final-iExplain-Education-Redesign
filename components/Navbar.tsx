@@ -149,6 +149,8 @@ const Navbar: React.FC<NavbarProps> = ({ isDarkMode, toggleTheme, logoUrl }) => 
   const [activeCollegeTab, setActiveCollegeTab] = useState<'MBBS' | 'STUDY'>('MBBS');
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [mobileCollegeOpen, setMobileCollegeOpen] = useState<{mbbs: boolean, study: boolean}>({ mbbs: false, study: false });
+  const [mobileProgramsOpen, setMobileProgramsOpen] = useState<string | null>(null);
+  const [mobileExpandedMenu, setMobileExpandedMenu] = useState<string | null>(null);
   const timerRef = useRef<number | null>(null);
 
   // Lock body scroll when mobile menu is open
@@ -300,93 +302,128 @@ const Navbar: React.FC<NavbarProps> = ({ isDarkMode, toggleTheme, logoUrl }) => 
             
             <div className="space-y-2">
               {navLinks.map(item => {
+                const isExpanded = mobileExpandedMenu === item;
+                
                 if (item === 'PROGRAMS') {
                   return (
-                    <div key={item} className="pt-4 pb-2">
-                       <p className="text-xs font-black text-gray-400 uppercase tracking-[0.2em] mb-4">Educational Programs</p>
-                       <div className="space-y-4 pl-2">
-                         {Object.keys(MEGA_MENU_DATA).map(key => (
-                           <div key={key}>
-                             <p className="font-black text-brand-gold text-sm uppercase tracking-widest mb-3 flex items-center">
-                               <i className={`${sidebarIcons[key]} mr-2`}></i> {key}
-                             </p>
-                             <div className="pl-6 space-y-3 border-l-2 border-gray-100 dark:border-slate-800">
-                               {MEGA_MENU_DATA[key as keyof typeof MEGA_MENU_DATA].slice(0, 5).map((subItem: any, i: number) => (
-                                 <a key={i} href={subItem.link} onClick={() => setIsMobileMenuOpen(false)} className="block text-sm font-bold text-gray-600 dark:text-gray-400 hover:text-brand-blue dark:hover:text-white transition-colors">
-                                   {subItem.name}
-                                 </a>
-                               ))}
-                             </div>
+                    <div key={item} className="border-b border-gray-50 dark:border-slate-800">
+                      <button 
+                        onClick={() => setMobileExpandedMenu(isExpanded ? null : item)}
+                        className={`w-full flex items-center justify-between py-4 text-lg font-black uppercase tracking-tight hover:text-brand-gold transition-colors ${isExpanded ? 'text-brand-gold' : 'text-brand-blue dark:text-white'}`}
+                      >
+                        <span>{item}</span>
+                        <i className={`fa-solid fa-chevron-down text-xs transition-transform ${isExpanded ? 'rotate-180' : ''}`}></i>
+                      </button>
+                      
+                      {isExpanded && (
+                        <div className="pb-4 animate-fade-in">
+                           <p className="text-xs font-black text-gray-400 uppercase tracking-[0.2em] mb-4">Educational Programs</p>
+                           <div className="space-y-4 pl-2">
+                             {Object.keys(MEGA_MENU_DATA).map(key => (
+                               <div key={key}>
+                                 <button 
+                                   onClick={() => setMobileProgramsOpen(prev => prev === key ? null : key)}
+                                   className="w-full flex items-center justify-between font-black text-brand-gold text-sm uppercase tracking-widest mb-3"
+                                 >
+                                   <span className="flex items-center"><i className={`${sidebarIcons[key]} mr-2`}></i> {key}</span>
+                                   <i className={`fa-solid fa-chevron-down text-xs transition-transform ${mobileProgramsOpen === key ? 'rotate-180' : ''}`}></i>
+                                 </button>
+                                 
+                                 {mobileProgramsOpen === key && (
+                                   <div className="pl-6 space-y-3 border-l-2 border-gray-100 dark:border-slate-800 animate-fade-in">
+                                     {MEGA_MENU_DATA[key as keyof typeof MEGA_MENU_DATA].slice(0, 5).map((subItem: any, i: number) => (
+                                       <a key={i} href={subItem.link} onClick={() => setIsMobileMenuOpen(false)} className="block text-sm font-bold text-gray-600 dark:text-gray-400 hover:text-brand-blue dark:hover:text-white transition-colors">
+                                         {subItem.name}
+                                       </a>
+                                     ))}
+                                   </div>
+                                 )}
+                               </div>
+                             ))}
                            </div>
-                         ))}
-                       </div>
+                        </div>
+                      )}
                     </div>
                   );
                 }
+                
                 if (item === 'COLLEGES') {
                   return (
-                    <div key={item} className="pt-4 pb-2">
-                       <p className="text-xs font-black text-gray-400 uppercase tracking-[0.2em] mb-4">Top Colleges</p>
-                       
-                       {/* Mobile Colleges Dropdown */}
-                       {/* MBBS Dropdown */}
-                       <div className="mb-4">
-                         <button onClick={() => setMobileCollegeOpen(prev => ({...prev, mbbs: !prev.mbbs}))} className="w-full flex items-center justify-between font-black text-brand-blue dark:text-white text-sm uppercase tracking-widest mb-3">
-                           <span className="flex items-center"><i className="fa-solid fa-stethoscope mr-2 text-brand-gold"></i> MBBS Abroad</span>
-                           <i className={`fa-solid fa-chevron-down text-xs transition-transform ${mobileCollegeOpen.mbbs ? 'rotate-180' : ''}`}></i>
-                         </button>
-                         
-                         {mobileCollegeOpen.mbbs && (
-                           <div className="pl-6 space-y-4 border-l-2 border-gray-100 dark:border-slate-800 animate-fade-in">
-                             {FOOTER_COLLEGES.mbbs.map((country, idx) => (
-                               <div key={idx}>
-                                 <p className="font-bold text-gray-800 dark:text-gray-200 text-xs uppercase mb-2">{country.country}</p>
-                                 <div className="pl-4 space-y-2">
-                                   {country.names.map((college, cIdx) => (
-                                     <a key={cIdx} href={`#/college/${createSlug(college)}`} onClick={() => setIsMobileMenuOpen(false)} className="block text-[11px] font-medium text-gray-500 dark:text-gray-400 hover:text-brand-blue dark:hover:text-white">
-                                       {college}
-                                     </a>
-                                   ))}
-                                 </div>
+                    <div key={item} className="border-b border-gray-50 dark:border-slate-800">
+                      <button 
+                        onClick={() => setMobileExpandedMenu(isExpanded ? null : item)}
+                        className={`w-full flex items-center justify-between py-4 text-lg font-black uppercase tracking-tight hover:text-brand-gold transition-colors ${isExpanded ? 'text-brand-gold' : 'text-brand-blue dark:text-white'}`}
+                      >
+                        <span>{item}</span>
+                        <i className={`fa-solid fa-chevron-down text-xs transition-transform ${isExpanded ? 'rotate-180' : ''}`}></i>
+                      </button>
+                      
+                      {isExpanded && (
+                        <div className="pb-4 animate-fade-in">
+                           <p className="text-xs font-black text-gray-400 uppercase tracking-[0.2em] mb-4">Top Colleges</p>
+                           
+                           {/* Mobile Colleges Dropdown */}
+                           {/* MBBS Dropdown */}
+                           <div className="mb-4">
+                             <button onClick={() => setMobileCollegeOpen(prev => ({...prev, mbbs: !prev.mbbs}))} className="w-full flex items-center justify-between font-black text-brand-blue dark:text-white text-sm uppercase tracking-widest mb-3">
+                               <span className="flex items-center"><i className="fa-solid fa-stethoscope mr-2 text-brand-gold"></i> MBBS Abroad</span>
+                               <i className={`fa-solid fa-chevron-down text-xs transition-transform ${mobileCollegeOpen.mbbs ? 'rotate-180' : ''}`}></i>
+                             </button>
+                             
+                             {mobileCollegeOpen.mbbs && (
+                               <div className="pl-6 space-y-4 border-l-2 border-gray-100 dark:border-slate-800 animate-fade-in">
+                                 {FOOTER_COLLEGES.mbbs.map((country, idx) => (
+                                   <div key={idx}>
+                                     <p className="font-bold text-gray-800 dark:text-gray-200 text-xs uppercase mb-2">{country.country}</p>
+                                     <div className="pl-4 space-y-2">
+                                       {country.names.map((college, cIdx) => (
+                                         <a key={cIdx} href={`#/college/${createSlug(college)}`} onClick={() => setIsMobileMenuOpen(false)} className="block text-[11px] font-medium text-gray-500 dark:text-gray-400 hover:text-brand-blue dark:hover:text-white">
+                                           {college}
+                                         </a>
+                                       ))}
+                                     </div>
+                                   </div>
+                                 ))}
                                </div>
-                             ))}
+                             )}
                            </div>
-                         )}
-                       </div>
-
-                       {/* Study Abroad Dropdown */}
-                       <div>
-                         <button onClick={() => setMobileCollegeOpen(prev => ({...prev, study: !prev.study}))} className="w-full flex items-center justify-between font-black text-brand-blue dark:text-white text-sm uppercase tracking-widest mb-3">
-                           <span className="flex items-center"><i className="fa-solid fa-earth-americas mr-2 text-brand-gold"></i> Study Abroad</span>
-                           <i className={`fa-solid fa-chevron-down text-xs transition-transform ${mobileCollegeOpen.study ? 'rotate-180' : ''}`}></i>
-                         </button>
-                         
-                         {mobileCollegeOpen.study && (
-                           <div className="pl-6 space-y-4 border-l-2 border-gray-100 dark:border-slate-800 animate-fade-in">
-                             {FOOTER_COLLEGES.study.map((country, idx) => (
-                               <div key={idx}>
-                                 <p className="font-bold text-gray-800 dark:text-gray-200 text-xs uppercase mb-2">{country.country}</p>
-                                 <div className="pl-4 space-y-2">
-                                   {country.names.map((college, cIdx) => (
-                                     <a key={cIdx} href={`#/college/${createSlug(college)}`} onClick={() => setIsMobileMenuOpen(false)} className="block text-[11px] font-medium text-gray-500 dark:text-gray-400 hover:text-brand-blue dark:hover:text-white">
-                                       {college}
-                                     </a>
-                                   ))}
-                                 </div>
+    
+                           {/* Study Abroad Dropdown */}
+                           <div>
+                             <button onClick={() => setMobileCollegeOpen(prev => ({...prev, study: !prev.study}))} className="w-full flex items-center justify-between font-black text-brand-blue dark:text-white text-sm uppercase tracking-widest mb-3">
+                               <span className="flex items-center"><i className="fa-solid fa-earth-americas mr-2 text-brand-gold"></i> Study Abroad</span>
+                               <i className={`fa-solid fa-chevron-down text-xs transition-transform ${mobileCollegeOpen.study ? 'rotate-180' : ''}`}></i>
+                             </button>
+                             
+                             {mobileCollegeOpen.study && (
+                               <div className="pl-6 space-y-4 border-l-2 border-gray-100 dark:border-slate-800 animate-fade-in">
+                                 {FOOTER_COLLEGES.study.map((country, idx) => (
+                                   <div key={idx}>
+                                     <p className="font-bold text-gray-800 dark:text-gray-200 text-xs uppercase mb-2">{country.country}</p>
+                                     <div className="pl-4 space-y-2">
+                                       {country.names.map((college, cIdx) => (
+                                         <a key={cIdx} href={`#/college/${createSlug(college)}`} onClick={() => setIsMobileMenuOpen(false)} className="block text-[11px] font-medium text-gray-500 dark:text-gray-400 hover:text-brand-blue dark:hover:text-white">
+                                           {college}
+                                         </a>
+                                       ))}
+                                     </div>
+                                   </div>
+                                 ))}
                                </div>
-                             ))}
+                             )}
                            </div>
-                         )}
-                       </div>
+                        </div>
+                      )}
                     </div>
                   );
                 }
+                
                 return (
                   <a 
                     key={item}
                     href={item === 'HOME' ? '#' : `#/${item.toLowerCase()}`}
                     onClick={() => setIsMobileMenuOpen(false)}
-                    className="block py-4 text-2xl font-black text-brand-blue dark:text-white uppercase tracking-tight border-b border-gray-50 dark:border-slate-800 hover:text-brand-gold transition-colors"
+                    className="block py-4 text-lg font-black text-brand-blue dark:text-white uppercase tracking-tight border-b border-gray-50 dark:border-slate-800 hover:text-brand-gold transition-colors"
                   >
                     {item}
                   </a>
