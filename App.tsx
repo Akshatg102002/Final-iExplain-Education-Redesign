@@ -24,6 +24,10 @@ import CollegeDetailPage from './components/CollegeDetailPage.tsx';
 import ProgramDetailPage from './components/ProgramDetailPage.tsx';
 import StudyIndiaDetailPage from './components/StudyIndiaDetailPage.tsx';
 import MBBSDetailPage from './components/MBBSDetailPage.tsx';
+import WhoWeAre from './components/WhoWeAre.tsx';
+import AirportDiaries from './components/AirportDiaries.tsx';
+import StudentReviews from './components/StudentReviews.tsx';
+import AwardsAchievements from './components/AwardsAchievements.tsx';
 import * as Flags from 'country-flag-icons/react/3x2';
 import { 
   STUDENT_SERVICES_DATA,
@@ -468,11 +472,14 @@ const App: React.FC = () => {
         <>
           <Hero onStartAI={() => setIsAICounselorOpen(true)} />
           <StatsSection />
-          <AboutSection compact={true} />
+          <WhoWeAre />
           <IndiaSection />
           <PopularColleges />
           <Roadmap />
+          <AirportDiaries />
           <KnowYourDestination />
+          <StudentReviews />
+          <AwardsAchievements />
           <VideoStories />
           <BlogSection />
           <ContactMapSection />
