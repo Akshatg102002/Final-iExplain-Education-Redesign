@@ -5,7 +5,7 @@ import {
   FOOTER_COLLEGES,
   OFFICE_ADDRESSES 
 } from '../constants.tsx';
-import { createSlug } from '../App.tsx';
+import { createSlug } from '../utils.ts';
 
 interface FooterProps {
   logoUrl?: string;

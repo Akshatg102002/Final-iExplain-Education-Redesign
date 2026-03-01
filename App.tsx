@@ -42,8 +42,7 @@ import {
 import { RouteState, SiteSettings } from './types.ts';
 import { db, collection, getDocs, doc, getDoc, query, orderBy, where } from './firebase.ts';
 
-// Helper to generate slugs
-export const createSlug = (text: string) => text ? text.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '') : '';
+import { createSlug } from './utils.ts';
 
 const LoadingOverlay = () => (
   <div className="fixed inset-0 z-[1000] bg-white dark:bg-slate-900 flex items-center justify-center animate-fade-in transition-all">
@@ -394,9 +393,9 @@ const App: React.FC = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsContactModalOpen(true);
-    }, 2000);
+    }, 5000);
     return () => clearTimeout(timer);
-  }, []);
+  }, [route]);
 
   useEffect(() => {
     const handleHashChange = () => {

@@ -1,6 +1,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
-import { LOGO_URL, MEGA_MENU_DATA, OFFICE_ADDRESSES } from '../constants.tsx';
+import { LOGO_URL, MEGA_MENU_DATA, OFFICE_ADDRESSES, FOOTER_COLLEGES } from '../constants.tsx';
+import { createSlug } from '../utils.ts';
 import * as Flags from 'country-flag-icons/react/3x2';
 
 interface NavbarProps {
@@ -144,8 +145,10 @@ const TopBar: React.FC = () => {
 
 const Navbar: React.FC<NavbarProps> = ({ isDarkMode, toggleTheme, logoUrl }) => {
   const [activeTab, setActiveTab] = useState<keyof typeof MEGA_MENU_DATA>("STUDY ABROAD");
-  const [isMegaOpen, setIsMegaOpen] = useState(false);
+  const [activeMenu, setActiveMenu] = useState<string | null>(null);
+  const [activeCollegeTab, setActiveCollegeTab] = useState<'MBBS' | 'STUDY'>('MBBS');
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [mobileCollegeOpen, setMobileCollegeOpen] = useState<{mbbs: boolean, study: boolean}>({ mbbs: false, study: false });
   const timerRef = useRef<number | null>(null);
 
   // Lock body scroll when mobile menu is open
@@ -157,13 +160,13 @@ const Navbar: React.FC<NavbarProps> = ({ isDarkMode, toggleTheme, logoUrl }) => 
     }
   }, [isMobileMenuOpen]);
 
-  const handleMouseEnter = () => {
+  const handleMouseEnter = (menuName: string) => {
     if (timerRef.current) clearTimeout(timerRef.current);
-    setIsMegaOpen(true);
+    setActiveMenu(menuName);
   };
 
   const handleMouseLeave = () => {
-    timerRef.current = window.setTimeout(() => setIsMegaOpen(false), 200);
+    timerRef.current = window.setTimeout(() => setActiveMenu(null), 200);
   };
 
   const sidebarIcons: Record<string, string> = {
@@ -172,6 +175,8 @@ const Navbar: React.FC<NavbarProps> = ({ isDarkMode, toggleTheme, logoUrl }) => 
     "STUDY IN INDIA": "fa-solid fa-building-columns",
     "ENTRANCE EXAMS": "fa-solid fa-file-signature"
   };
+
+  const navLinks = ['HOME', 'ABOUT', 'PROGRAMS', 'COLLEGES', 'SERVICES', 'BLOGS', 'CONTACT'];
 
   return (
     <div className="sticky top-0 z-[200] w-full bg-white dark:bg-slate-900 shadow-sm border-b border-gray-100 dark:border-slate-800">
@@ -183,13 +188,13 @@ const Navbar: React.FC<NavbarProps> = ({ isDarkMode, toggleTheme, logoUrl }) => 
           </div>
 
           <div className="hidden lg:flex flex-grow justify-center h-full items-center space-x-8 xl:space-x-10">
-            {['HOME', 'ABOUT', 'PROGRAMS', 'SERVICES', 'BLOGS', 'CONTACT'].map(name => (
+            {navLinks.map(name => (
               <div key={name} className="h-20 flex items-center" 
-                onMouseEnter={name === 'PROGRAMS' ? handleMouseEnter : undefined} 
-                onMouseLeave={name === 'PROGRAMS' ? handleMouseLeave : undefined}>
-                <a href={name === 'PROGRAMS' ? undefined : name === 'HOME' ? '#' : `#/${name.toLowerCase()}`} 
-                  className={`text-[11px] font-bold tracking-[0.15em] transition-all py-2 border-b-2 border-transparent hover:border-brand-gold ${name === 'PROGRAMS' && isMegaOpen ? 'text-brand-gold border-brand-gold' : 'text-brand-blue dark:text-white hover:text-brand-gold'}`}>
-                  {name} {name === 'PROGRAMS' && <i className="fa-solid fa-chevron-down ml-1.5 text-[8px]"></i>}
+                onMouseEnter={(name === 'PROGRAMS' || name === 'COLLEGES') ? () => handleMouseEnter(name) : undefined} 
+                onMouseLeave={(name === 'PROGRAMS' || name === 'COLLEGES') ? handleMouseLeave : undefined}>
+                <a href={(name === 'PROGRAMS' || name === 'COLLEGES') ? undefined : name === 'HOME' ? '#' : `#/${name.toLowerCase()}`} 
+                  className={`text-[11px] font-bold tracking-[0.15em] transition-all py-2 border-b-2 border-transparent hover:border-brand-gold ${(name === 'PROGRAMS' || name === 'COLLEGES') && activeMenu === name ? 'text-brand-gold border-brand-gold' : 'text-brand-blue dark:text-white hover:text-brand-gold'}`}>
+                  {name} {(name === 'PROGRAMS' || name === 'COLLEGES') && <i className="fa-solid fa-chevron-down ml-1.5 text-[8px]"></i>}
                 </a>
               </div>
             ))}
@@ -206,9 +211,9 @@ const Navbar: React.FC<NavbarProps> = ({ isDarkMode, toggleTheme, logoUrl }) => 
           </div>
         </div>
 
-        {/* Desktop Mega Menu */}
-        {isMegaOpen && (
-          <div onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className="absolute top-full inset-x-0 w-full flex justify-center z-[300]">
+        {/* Desktop Mega Menu - PROGRAMS */}
+        {activeMenu === 'PROGRAMS' && (
+          <div onMouseEnter={() => handleMouseEnter('PROGRAMS')} onMouseLeave={handleMouseLeave} className="absolute top-full inset-x-0 w-full flex justify-center z-[300]">
             <div className="w-[95%] max-w-5xl bg-white dark:bg-slate-900 shadow-[0_30px_80px_-10px_rgba(0,0,0,0.25)] border border-gray-100 dark:border-slate-800 rounded-[2rem] mt-3 overflow-hidden animate-fade-in flex flex-col">
               <div className="flex h-[360px]">
                 <div className="w-64 bg-slate-50/60 dark:bg-slate-800/40 p-5 border-r border-gray-100 dark:border-slate-800 flex flex-col">
@@ -223,11 +228,56 @@ const Navbar: React.FC<NavbarProps> = ({ isDarkMode, toggleTheme, logoUrl }) => 
                 </div>
                 <div className="flex-grow p-8 grid grid-cols-3 gap-4 overflow-y-auto no-scrollbar">
                   {MEGA_MENU_DATA[activeTab].map((item: any, i) => (
-                    <a key={i} href={item.link} onClick={() => setIsMegaOpen(false)} className="flex items-center p-4 rounded-2xl border border-gray-50 dark:border-slate-800 bg-white dark:bg-slate-800 hover:border-brand-gold/30 hover:shadow-xl transition-all group">
+                    <a key={i} href={item.link} onClick={() => setActiveMenu(null)} className="flex items-center p-4 rounded-2xl border border-gray-50 dark:border-slate-800 bg-white dark:bg-slate-800 hover:border-brand-gold/30 hover:shadow-xl transition-all group">
                       <div className="mr-4 shrink-0 transition-transform group-hover:scale-110">{item.code ? <FlagIcon code={item.code} /> : <i className={`${item.icon} text-brand-gold text-lg`}></i>}</div>
                       <div className="flex flex-col"><h4 className="font-bold text-[13px] text-brand-blue dark:text-white group-hover:text-brand-gold transition-colors leading-tight">{item.name}</h4><span className="text-[8px] font-black uppercase text-gray-400 tracking-widest mt-1 opacity-0 group-hover:opacity-100 transition-opacity">Explore Country</span></div>
                     </a>
                   ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Desktop Mega Menu - COLLEGES */}
+        {activeMenu === 'COLLEGES' && (
+          <div onMouseEnter={() => handleMouseEnter('COLLEGES')} onMouseLeave={handleMouseLeave} className="absolute top-full inset-x-0 w-full flex justify-center z-[300]">
+            <div className="w-[95%] max-w-6xl bg-white dark:bg-slate-900 shadow-[0_30px_80px_-10px_rgba(0,0,0,0.25)] border border-gray-100 dark:border-slate-800 rounded-[2rem] mt-3 overflow-hidden animate-fade-in flex flex-col">
+              <div className="flex h-[450px]">
+                {/* Sidebar Tabs */}
+                <div className="w-64 bg-slate-50/60 dark:bg-slate-800/40 p-5 border-r border-gray-100 dark:border-slate-800 flex flex-col">
+                  <div className="space-y-1">
+                    <button onMouseEnter={() => setActiveCollegeTab('MBBS')} className={`w-full flex items-center justify-between px-4 py-3.5 rounded-2xl font-black text-[9px] uppercase tracking-widest transition-all ${activeCollegeTab === 'MBBS' ? 'bg-white dark:bg-slate-700 text-brand-gold shadow-md ring-1 ring-gray-100 dark:ring-slate-600 translate-x-1' : 'text-gray-400 hover:text-brand-blue hover:bg-white/50 dark:hover:bg-slate-800'}`}>
+                      <div className="flex items-center space-x-3"><i className="fa-solid fa-stethoscope text-xs opacity-70"></i><span>MBBS ABROAD</span></div>
+                      <i className="fa-solid fa-chevron-right text-[7px]"></i>
+                    </button>
+                    <button onMouseEnter={() => setActiveCollegeTab('STUDY')} className={`w-full flex items-center justify-between px-4 py-3.5 rounded-2xl font-black text-[9px] uppercase tracking-widest transition-all ${activeCollegeTab === 'STUDY' ? 'bg-white dark:bg-slate-700 text-brand-gold shadow-md ring-1 ring-gray-100 dark:ring-slate-600 translate-x-1' : 'text-gray-400 hover:text-brand-blue hover:bg-white/50 dark:hover:bg-slate-800'}`}>
+                      <div className="flex items-center space-x-3"><i className="fa-solid fa-earth-americas text-xs opacity-70"></i><span>STUDY ABROAD</span></div>
+                      <i className="fa-solid fa-chevron-right text-[7px]"></i>
+                    </button>
+                  </div>
+                </div>
+                
+                {/* Content Area */}
+                <div className="flex-grow p-8 overflow-y-auto no-scrollbar">
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    {(activeCollegeTab === 'MBBS' ? FOOTER_COLLEGES.mbbs : FOOTER_COLLEGES.study).map((countryData, idx) => (
+                      <div key={idx} className="space-y-3">
+                        <h4 className="font-black text-xs text-brand-blue dark:text-white uppercase tracking-widest border-b border-gray-100 dark:border-slate-700 pb-2 flex items-center">
+                          <i className="fa-solid fa-flag text-brand-gold mr-2"></i> {countryData.country}
+                        </h4>
+                        <ul className="space-y-2">
+                          {countryData.names.map((college, cIdx) => (
+                            <li key={cIdx}>
+                              <a href={`#/college/${createSlug(college)}`} onClick={() => setActiveMenu(null)} className="block text-[11px] font-bold text-gray-500 dark:text-gray-400 hover:text-brand-blue dark:hover:text-white hover:translate-x-1 transition-all truncate">
+                                {college}
+                              </a>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
@@ -249,38 +299,100 @@ const Navbar: React.FC<NavbarProps> = ({ isDarkMode, toggleTheme, logoUrl }) => 
             </div>
             
             <div className="space-y-2">
-              {['HOME', 'ABOUT', 'SERVICES', 'BLOGS', 'CONTACT'].map(item => (
-                <a 
-                  key={item}
-                  href={item === 'HOME' ? '#' : `#/${item.toLowerCase()}`}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="block py-4 text-2xl font-black text-brand-blue dark:text-white uppercase tracking-tight border-b border-gray-50 dark:border-slate-800 hover:text-brand-gold transition-colors"
-                >
-                  {item}
-                </a>
-              ))}
-              
-              <div className="pt-8 pb-10">
-                 <p className="text-xs font-black text-gray-400 uppercase tracking-[0.2em] mb-6">Educational Programs</p>
-                 <div className="space-y-6">
-                   {Object.keys(MEGA_MENU_DATA).map(key => (
-                     <div key={key}>
-                       <p className="font-black text-brand-gold text-sm uppercase tracking-widest mb-3 flex items-center">
-                         <i className={`${sidebarIcons[key]} mr-2`}></i> {key}
-                       </p>
-                       <div className="pl-6 space-y-3 border-l-2 border-gray-100 dark:border-slate-800">
-                         {MEGA_MENU_DATA[key as keyof typeof MEGA_MENU_DATA].slice(0, 5).map((subItem: any, i: number) => (
-                           <a key={i} href={subItem.link} onClick={() => setIsMobileMenuOpen(false)} className="block text-sm font-bold text-gray-600 dark:text-gray-400 hover:text-brand-blue dark:hover:text-white transition-colors">
-                             {subItem.name}
-                           </a>
+              {navLinks.map(item => {
+                if (item === 'PROGRAMS') {
+                  return (
+                    <div key={item} className="pt-4 pb-2">
+                       <p className="text-xs font-black text-gray-400 uppercase tracking-[0.2em] mb-4">Educational Programs</p>
+                       <div className="space-y-4 pl-2">
+                         {Object.keys(MEGA_MENU_DATA).map(key => (
+                           <div key={key}>
+                             <p className="font-black text-brand-gold text-sm uppercase tracking-widest mb-3 flex items-center">
+                               <i className={`${sidebarIcons[key]} mr-2`}></i> {key}
+                             </p>
+                             <div className="pl-6 space-y-3 border-l-2 border-gray-100 dark:border-slate-800">
+                               {MEGA_MENU_DATA[key as keyof typeof MEGA_MENU_DATA].slice(0, 5).map((subItem: any, i: number) => (
+                                 <a key={i} href={subItem.link} onClick={() => setIsMobileMenuOpen(false)} className="block text-sm font-bold text-gray-600 dark:text-gray-400 hover:text-brand-blue dark:hover:text-white transition-colors">
+                                   {subItem.name}
+                                 </a>
+                               ))}
+                             </div>
+                           </div>
                          ))}
                        </div>
-                     </div>
-                   ))}
-                 </div>
-              </div>
+                    </div>
+                  );
+                }
+                if (item === 'COLLEGES') {
+                  return (
+                    <div key={item} className="pt-4 pb-2">
+                       <p className="text-xs font-black text-gray-400 uppercase tracking-[0.2em] mb-4">Top Colleges</p>
+                       
+                       {/* MBBS Dropdown */}
+                       <div className="mb-4">
+                         <button onClick={() => setMobileCollegeOpen(prev => ({...prev, mbbs: !prev.mbbs}))} className="w-full flex items-center justify-between font-black text-brand-blue dark:text-white text-sm uppercase tracking-widest mb-3">
+                           <span className="flex items-center"><i className="fa-solid fa-stethoscope mr-2 text-brand-gold"></i> MBBS Abroad</span>
+                           <i className={`fa-solid fa-chevron-down text-xs transition-transform ${mobileCollegeOpen.mbbs ? 'rotate-180' : ''}`}></i>
+                         </button>
+                         
+                         {mobileCollegeOpen.mbbs && (
+                           <div className="pl-6 space-y-4 border-l-2 border-gray-100 dark:border-slate-800 animate-fade-in">
+                             {FOOTER_COLLEGES.mbbs.map((country, idx) => (
+                               <div key={idx}>
+                                 <p className="font-bold text-gray-800 dark:text-gray-200 text-xs uppercase mb-2">{country.country}</p>
+                                 <div className="pl-4 space-y-2">
+                                   {country.names.map((college, cIdx) => (
+                                     <a key={cIdx} href={`#/college/${createSlug(college)}`} onClick={() => setIsMobileMenuOpen(false)} className="block text-[11px] font-medium text-gray-500 dark:text-gray-400 hover:text-brand-blue dark:hover:text-white">
+                                       {college}
+                                     </a>
+                                   ))}
+                                 </div>
+                               </div>
+                             ))}
+                           </div>
+                         )}
+                       </div>
 
-              <div className="pb-8">
+                       {/* Study Abroad Dropdown */}
+                       <div>
+                         <button onClick={() => setMobileCollegeOpen(prev => ({...prev, study: !prev.study}))} className="w-full flex items-center justify-between font-black text-brand-blue dark:text-white text-sm uppercase tracking-widest mb-3">
+                           <span className="flex items-center"><i className="fa-solid fa-earth-americas mr-2 text-brand-gold"></i> Study Abroad</span>
+                           <i className={`fa-solid fa-chevron-down text-xs transition-transform ${mobileCollegeOpen.study ? 'rotate-180' : ''}`}></i>
+                         </button>
+                         
+                         {mobileCollegeOpen.study && (
+                           <div className="pl-6 space-y-4 border-l-2 border-gray-100 dark:border-slate-800 animate-fade-in">
+                             {FOOTER_COLLEGES.study.map((country, idx) => (
+                               <div key={idx}>
+                                 <p className="font-bold text-gray-800 dark:text-gray-200 text-xs uppercase mb-2">{country.country}</p>
+                                 <div className="pl-4 space-y-2">
+                                   {country.names.map((college, cIdx) => (
+                                     <a key={cIdx} href={`#/college/${createSlug(college)}`} onClick={() => setIsMobileMenuOpen(false)} className="block text-[11px] font-medium text-gray-500 dark:text-gray-400 hover:text-brand-blue dark:hover:text-white">
+                                       {college}
+                                     </a>
+                                   ))}
+                                 </div>
+                               </div>
+                             ))}
+                           </div>
+                         )}
+                       </div>
+                    </div>
+                  );
+                }
+                return (
+                  <a 
+                    key={item}
+                    href={item === 'HOME' ? '#' : `#/${item.toLowerCase()}`}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="block py-4 text-2xl font-black text-brand-blue dark:text-white uppercase tracking-tight border-b border-gray-50 dark:border-slate-800 hover:text-brand-gold transition-colors"
+                  >
+                    {item}
+                  </a>
+                );
+              })}
+              
+              <div className="pb-8 pt-8">
                 <a href="#contact" onClick={() => setIsMobileMenuOpen(false)} className="block w-full py-5 bg-brand-blue text-white text-center rounded-2xl font-black uppercase tracking-widest shadow-xl shadow-brand-blue/20">
                   Book Consultation
                 </a>

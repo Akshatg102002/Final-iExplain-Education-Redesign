@@ -249,4 +249,122 @@ export const INDIA_COURSES_DETAILED: Record<string, StudyIndiaDetailData> = {
         "In India, the weather is tropical monsoon climate and tropical wet and dry climate.",
         "The population in India is approx. 133.92 crores.",
         "India has the largest postal network across the globe, having more than 1 55,015 post offices.",
-        "India is known for organizing the largest
+        "India is known for organizing the largest gathering of people, Kumbh Mela."
+      ]
+    }
+  }
+};
+
+export const MEGA_MENU_DATA = {
+  "STUDY ABROAD": [
+    { name: "USA", link: "#/study-abroad/usa", code: "US" },
+    { name: "UK", link: "#/study-abroad/uk", code: "GB" },
+    { name: "Canada", link: "#/study-abroad/canada", code: "CA" },
+    { name: "Australia", link: "#/study-abroad/australia", code: "AU" },
+    { name: "Germany", link: "#/study-abroad/germany", code: "DE" },
+    { name: "Ireland", link: "#/study-abroad/ireland", code: "IE" },
+    { name: "New Zealand", link: "#/study-abroad/new-zealand", code: "NZ" },
+    { name: "Dubai", link: "#/study-abroad/dubai", code: "AE" }
+  ],
+  "MBBS ABROAD": [
+    { name: "Russia", link: "#/mbbs-abroad/russia", code: "RU" },
+    { name: "Uzbekistan", link: "#/mbbs-abroad/uzbekistan", code: "UZ" },
+    { name: "Kazakhstan", link: "#/mbbs-abroad/kazakhstan", code: "KZ" },
+    { name: "Philippines", link: "#/mbbs-abroad/philippines", code: "PH" },
+    { name: "Georgia", link: "#/mbbs-abroad/georgia", code: "GE" },
+    { name: "Kyrgyzstan", link: "#/mbbs-abroad/kyrgyzstan", code: "KG" },
+    { name: "Egypt", link: "#/mbbs-abroad/egypt", code: "EG" },
+    { name: "Bangladesh", link: "#/mbbs-abroad/bangladesh", code: "BD" }
+  ],
+  "STUDY IN INDIA": [
+    { name: "MBBS", link: "#/study-india/mbbs", icon: "fa-solid fa-user-doctor" },
+    { name: "B.Tech", link: "#/study-india/btech", icon: "fa-solid fa-microchip" },
+    { name: "MBA", link: "#/study-india/mba", icon: "fa-solid fa-briefcase" },
+    { name: "BBA", link: "#/study-india/bba", icon: "fa-solid fa-chart-line" },
+    { name: "PGDM", link: "#/study-india/pgdm", icon: "fa-solid fa-graduation-cap" }
+  ],
+  "ENTRANCE EXAMS": [
+    { name: "NEET UG", link: "#/exams/neet-ug", icon: "fa-solid fa-file-medical" },
+    { name: "JEE Main", link: "#/exams/jee-main", icon: "fa-solid fa-calculator" },
+    { name: "CAT", link: "#/exams/cat", icon: "fa-solid fa-chart-pie" },
+    { name: "CLAT", link: "#/exams/clat", icon: "fa-solid fa-scale-balanced" },
+    { name: "CUET", link: "#/exams/cuet", icon: "fa-solid fa-pen-to-square" }
+  ]
+};
+
+export const STUDENT_SERVICES_DATA = [
+  { id: "counseling", title: "Career Counseling", icon: "fa-solid fa-comments", desc: "Expert guidance to choose the right path." },
+  { id: "admission", title: "Admission Guidance", icon: "fa-solid fa-university", desc: "Step-by-step assistance for admission." },
+  { id: "visa", title: "Visa Assistance", icon: "fa-solid fa-passport", desc: "Hassle-free visa application process." },
+  { id: "loan", title: "Education Loan", icon: "fa-solid fa-money-check-dollar", desc: "Financial support for your education." }
+];
+
+export const BLOG_POSTS = [
+  { id: "1", title: "Top 10 Universities in USA", image: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&q=80&w=600", date: "Oct 10, 2023", excerpt: "Discover the best universities in the USA for international students." },
+  { id: "2", title: "MBBS in Russia: A Complete Guide", image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&q=80&w=600", date: "Sep 25, 2023", excerpt: "Everything you need to know about studying MBBS in Russia." }
+];
+
+export const STUDY_ABROAD_DETAILED = {
+  "usa": { title: "Study in USA", heroImage: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&q=80&w=1200", intro: "The USA is a top destination...", universities: [] },
+  "uk": { title: "Study in UK", heroImage: "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&q=80&w=1200", intro: "The UK offers world-class education...", universities: [] }
+};
+
+export const MBBS_ABROAD_DETAILED = {
+  "russia": { title: "MBBS in Russia", heroImage: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&q=80&w=1200", intro: "Russia is a popular choice for MBBS...", colleges: [] }
+};
+
+export const EXAMS_DETAILED = {
+  "neet-ug": { title: "NEET UG", heroImage: "https://images.unsplash.com/photo-1606326608606-aa0b62935f2b?auto=format&fit=crop&q=80&w=1200", intro: "National Eligibility cum Entrance Test...", syllabus: {} }
+};
+
+export const ROADMAP_STEPS = [
+  { title: "Counseling", desc: "Get expert advice" },
+  { title: "University Selection", desc: "Choose the best fit" },
+  { title: "Application", desc: "Submit your documents" },
+  { title: "Visa Process", desc: "Get your visa approved" },
+  { title: "Departure", desc: "Fly to your dream destination" }
+];
+
+export const INDIA_COURSES = [
+  { name: "MBBS", slug: "mbbs", image: "https://images.unsplash.com/photo-1551076805-e1869033e561?auto=format&fit=crop&q=80&w=600" },
+  { name: "B.Tech", slug: "btech", image: "https://images.unsplash.com/photo-1581092921461-eab62e97a782?auto=format&fit=crop&q=80&w=600" },
+  { name: "MBA", slug: "mba", image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=600" }
+];
+
+export const STATS = [
+  { label: "Students Counseled", value: "10,000+" },
+  { label: "Partner Universities", value: "500+" },
+  { label: "Years of Experience", value: "15+" }
+];
+
+export const POPULAR_COLLEGES = [
+  { name: "Kazan Federal University", country: "Russia", image: "https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&q=80&w=600", slug: "kazan-federal-university" },
+  { name: "Northeastern University", country: "USA", image: "https://images.unsplash.com/photo-1498243691581-b145c3f54a5a?auto=format&fit=crop&q=80&w=600", slug: "northeastern-university" },
+  { name: "University of Leeds", country: "UK", image: "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&q=80&w=600", slug: "university-of-leeds" }
+];
+
+export const COUNTRY_ICONS: Record<string, string> = {
+  "Russia": "RU",
+  "USA": "US",
+  "UK": "GB",
+  "Australia": "AU",
+  "Canada": "CA",
+  "Germany": "DE",
+  "Ireland": "IE",
+  "New Zealand": "NZ",
+  "Dubai": "AE",
+  "Uzbekistan": "UZ",
+  "Kazakhstan": "KZ",
+  "Philippines": "PH",
+  "Georgia": "GE",
+  "Kyrgyzstan": "KG",
+  "Egypt": "EG",
+  "Bangladesh": "BD"
+};
+
+export const KNOW_YOUR_DESTINATIONS = [
+  { name: "USA", image: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&q=80&w=600", slug: "usa" },
+  { name: "UK", image: "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&q=80&w=600", slug: "uk" },
+  { name: "Canada", image: "https://images.unsplash.com/photo-1517935706615-2717063c2225?auto=format&fit=crop&q=80&w=600", slug: "canada" },
+  { name: "Australia", image: "https://images.unsplash.com/photo-1523482580672-f109ba8cb9be?auto=format&fit=crop&q=80&w=600", slug: "australia" }
+];
