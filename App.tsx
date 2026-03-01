@@ -396,6 +396,9 @@ const App: React.FC = () => {
 
   // Trigger contact modal after 5 seconds on route change
   useEffect(() => {
+    // Don't auto-trigger on contact page as it already has a form
+    if (route.view === 'contact') return;
+
     const timer = setTimeout(() => {
       setIsContactModalOpen(true);
     }, 5000);
