@@ -223,6 +223,33 @@ export interface GalleryItem {
 
 export type AppView = 'home' | 'about' | 'services' | 'contact' | 'mbbs-abroad' | 'study-abroad' | 'study-india' | 'exams' | 'admin' | 'service-detail' | 'legal' | 'achievements' | 'office-detail' | 'blog-list' | 'blog-detail' | 'college-detail';
 
+export interface EntranceExamData {
+  id?: string;
+  title: string;
+  heroImage: string;
+  intro: string;
+  examParts?: string[];
+  additionalNote?: string;
+  eligibility: {
+    title: string;
+    points: string[];
+  };
+  syllabus: {
+    maths?: string[];
+    physics?: {
+      sectionA: string[];
+      sectionB: string[];
+    };
+    chemistry?: {
+      physical: string[];
+      inorganic: string[];
+      organic: string[];
+    };
+    biology?: string[]; // Added for NEET
+  };
+  preparationTips: string[];
+}
+
 export interface RouteState {
   view: AppView;
   subPath?: string;
