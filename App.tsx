@@ -390,6 +390,7 @@ const App: React.FC = () => {
   const [isAICounselorOpen, setIsAICounselorOpen] = useState(false);
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
 
+  // Trigger contact modal after 5 seconds on route change
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsContactModalOpen(true);

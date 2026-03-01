@@ -328,6 +328,7 @@ const Navbar: React.FC<NavbarProps> = ({ isDarkMode, toggleTheme, logoUrl }) => 
                     <div key={item} className="pt-4 pb-2">
                        <p className="text-xs font-black text-gray-400 uppercase tracking-[0.2em] mb-4">Top Colleges</p>
                        
+                       {/* Mobile Colleges Dropdown */}
                        {/* MBBS Dropdown */}
                        <div className="mb-4">
                          <button onClick={() => setMobileCollegeOpen(prev => ({...prev, mbbs: !prev.mbbs}))} className="w-full flex items-center justify-between font-black text-brand-blue dark:text-white text-sm uppercase tracking-widest mb-3">
