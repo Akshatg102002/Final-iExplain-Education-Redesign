@@ -8,7 +8,7 @@ interface HeroProps {
 
 const Hero: React.FC<HeroProps> = ({ onStartAI }) => {
   return (
-    <section className="bg-white dark:bg-slate-900 pt-12 pb-20 lg:pt-24 lg:pb-32 border-b border-gray-100 dark:border-slate-800 relative overflow-hidden">
+    <section className="bg-white dark:bg-slate-900 pt-12 pb-20 lg:pt-12 lg:pb-20 border-b border-gray-100 dark:border-slate-800 relative overflow-hidden">
       {/* Decorative Elements */}
       <div className="absolute top-0 right-0 w-1/2 h-full bg-brand-light dark:bg-slate-800/20 -skew-x-12 transform translate-x-1/3 z-0 pointer-events-none"></div>
       
@@ -47,7 +47,7 @@ const Hero: React.FC<HeroProps> = ({ onStartAI }) => {
           <div className="lg:w-1/2 relative">
             <div className="relative z-10 aspect-hero overflow-hidden rounded-[3rem] shadow-[0_48px_100px_rgba(2,56,90,0.15)] border-8 border-white dark:border-slate-800 bg-gray-50">
               <img 
-                src={HERO_IMG_URL} 
+                src="https://images.unsplash.com/20/cambridge.JPG?q=80&w=847" 
                 alt="iExplain Education Success" 
                 className="w-full h-full object-cover transition-all duration-1000 hover:scale-110"
               />

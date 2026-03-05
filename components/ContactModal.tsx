@@ -99,7 +99,7 @@ const ContactModal: React.FC<ContactModalProps> = ({ onClose }) => {
         {/* Compact Header */}
         <div className="bg-[#01304A] p-5 flex items-center justify-between shrink-0">
            <div className="flex items-center gap-4">
-              <img src={LOGO_URL} alt="Logo" className="h-8 w-auto brightness-0 invert" />
+              <img src={LOGO_URL} alt="Logo" className="h-8 w-auto brightness-100" />
               <div className="h-6 w-px bg-white/20"></div>
               <div>
                  <h2 className="text-lg font-black text-white leading-none mb-1">Unlock Your College Journey</h2>

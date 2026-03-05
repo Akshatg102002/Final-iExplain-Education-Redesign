@@ -8,6 +8,7 @@ import {
   deleteDoc, 
   doc, 
   updateDoc,
+  setDoc,
   serverTimestamp 
 } from '../firebase.ts';
 import { Blog, BlogCategory, SiteSettings, MediaItem, VideoStory, CollegeDetailData } from '../types';
@@ -60,6 +61,7 @@ const AdminPanel: React.FC<{ onExit: () => void }> = ({ onExit }) => {
   const [media, setMedia] = useState<any[]>([]);
   const [stories, setStories] = useState<any[]>([]);
   const [settings, setSettings] = useState<SiteSettings | null>(null);
+  const [sitemapContent, setSitemapContent] = useState<string>('');
   const [loading, setLoading] = useState(false);
 
   const [imagePreview, setImagePreview] = useState<string | null>(null);
@@ -102,6 +104,17 @@ const AdminPanel: React.FC<{ onExit: () => void }> = ({ onExit }) => {
       if (results.settings.length > 0) {
         setSettings(results.settings[0]);
         setSettingsForm(results.settings[0]);
+      }
+      
+      // Fetch Sitemap
+      try {
+        const sitemapDoc = await getDocs(collection(db, 'settings'));
+        const sitemapData = sitemapDoc.docs.find(d => d.id === 'sitemap');
+        if (sitemapData) {
+            setSitemapContent(sitemapData.data().content || '');
+        }
+      } catch (e) {
+        console.log("Sitemap fetch error", e);
       }
     } catch (err) {
       console.error("Fetch error:", err);
@@ -497,6 +510,66 @@ const AdminPanel: React.FC<{ onExit: () => void }> = ({ onExit }) => {
                      </form>
                   </div>
                )}
+            </div>
+          )}
+
+          {activeTab === 'settings' && (
+            <div className="animate-fade-in space-y-12">
+               {/* Sitemap Section */}
+               <div className="bg-white rounded-[2.5rem] p-12 shadow-sm border border-gray-100">
+                  <h3 className="text-2xl font-black text-brand-blue mb-6">Sitemap Configuration</h3>
+                  <div className="space-y-6">
+                     <div>
+                        <label className="label">Upload Sitemap XML</label>
+                        <input 
+                          type="file" 
+                          accept=".xml"
+                          className="input-std"
+                          onChange={(e) => {
+                            const file = e.target.files?.[0];
+                            if (file) {
+                               const reader = new FileReader();
+                               reader.onload = (ev) => {
+                                  setSitemapContent(ev.target?.result as string);
+                               };
+                               reader.readAsText(file);
+                            }
+                          }}
+                        />
+                        <p className="text-xs text-gray-400 mt-2">Upload a valid sitemap.xml file.</p>
+                     </div>
+                     <div>
+                        <label className="label">Sitemap Content (Editable)</label>
+                        <textarea 
+                          rows={15} 
+                          className="input-std font-mono text-xs" 
+                          value={sitemapContent} 
+                          onChange={(e) => setSitemapContent(e.target.value)}
+                          placeholder="<?xml version='1.0' encoding='UTF-8'?>..."
+                        />
+                     </div>
+                     <button 
+                       onClick={async () => {
+                          setLoading(true);
+                          try {
+                             await setDoc(doc(db, 'settings', 'sitemap'), {
+                                content: sitemapContent,
+                                updatedAt: serverTimestamp()
+                             });
+                             alert('Sitemap updated successfully!');
+                          } catch (e) {
+                             console.error(e);
+                             alert('Error saving sitemap');
+                          } finally {
+                             setLoading(false);
+                          }
+                       }}
+                       className="py-4 px-8 bg-brand-gold text-white rounded-xl font-black uppercase tracking-widest shadow-xl hover:brightness-110 transition-all"
+                     >
+                       Save Sitemap
+                     </button>
+                  </div>
+               </div>
             </div>
           )}
 
