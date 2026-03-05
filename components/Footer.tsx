@@ -4,7 +4,7 @@ import {
   LOGO_URL, 
   FOOTER_COLLEGES,
   OFFICE_ADDRESSES 
-} from '../constants.tsx';
+} from '../data.ts';
 import { createSlug } from '../utils.ts';
 
 interface FooterProps {

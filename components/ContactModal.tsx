@@ -1,7 +1,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { db, collection, addDoc, serverTimestamp } from '../firebase.ts';
-import { LOGO_URL } from '../constants.tsx';
+import { LOGO_URL } from '../data.ts';
 
 interface ContactModalProps {
   onClose: () => void;

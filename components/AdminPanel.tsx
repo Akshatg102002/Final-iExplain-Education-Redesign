@@ -12,7 +12,7 @@ import {
   serverTimestamp 
 } from '../firebase.ts';
 import { Blog, BlogCategory, SiteSettings, MediaItem, VideoStory, CollegeDetailData } from '../types';
-import { LOGO_URL, FOOTER_COLLEGES } from '../constants.tsx';
+import { LOGO_URL, FOOTER_COLLEGES } from '../data.ts';
 
 type AdminTab = 'dashboard' | 'blogs' | 'categories' | 'colleges' | 'entries' | 'media' | 'stories' | 'settings';
 type ViewMode = 'list' | 'create' | 'edit';

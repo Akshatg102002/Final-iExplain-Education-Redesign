@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { KNOW_YOUR_DESTINATIONS } from '../constants.tsx';
+import { KNOW_YOUR_DESTINATIONS } from '../data.ts';
 
 const KnowYourDestination: React.FC = () => {
   return (

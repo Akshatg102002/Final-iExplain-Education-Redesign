@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { ABOUT_US_CONTENT, CORE_VALUES_FULL, TEAM_MEMBERS } from '../constants.tsx';
+import { ABOUT_US_CONTENT, CORE_VALUES_FULL, TEAM_MEMBERS } from '../data.ts';
 
 interface AboutSectionProps {
   compact?: boolean;

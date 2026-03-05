@@ -31,7 +31,6 @@ import AwardsAchievements from './components/AwardsAchievements.tsx';
 import * as Flags from 'country-flag-icons/react/3x2';
 import { 
   STUDENT_SERVICES_DATA,
-  COUNTRY_DETAILS,
   COLLEGE_DETAILS,
   OFFICE_ADDRESSES,
   BLOG_POSTS,
@@ -42,7 +41,7 @@ import {
   HERO_IMG_URL,
   PRIVACY_POLICY_CONTENT,
   TERMS_CONTENT
-} from './constants.tsx';
+} from './data.ts';
 import { RouteState, SiteSettings } from './types.ts';
 import { db, collection, getDocs, doc, getDoc, query, orderBy, where } from './firebase.ts';
 

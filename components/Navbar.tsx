@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect, useRef } from 'react';
-import { LOGO_URL, MEGA_MENU_DATA, OFFICE_ADDRESSES, FOOTER_COLLEGES } from '../constants.tsx';
+import { LOGO_URL, MEGA_MENU_DATA, OFFICE_ADDRESSES, FOOTER_COLLEGES } from '../data.ts';
 import { createSlug } from '../utils.ts';
 import * as Flags from 'country-flag-icons/react/3x2';
 

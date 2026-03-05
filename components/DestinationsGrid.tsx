@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { DESTINATIONS } from '../constants.tsx';
+import { DESTINATIONS } from '../data.ts';
 
 const DestinationsGrid: React.FC = () => {
   return (

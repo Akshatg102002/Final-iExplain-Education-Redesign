@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { POPULAR_COLLEGES, COUNTRY_ICONS } from '../constants.tsx';
+import { POPULAR_COLLEGES, COUNTRY_ICONS } from '../data.ts';
 import * as Flags from 'country-flag-icons/react/3x2';
 import { 
   db, 

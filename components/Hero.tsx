@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { HERO_IMG_URL } from '../constants.tsx';
+import { HERO_IMG_URL } from '../data.ts';
 import * as Flags from 'country-flag-icons/react/3x2';
 
 interface HeroProps {

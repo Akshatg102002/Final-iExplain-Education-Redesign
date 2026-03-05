@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { BLOG_POSTS, HERO_IMG_URL } from '../constants.tsx';
+import { BLOG_POSTS, HERO_IMG_URL } from '../data.ts';
 import { db, collection, getDocs, query } from '../firebase.ts';
 import ContactForm from './ContactForm.tsx';
 

@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { INDIA_COURSES } from '../constants.tsx';
+import { INDIA_COURSES } from '../data.ts';
 
 const IndiaSection: React.FC = () => {
   return (

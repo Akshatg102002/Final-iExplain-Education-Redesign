@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { BLOG_POSTS } from '../constants.tsx';
+import { BLOG_POSTS } from '../data.ts';
 import { 
   db, 
   collection, 

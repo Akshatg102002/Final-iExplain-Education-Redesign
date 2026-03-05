@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { STATS } from '../constants.tsx';
+import { STATS } from '../data.ts';
 
 const StatsSection: React.FC = () => {
   return (
