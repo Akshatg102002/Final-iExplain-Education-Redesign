@@ -473,7 +473,7 @@ const App: React.FC = () => {
       case 'home':
       default: return (
         <>
-          <Hero onStartAI={() => setIsAICounselorOpen(true)} />
+          <Hero onBookSession={() => setIsContactModalOpen(true)} />
           <StatsSection />
           <WhoWeAre />
           <IndiaSection />

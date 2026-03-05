@@ -3,10 +3,10 @@ import React from 'react';
 import { HERO_IMG_URL } from '../constants.tsx';
 
 interface HeroProps {
-  onStartAI: () => void;
+  onBookSession: () => void;
 }
 
-const Hero: React.FC<HeroProps> = ({ onStartAI }) => {
+const Hero: React.FC<HeroProps> = ({ onBookSession }) => {
   return (
     <section className="bg-white dark:bg-slate-900 pt-12 pb-20 lg:pt-12 lg:pb-20 border-b border-gray-100 dark:border-slate-800 relative overflow-hidden">
       {/* Decorative Elements */}
@@ -32,7 +32,7 @@ const Hero: React.FC<HeroProps> = ({ onStartAI }) => {
             
             <div className="flex flex-wrap gap-6">
               <button 
-                onClick={onStartAI}
+                onClick={onBookSession}
                 className="px-10 py-5 bg-brand-blue text-white rounded-[1.25rem] font-black text-xs uppercase tracking-widest hover:bg-brand-gold transition-all shadow-2xl shadow-brand-blue/30 flex items-center gap-4 group"
               >
                 <i className="fa-solid fa-sparkles group-hover:rotate-12 transition-transform"></i>

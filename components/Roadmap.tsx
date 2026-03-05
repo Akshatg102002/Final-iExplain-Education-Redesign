@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { ROADMAP_STEPS } from '../constants.tsx';
+import { HOW_IT_WORKS_CONTENT } from '../home_content.ts';
 
 const Roadmap: React.FC = () => {
   return (
@@ -13,7 +13,7 @@ const Roadmap: React.FC = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-          {ROADMAP_STEPS.map((item, i) => (
+          {HOW_IT_WORKS_CONTENT.map((item, i) => (
             <div key={i} className="flex bg-white dark:bg-slate-800 rounded-[2rem] p-8 border border-transparent dark:border-slate-700 hover:border-brand-gold hover:shadow-2xl transition-all duration-500 group relative overflow-hidden shadow-sm items-center">
               {/* Subtle Background Step Text */}
               <div className="absolute top-4 left-6 text-6xl font-black text-black/5 dark:text-white/5 pointer-events-none select-none transition-colors group-hover:text-brand-gold/10 uppercase tracking-tighter">

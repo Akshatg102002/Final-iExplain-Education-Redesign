@@ -94,3 +94,42 @@ export const AWARDS_ACHIEVEMENTS = [
     icon: "fa-solid fa-passport"
   }
 ];
+
+export const HOW_IT_WORKS_CONTENT = [
+  {
+    step: "01",
+    title: "Counseling",
+    desc: "Our expert counseling services are designed to guide students who want to pursue MBBS in India, MBBS Abroad, and Study Abroad programs. We provide personalized career guidance based on your academic profile, budget, and future goals.",
+    icon: "fa-solid fa-comments"
+  },
+  {
+    step: "02",
+    title: "Choose Your Destination & Course",
+    desc: "Selecting the right destination and course is the foundation of a successful career. At iExplain Education, we help you explore the best countries and programs based on your academic background, career goals, and budget.",
+    icon: "fa-solid fa-map-location-dot"
+  },
+  {
+    step: "03",
+    title: "University Selection",
+    desc: "Selecting the right university is one of the most important decisions in a student’s academic journey. At iExplain Education, we carefully analyze your academic background, career goals, preferred location, and budget to recommend the most suitable universities.",
+    icon: "fa-solid fa-building-columns"
+  },
+  {
+    step: "04",
+    title: "Admission – Application & Offer Letter",
+    desc: "Our team provides complete assistance throughout the admission process. We help students accurately fill out application forms, prepare and verify required documents, and submit applications to the selected universities within deadlines.",
+    icon: "fa-solid fa-file-signature"
+  },
+  {
+    step: "05",
+    title: "Visa – Visa Filing & Interview",
+    desc: "We provide complete assistance with the visa process to ensure a smooth transition to your chosen destination. Our team guides you through accurate visa filing, document preparation, financial documentation, and appointment scheduling.",
+    icon: "fa-solid fa-passport"
+  },
+  {
+    step: "06",
+    title: "Departure",
+    desc: "We ensure your journey begins smoothly with complete departure assistance. Our team helps you with flight booking guidance to secure the best routes and affordable fares according to your travel schedule. We also assist in arranging foreign exchange (Forex), international SIM cards, and essential travel guidance.",
+    icon: "fa-solid fa-plane-departure"
+  }
+];
