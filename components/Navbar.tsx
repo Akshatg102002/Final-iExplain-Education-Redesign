@@ -146,9 +146,9 @@ const TopBar: React.FC = () => {
 const Navbar: React.FC<NavbarProps> = ({ isDarkMode, toggleTheme, logoUrl }) => {
   const [activeTab, setActiveTab] = useState<keyof typeof MEGA_MENU_DATA>("STUDY ABROAD");
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
-  const [activeCollegeTab, setActiveCollegeTab] = useState<'MBBS' | 'STUDY'>('MBBS');
+  const [activeCollegeTab, setActiveCollegeTab] = useState<'MBBS' | 'STUDY' | 'INDIA'>('MBBS');
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [mobileCollegeOpen, setMobileCollegeOpen] = useState<{mbbs: boolean, study: boolean}>({ mbbs: false, study: false });
+  const [mobileCollegeOpen, setMobileCollegeOpen] = useState<{mbbs: boolean, study: boolean, india: boolean}>({ mbbs: false, study: false, india: false });
   const [mobileProgramsOpen, setMobileProgramsOpen] = useState<string | null>(null);
   const [mobileExpandedMenu, setMobileExpandedMenu] = useState<string | null>(null);
   const timerRef = useRef<number | null>(null);
@@ -179,6 +179,13 @@ const Navbar: React.FC<NavbarProps> = ({ isDarkMode, toggleTheme, logoUrl }) => 
   };
 
   const navLinks = ['HOME', 'ABOUT', 'PROGRAMS', 'COLLEGES', 'SERVICES', 'BLOGS', 'CONTACT'];
+
+  const getCollegeData = () => {
+    if (activeCollegeTab === 'MBBS') return FOOTER_COLLEGES.mbbs;
+    if (activeCollegeTab === 'STUDY') return FOOTER_COLLEGES.study;
+    if (activeCollegeTab === 'INDIA') return FOOTER_COLLEGES.mbbs_india;
+    return [];
+  };
 
   return (
     <div className="sticky top-0 z-[200] w-full bg-white dark:bg-slate-900 shadow-sm border-b border-gray-100 dark:border-slate-800">
@@ -257,25 +264,39 @@ const Navbar: React.FC<NavbarProps> = ({ isDarkMode, toggleTheme, logoUrl }) => 
                       <div className="flex items-center space-x-3"><i className="fa-solid fa-earth-americas text-xs opacity-70"></i><span>STUDY ABROAD</span></div>
                       <i className="fa-solid fa-chevron-right text-[7px]"></i>
                     </button>
+                    <button onMouseEnter={() => setActiveCollegeTab('INDIA')} className={`w-full flex items-center justify-between px-4 py-3.5 rounded-2xl font-black text-[9px] uppercase tracking-widest transition-all ${activeCollegeTab === 'INDIA' ? 'bg-white dark:bg-slate-700 text-brand-gold shadow-md ring-1 ring-gray-100 dark:ring-slate-600 translate-x-1' : 'text-gray-400 hover:text-brand-blue hover:bg-white/50 dark:hover:bg-slate-800'}`}>
+                      <div className="flex items-center space-x-3"><i className="fa-solid fa-building-columns text-xs opacity-70"></i><span>MBBS INDIA</span></div>
+                      <i className="fa-solid fa-chevron-right text-[7px]"></i>
+                    </button>
                   </div>
                 </div>
                 
                 {/* Content Area */}
                 <div className="flex-grow p-8 overflow-y-auto no-scrollbar">
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {(activeCollegeTab === 'MBBS' ? FOOTER_COLLEGES.mbbs : FOOTER_COLLEGES.study).map((countryData, idx) => (
+                    {getCollegeData().map((countryData: any, idx: number) => (
                       <div key={idx} className="space-y-3">
                         <h4 className="font-black text-xs text-brand-blue dark:text-white uppercase tracking-widest border-b border-gray-100 dark:border-slate-700 pb-2 flex items-center">
-                          <i className="fa-solid fa-flag text-brand-gold mr-2"></i> {countryData.country}
+                          {countryData.code ? <span className="mr-2"><FlagIcon code={countryData.code} /></span> : <i className="fa-solid fa-flag text-brand-gold mr-2"></i>} 
+                          {countryData.country}
                         </h4>
                         <ul className="space-y-2">
-                          {countryData.names.map((college, cIdx) => (
-                            <li key={cIdx}>
-                              <a href={`#/college/${createSlug(college)}`} onClick={() => setActiveMenu(null)} className="block text-[11px] font-bold text-gray-500 dark:text-gray-400 hover:text-brand-blue dark:hover:text-white hover:translate-x-1 transition-all truncate">
-                                {college}
-                              </a>
-                            </li>
-                          ))}
+                          {countryData.names.map((college: string, cIdx: number) => {
+                            let link = `#/college/${createSlug(college)}`;
+                            if (activeCollegeTab === 'INDIA') {
+                              link = `#/mbbs-india/${createSlug(college)}`;
+                            } else if (countryData.country === 'Europe Top Destinations') {
+                              link = `#/study-abroad/${createSlug(college)}`;
+                            }
+                            
+                            return (
+                              <li key={cIdx}>
+                                <a href={link} onClick={() => setActiveMenu(null)} className="block text-[11px] font-bold text-gray-500 dark:text-gray-400 hover:text-brand-blue dark:hover:text-white hover:translate-x-1 transition-all truncate">
+                                  {college}
+                                </a>
+                              </li>
+                            );
+                          })}
                         </ul>
                       </div>
                     ))}
@@ -404,6 +425,31 @@ const Navbar: React.FC<NavbarProps> = ({ isDarkMode, toggleTheme, logoUrl }) => 
                                        {country.names.map((college, cIdx) => (
                                          <a key={cIdx} href={`#/college/${createSlug(college)}`} onClick={() => setIsMobileMenuOpen(false)} className="block text-[11px] font-medium text-gray-500 dark:text-gray-400 hover:text-brand-blue dark:hover:text-white">
                                            {college}
+                                         </a>
+                                       ))}
+                                     </div>
+                                   </div>
+                                 ))}
+                               </div>
+                             )}
+                           </div>
+
+                           {/* MBBS India Dropdown */}
+                           <div>
+                             <button onClick={() => setMobileCollegeOpen(prev => ({...prev, india: !prev.india}))} className="w-full flex items-center justify-between font-black text-brand-blue dark:text-white text-sm uppercase tracking-widest mb-3">
+                               <span className="flex items-center"><i className="fa-solid fa-building-columns mr-2 text-brand-gold"></i> MBBS India</span>
+                               <i className={`fa-solid fa-chevron-down text-xs transition-transform ${mobileCollegeOpen.india ? 'rotate-180' : ''}`}></i>
+                             </button>
+                             
+                             {mobileCollegeOpen.india && (
+                               <div className="pl-6 space-y-4 border-l-2 border-gray-100 dark:border-slate-800 animate-fade-in">
+                                 {FOOTER_COLLEGES.mbbs_india.map((region, idx) => (
+                                   <div key={idx}>
+                                     <p className="font-bold text-gray-800 dark:text-gray-200 text-xs uppercase mb-2">{region.country}</p>
+                                     <div className="pl-4 space-y-2">
+                                       {region.names.map((state, cIdx) => (
+                                         <a key={cIdx} href={`#/mbbs-india/${createSlug(state)}`} onClick={() => setIsMobileMenuOpen(false)} className="block text-[11px] font-medium text-gray-500 dark:text-gray-400 hover:text-brand-blue dark:hover:text-white">
+                                           {state}
                                          </a>
                                        ))}
                                      </div>

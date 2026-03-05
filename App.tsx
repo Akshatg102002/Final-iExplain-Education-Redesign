@@ -478,7 +478,7 @@ const App: React.FC = () => {
           <WhoWeAre />
           <IndiaSection />
           <PopularColleges />
-          <Roadmap />
+          <Roadmap onBookSession={() => setIsContactModalOpen(true)} />
           <AirportDiaries />
           <KnowYourDestination />
           <StudentReviews />

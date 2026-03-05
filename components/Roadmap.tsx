@@ -2,7 +2,11 @@
 import React from 'react';
 import { HOW_IT_WORKS_CONTENT } from '../home_content.ts';
 
-const Roadmap: React.FC = () => {
+interface RoadmapProps {
+  onBookSession?: () => void;
+}
+
+const Roadmap: React.FC<RoadmapProps> = ({ onBookSession }) => {
   return (
     <section className="py-16 bg-brand-light dark:bg-slate-900 border-t border-gray-100 dark:border-slate-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -44,7 +48,10 @@ const Roadmap: React.FC = () => {
         </div>
 
         <div className="text-center">
-          <button className="px-10 py-4 bg-brand-blue text-white rounded-2xl font-black text-[10px] uppercase tracking-[0.2em] hover:bg-brand-gold hover:scale-105 transition-all shadow-xl">
+          <button 
+            onClick={onBookSession}
+            className="px-10 py-4 bg-brand-blue text-white rounded-2xl font-black text-[10px] uppercase tracking-[0.2em] hover:bg-brand-gold hover:scale-105 transition-all shadow-xl"
+          >
             Book Your Flight To Study Abroad
           </button>
         </div>

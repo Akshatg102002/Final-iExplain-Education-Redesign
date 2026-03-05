@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { HERO_IMG_URL } from '../constants.tsx';
+import * as Flags from 'country-flag-icons/react/3x2';
 
 interface HeroProps {
   onBookSession: () => void;
@@ -35,7 +36,7 @@ const Hero: React.FC<HeroProps> = ({ onBookSession }) => {
                 onClick={onBookSession}
                 className="px-10 py-5 bg-brand-blue text-white rounded-[1.25rem] font-black text-xs uppercase tracking-widest hover:bg-brand-gold transition-all shadow-2xl shadow-brand-blue/30 flex items-center gap-4 group"
               >
-                <i className="fa-solid fa-sparkles group-hover:rotate-12 transition-transform"></i>
+                <i className="fa-solid fa-star group-hover:rotate-12 transition-transform"></i>
                 Free Counseling Session
               </button>
               <button className="px-10 py-5 bg-white dark:bg-slate-800 text-brand-blue dark:text-white rounded-[1.25rem] font-black text-xs uppercase tracking-widest border border-gray-200 dark:border-slate-700 hover:shadow-xl transition-all flex items-center gap-4">
@@ -54,6 +55,12 @@ const Hero: React.FC<HeroProps> = ({ onBookSession }) => {
             </div>
             {/* Float Badge */}
             <div className="absolute -bottom-10 -left-10 bg-brand-gold p-8 rounded-[2.5rem] text-white shadow-2xl z-20 animate-fade-in hidden sm:block">
+               <div className="flex -space-x-3 mb-3">
+                  <div className="w-8 h-8 rounded-full border-2 border-brand-gold bg-white overflow-hidden"><Flags.US className="w-full h-full object-cover" /></div>
+                  <div className="w-8 h-8 rounded-full border-2 border-brand-gold bg-white overflow-hidden"><Flags.GB className="w-full h-full object-cover" /></div>
+                  <div className="w-8 h-8 rounded-full border-2 border-brand-gold bg-white overflow-hidden"><Flags.CA className="w-full h-full object-cover" /></div>
+                  <div className="w-8 h-8 rounded-full border-2 border-brand-gold bg-white overflow-hidden"><Flags.AU className="w-full h-full object-cover" /></div>
+               </div>
                <p className="text-5xl font-black mb-1">20+</p>
                <p className="text-[10px] font-bold uppercase tracking-widest opacity-80">Global Destinations</p>
             </div>
