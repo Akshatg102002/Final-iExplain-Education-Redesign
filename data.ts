@@ -277,20 +277,18 @@ export const MEGA_MENU_DATA = {
     { name: "UK", link: "#/study-abroad/uk", code: "GB" },
     { name: "Canada", link: "#/study-abroad/canada", code: "CA" },
     { name: "Australia", link: "#/study-abroad/australia", code: "AU" },
-    { name: "Germany", link: "#/study-abroad/germany", code: "DE" },
-    { name: "Ireland", link: "#/study-abroad/ireland", code: "IE" },
     { name: "New Zealand", link: "#/study-abroad/new-zealand", code: "NZ" },
-    { name: "Dubai", link: "#/study-abroad/dubai", code: "AE" }
+    { name: "Dubai", link: "#/study-abroad/dubai", code: "AE" },
+    { name: "Europe", link: "#/study-abroad/europe", code: "EU" }
   ],
   "MBBS ABROAD": [
-    { name: "Russia", link: "#/mbbs-abroad/russia", code: "RU" },
-    { name: "Uzbekistan", link: "#/mbbs-abroad/uzbekistan", code: "UZ" },
-    { name: "Kazakhstan", link: "#/mbbs-abroad/kazakhstan", code: "KZ" },
+    { name: "Eastern Europe", link: "#/mbbs-abroad/eastern-europe", code: "EU" },
+    { name: "Central Asia", link: "#/mbbs-abroad/central-asia", code: "KZ" },
     { name: "Philippines", link: "#/mbbs-abroad/philippines", code: "PH" },
-    { name: "Georgia", link: "#/mbbs-abroad/georgia", code: "GE" },
-    { name: "Kyrgyzstan", link: "#/mbbs-abroad/kyrgyzstan", code: "KG" },
-    { name: "Egypt", link: "#/mbbs-abroad/egypt", code: "EG" },
-    { name: "Bangladesh", link: "#/mbbs-abroad/bangladesh", code: "BD" }
+    { name: "Bangladesh", link: "#/mbbs-abroad/bangladesh", code: "BD" },
+    { name: "Nepal", link: "#/mbbs-abroad/nepal", code: "NP" },
+    { name: "China", link: "#/mbbs-abroad/china", code: "CN" },
+    { name: "Egypt", link: "#/mbbs-abroad/egypt", code: "EG" }
   ],
   "STUDY IN INDIA": [
     { name: "MBBS", link: "#/study-india/mbbs", icon: "fa-solid fa-user-doctor" },
@@ -322,11 +320,542 @@ export const BLOG_POSTS = [
 
 export const STUDY_ABROAD_DETAILED = {
   "usa": { title: "Study in USA", heroImage: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&q=80&w=1200", intro: "The USA is a top destination...", universities: [] },
-  "uk": { title: "Study in UK", heroImage: "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&q=80&w=1200", intro: "The UK offers world-class education...", universities: [] }
+  "uk": { title: "Study in UK", heroImage: "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&q=80&w=1200", intro: "The UK offers world-class education...", universities: [] },
+  "europe": {
+    title: "Study in Europe",
+    heroImage: "https://images.unsplash.com/photo-1485081669829-bacb8c7bb1f3?q=80&w=870&auto=format&fit=crop",
+    intro: "Europe is one of the most popular study destinations in the world, offering world-class education, rich cultural diversity, and excellent career prospects. Home to many top-ranked universities, Europe provides a wide range of programs taught in English. With low or no tuition fees in several countries, strong research opportunities, and easy travel across nations, Europe offers an unmatched international study experience.",
+    universities: [],
+    faqs: [
+      {
+        "question": "Why study in Europe?",
+        "answer": "Studying in Europe boosts career prospects through international exposure, world-class education, affordable tuition, and strong post-study employment opportunities."
+      },
+      {
+        "question": "Are European degrees internationally recognized?",
+        "answer": "Yes, European degrees follow the Bologna Process, ensuring that bachelor’s and master’s degrees are standardized and recognized across Europe and globally."
+      },
+      {
+        "question": "Can I study in English in Europe?",
+        "answer": "Yes, thousands of undergraduate and postgraduate programs across Europe are taught entirely in English."
+      },
+      {
+        "question": "What education system is followed in Europe?",
+        "answer": "Europe follows the International Standard Classification of Education (ISCED) and the Bologna system, offering bachelor’s, master’s, and doctoral programs with transferable credits through ECTS."
+      },
+      {
+        "question": "What study options are available in Europe?",
+        "answer": "Europe offers a wide range of programs across arts, science, engineering, business, medicine, humanities, and research-oriented fields at public and private universities."
+      },
+      {
+        "question": "Is studying in Europe affordable?",
+        "answer": "Many European countries offer low or no tuition fees at public universities, along with scholarships and financial support options for international students."
+      },
+      {
+        "question": "What are the living costs for international students in Europe?",
+        "answer": "Living costs vary by country, with relatively affordable options available in countries such as Italy, Spain, France, and parts of Northern and Eastern Europe."
+      },
+      {
+        "question": "Can international students travel within Europe?",
+        "answer": "Yes, students studying in the Schengen Area can travel freely across 26 European countries with a valid student visa."
+      },
+      {
+        "question": "What visa is required to study in Europe?",
+        "answer": "Non-EU students require a student visa issued by the host country, valid for the duration of the study program and renewable annually."
+      },
+      {
+        "question": "What documents are required for a European student visa?",
+        "answer": "Applicants must provide an admission letter, academic qualifications, proof of accommodation, health insurance, financial proof, completed application forms, and a valid passport."
+      }
+    ]
+  }
 };
 
 export const MBBS_ABROAD_DETAILED = {
-  "russia": { title: "MBBS in Russia", heroImage: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&q=80&w=1200", intro: "Russia is a popular choice for MBBS...", colleges: [] }
+  "russia": {
+    title: "MBBS in Russia",
+    heroImage: "https://images.unsplash.com/photo-1513326738677-b964603b136d?auto=format&fit=crop&q=80&w=1600",
+    intro: {
+      text: "Being the center of attraction globally, Russia provides extreme exposure for medical aspirants. With affordable tuition, skilled faculty, and advanced infrastructure, MBBS in Russia is one of the most preferred destinations for national and international students.",
+      image: "https://images.unsplash.com/photo-1547448415-e9f5b28e570d?q=80&w=870&auto=format&fit=crop"
+    },
+    highlights: [
+      { title: "Duration", value: "6 Years (Including Internships)" },
+      { title: "Medium", value: "English" },
+      { title: "Admission Criteria", value: "NEET Qualified" },
+      { title: "Climatic Conditions", value: "Long cold winters, Brief warm to hot summers" }
+    ],
+    topUniversities: [
+      "Kazan Federal University",
+      "Bashkir State Medical University",
+      "People's Friendship University of Russia",
+      "Altai State Medical University",
+      "Far Eastern Federal University",
+      "Kabardino Balkarian State University",
+      "Chuvash State Medical University",
+      "Perm State Medical University",
+      "Orenburg State Medical University"
+    ],
+    facts: {
+      intro: "Russia is the largest country in the world by landmass and is extremely diverse in geography and culture. Key highlights include:",
+      list: [
+        "Covers 11 time zones",
+        "Home to Lake Baikal, the world's deepest lake",
+        "Government-funded universities, keeping tuition affordable",
+        "Easy connectivity via metro or university buses",
+        "Degrees recognized by NMC, WHO, FAIMER, and other global bodies",
+        "Rich Indian diaspora making adaptation easier"
+      ]
+    },
+    documents: [
+      { icon: "fa-solid fa-passport", label: "Passport" },
+      { icon: "fa-solid fa-file-lines", label: "Class X and XII Certificates and Mark Sheets" },
+      { icon: "fa-solid fa-chart-column", label: "NEET Scorecard" },
+      { icon: "fa-solid fa-image", label: "Passport Size Photographs" },
+      { icon: "fa-solid fa-notes-medical", label: "Covid & HIV Tests" },
+      { icon: "fa-solid fa-shield-halved", label: "Criminal Background Check" }
+    ],
+    advantages: [
+      "Low tuition fees starting around INR 14 Lakh for full course",
+      "WHO and NMC recognized degrees",
+      "No entrance or capitation fees required",
+      "English is the medium of instruction",
+      "Eligible for FMGE/NEXT (India), USMLE (USA), PLAB (UK)",
+      "Scholarships available for international students",
+      "Clinical internships in top medical universities"
+    ],
+    studentLife: {
+      intro: "Life for Indian students in Russia is vibrant and multicultural. Students enjoy academic support, cultural integration, and ample extracurricular opportunities.",
+      list: [
+        "Indian food widely available in cafeterias",
+        "Heated and well-furnished hostels",
+        "Extracurricular activities like sports, concerts, cultural fests",
+        "Accessible faculty, seminars, and research opportunities",
+        "Cold climate requires preparation for snow and low temperatures",
+        "Easy public transport via buses, trains, subways, and boats",
+        "Bollywood films and Indian cultural events widely appreciated"
+      ]
+    }
+  },
+  "eastern-europe": {
+    title: "MBBS in Eastern Europe",
+    heroImage: "https://images.unsplash.com/photo-1513326738677-b964603b136d?auto=format&fit=crop&q=80&w=1600",
+    intro: {
+      text: "Eastern Europe is a premier destination for medical education, offering world-class universities in Russia, Georgia, Romania, and Serbia. Known for their high academic standards, affordable tuition, and English-taught programs, these countries attract thousands of international students annually.",
+      image: "https://images.unsplash.com/photo-1547448415-e9f5b28e570d?q=80&w=870&auto=format&fit=crop"
+    },
+    highlights: [
+      { title: "Duration", value: "6 Years" },
+      { title: "Medium", value: "English" },
+      { title: "Recognition", value: "WHO, NMC, ECFMG" },
+      { title: "Cost", value: "Affordable" }
+    ],
+    topUniversities: [
+      "Kazan Federal University (Russia)",
+      "Tbilisi State Medical University (Georgia)",
+      "Carol Davila University (Romania)",
+      "University of Belgrade (Serbia)",
+      "Bashkir State Medical University (Russia)",
+      "European University (Georgia)"
+    ],
+    facts: {
+      intro: "Eastern Europe Facts",
+      list: [
+        "Home to some of the oldest and most prestigious medical universities",
+        "Diverse cultures and rich history",
+        "High safety standards for international students",
+        "Easy travel within Europe for students in EU countries (Romania)",
+        "Strong Indian student community"
+      ]
+    },
+    documents: [
+      { icon: "fa-solid fa-passport", label: "Valid Passport" },
+      { icon: "fa-solid fa-file-lines", label: "Academic Transcripts" },
+      { icon: "fa-solid fa-chart-column", label: "NEET Scorecard" },
+      { icon: "fa-solid fa-image", label: "Photos" }
+    ],
+    advantages: [
+      "Globally recognized degrees",
+      "English medium instruction",
+      "Low cost of living compared to Western Europe",
+      "High quality clinical exposure",
+      "Pathway to practice in Europe and USA"
+    ],
+    studentLife: {
+      intro: "Student Life in Eastern Europe",
+      list: [
+        "Vibrant international student community",
+        "Affordable hostels and apartments",
+        "Rich cultural experiences and travel opportunities",
+        "Safe and welcoming environment"
+      ]
+    }
+  },
+  "central-asia": {
+    title: "MBBS in Central Asia",
+    heroImage: "https://images.unsplash.com/photo-1549877452-9c387954fbc2?q=80&w=1200&auto=format&fit=crop",
+    intro: {
+      text: "Central Asia, comprising Kazakhstan, Kyrgyzstan, and Uzbekistan, has emerged as a top hub for MBBS aspirants. These countries offer high-quality medical education at very affordable costs, with a curriculum similar to India and English as the medium of instruction.",
+      image: "https://images.unsplash.com/photo-1666975823342-3b755b3784d4?q=80&w=870&auto=format&fit=crop"
+    },
+    highlights: [
+      { title: "Duration", value: "5-6 Years" },
+      { title: "Medium", value: "English" },
+      { title: "Recognition", value: "WHO, NMC" },
+      { title: "Cost", value: "Very Low" }
+    ],
+    topUniversities: [
+      "Kazakh National Medical University (Kazakhstan)",
+      "Osh State University (Kyrgyzstan)",
+      "Tashkent Medical Academy (Uzbekistan)",
+      "Asian Medical Institute (Kyrgyzstan)",
+      "Samarkand State Medical University (Uzbekistan)",
+      "Al-Farabi Kazakh National University (Kazakhstan)"
+    ],
+    facts: {
+      intro: "Central Asia Facts",
+      list: [
+        "Close proximity to India (3-4 hours flight)",
+        "Similar culture and food habits",
+        "Rapidly developing infrastructure",
+        "High safety for Indian students",
+        "Large Indian student community"
+      ]
+    },
+    documents: [
+      { icon: "fa-solid fa-passport", label: "Valid Passport" },
+      { icon: "fa-solid fa-file-lines", label: "Academic Transcripts" },
+      { icon: "fa-solid fa-chart-column", label: "NEET Scorecard" },
+      { icon: "fa-solid fa-image", label: "Photos" }
+    ],
+    advantages: [
+      "Lowest tuition fees for MBBS abroad",
+      "English medium instruction",
+      "NMC recognized universities",
+      "Easy admission process",
+      "Good FMGE coaching availability"
+    ],
+    studentLife: {
+      intro: "Student Life in Central Asia",
+      list: [
+        "Indian mess facilities available in most hostels",
+        "Safe and secure campuses",
+        "Affordable living costs",
+        "Friendly local population"
+      ]
+    }
+  },
+  "philippines": {
+    title: "MBBS in Philippines",
+    heroImage: "https://images.unsplash.com/photo-1518509562904-e7ef99cdcc86?q=80&w=774&auto=format&fit=crop",
+    intro: {
+      text: "MBBS in the Philippines follows an internationally recognized MD program aligned with NMC guidelines. With WHO, NMC, and FAIMER-approved universities, affordable tuition fees, and English-medium education, the Philippines attracts thousands of Indian students every year.",
+      image: "https://images.unsplash.com/photo-1529686342540-1b43aec0df75?q=80&w=870&auto=format&fit=crop"
+    },
+    highlights: [
+      { title: "Duration", value: "5.5 Years (4.5 MD + 1 Year Internship)" },
+      { title: "Medium", value: "English" },
+      { title: "Climatic Conditions", value: "Monsoonal (Wet-Dry Tropical Climate)" },
+      { title: "Admission Criteria", value: "Minimum 50% in PCB & NEET Qualified" }
+    ],
+    topUniversities: [
+      "Bicol Christian College of Medicine",
+      "Our Lady of Fatima University",
+      "University of Perpetual Help System Dalta",
+      "AMA School of Medicine",
+      "Emilio Aguinaldo College",
+      "Davao Medical School Foundation"
+    ],
+    facts: {
+      intro: "Philippines Facts",
+      list: [
+        "Southeast Asian archipelago consisting of more than 7,000 islands",
+        "Named after King Philip II of Spain",
+        "Former Spanish colony with over 300 years of history",
+        "Tropical monsoonal climate with wet and dry seasons",
+        "Medical program fees range between INR 19–30 Lakhs",
+        "No donation or capitation fees charged by universities",
+        "Student visa process is completely online and faster",
+        "Visa approval usually received within 15 days",
+        "On-campus accommodation included in total fees",
+        "Currency is affordable: 1 Philippine Peso ≈ INR 1.5",
+        "Strong emphasis on practical learning, labs, seminars, and clinical exposure"
+      ]
+    },
+    documents: [
+      { icon: "fa-solid fa-file-lines", label: "Class X and XII Certificates and Mark Sheets" },
+      { icon: "fa-solid fa-chart-column", label: "NEET Scorecard" },
+      { icon: "fa-solid fa-passport", label: "Valid Passport" },
+      { icon: "fa-solid fa-shield-halved", label: "Police Clearance Certificate" },
+      { icon: "fa-solid fa-graduation-cap", label: "Graduation Certificate (if applicable)" },
+      { icon: "fa-solid fa-notes-medical", label: "Medical Test Reports (Covid & HIV)" },
+      { icon: "fa-solid fa-image", label: "Passport-size Photographs (2x2)" },
+      { icon: "fa-solid fa-building-columns", label: "Bank Statement" }
+    ],
+    advantages: [
+      "Third largest English-speaking country in the world",
+      "No IELTS or TOEFL required for admission",
+      "Authentic Indian food available in hostels and canteens",
+      "NMC/MCI-approved universities with FMGE eligibility",
+      "Tropical climate similar to Indian coastal regions",
+      "Easy and fast student visa process",
+      "Strong pathway to USMLE and medical practice in the USA",
+      "No donation or capitation fees",
+      "Affordable tuition fees capped at INR 20–30 Lakhs",
+      "Multicultural and non-orthodox society ideal for international students"
+    ],
+    studentLife: {
+      intro: "Life for MBBS students in the Philippines",
+      list: [
+        "English widely spoken, eliminating communication barriers",
+        "Significant reduction in crime rate, ensuring student safety",
+        "Monsoonal climate similar to India",
+        "Indian cooks available in most university hostels",
+        "Home to some of the world’s largest shopping malls",
+        "Affordable public transportation",
+        "In-house counselors for student mental well-being",
+        "Universities located near scenic and peaceful surroundings",
+        "Regular cultural events and creative activities for students",
+        "Balanced academic and social life with global exposure"
+      ]
+    }
+  },
+  "bangladesh": {
+    title: "MBBS in Bangladesh",
+    heroImage: "https://plus.unsplash.com/premium_photo-1697729609380-5cfe9494a7c1?q=80&w=870&auto=format&fit=crop",
+    intro: {
+      text: "MBBS in Bangladesh is one of the most preferred choices for Indian students due to its close proximity, similar education system, and affordable tuition fees. The country is home to several NMC and WHO-approved government and private medical colleges offering quality medical education.",
+      image: "https://images.unsplash.com/photo-1604993497451-eed6eb271a9c?q=80&w=774&auto=format&fit=crop"
+    },
+    highlights: [
+      { title: "Duration", value: "5.5 Years" },
+      { title: "Medium", value: "English" },
+      { title: "Climatic Conditions", value: "Humid and Warm Climate" },
+      { title: "Admission Criteria", value: "10+2 qualified & NEET (Merit-based)" }
+    ],
+    topUniversities: [
+      "US-Bangla Medical College",
+      "Monno Medical College & Hospital",
+      "Marks Medical College",
+      "Bangladesh Medical College",
+      "Barind Medical College",
+      "Dhaka National Medical College"
+    ],
+    facts: {
+      intro: "Bangladesh Facts",
+      list: [
+        "Neighboring country of India and one of the closest MBBS destinations",
+        "Medical colleges approved by NMC and WHO",
+        "Visa processing time is usually 10–15 working days",
+        "Visa is renewable after every 6 months",
+        "Affordable tuition fees with world-class facilities",
+        "1 Bangladeshi Taka ≈ 0.88 Indian Rupee (subject to change)",
+        "MBBS course duration and curriculum similar to India",
+        "MBBS session usually starts in mid or end of October",
+        "Medical colleges strictly follow NMC gazette guidelines"
+      ]
+    },
+    documents: [
+      { icon: "fa-solid fa-file-lines", label: "Class X and XII Mark Sheets" },
+      { icon: "fa-solid fa-certificate", label: "Birth Certificate" },
+      { icon: "fa-solid fa-passport", label: "Valid Passport" },
+      { icon: "fa-solid fa-image", label: "Passport-size Photographs (8 copies)" },
+      { icon: "fa-solid fa-notes-medical", label: "Medical Certificate" },
+      { icon: "fa-solid fa-envelope-open-text", label: "University Invitation Letter" }
+    ],
+    advantages: [
+      "One of the closest and friendliest neighboring countries of India",
+      "NMC-recognized medical colleges allowing practice in India",
+      "Good FMGE passing percentage (around 58.57% and improving)",
+      "Cuisine very similar to Indian food",
+      "Low travel time and cost due to close distance",
+      "English-medium MBBS program aligned with Indian education system",
+      "Affordable tuition fees compared to other foreign destinations",
+      "Similar climate makes adaptation easy for Indian students"
+    ],
+    studentLife: {
+      intro: "Life for MBBS students in Bangladesh",
+      list: [
+        "Comfortable lifestyle with affordable accommodation options",
+        "Hostels available near medical college campuses",
+        "Low cost of living for international students",
+        "Students can participate in clubs and extracurricular activities",
+        "Efficient academic system with organized classroom teaching",
+        "Short travel time from India compared to other countries",
+        "Safe and student-friendly environment",
+        "Facilities and daily essentials available at low cost"
+      ]
+    }
+  },
+  "nepal": {
+    title: "MBBS in Nepal",
+    heroImage: "https://plus.unsplash.com/premium_photo-1688645554172-d3aef5f837ce?q=80&w=876&auto=format&fit=crop",
+    intro: {
+      text: "Nepal is one of the most preferred destinations for Indian students to pursue MBBS due to its proximity, similar education system, and hassle-free admission process. With NMC and WHO-approved medical colleges, Nepal offers quality medical education at an affordable cost.",
+      image: "https://images.unsplash.com/photo-1611516491426-03025e6043c8?q=80&w=1033&auto=format&fit=crop"
+    },
+    highlights: [
+      { title: "Duration", value: "6 Years" },
+      { title: "Medium", value: "English" },
+      { title: "Climatic Conditions", value: "Subtropical Lowlands & Cold Mountain Climate" },
+      { title: "Admission Criteria", value: "10+2 qualified & NEET (Merit-based)" }
+    ],
+    topUniversities: [
+      "Kathmandu Medical College",
+      "College of Medical Sciences",
+      "National Medical College",
+      "Nepalgunj Medical College",
+      "Universal College of Medical Science (UCMS)",
+      "B.P. Koirala Institute of Health Sciences"
+    ],
+    facts: {
+      intro: "Nepal Facts",
+      list: [
+        "One of the closest MBBS destinations for Indian students",
+        "NMC and WHO-approved medical colleges",
+        "No need to cross continents for studying abroad",
+        "Nepalese Rupee (NPR) is the official currency",
+        "Languages spoken include Nepali and other regional languages",
+        "Major religions include Hinduism, Buddhism, Christianity, and Islam",
+        "Federal parliamentary republic system of government",
+        "Kathmandu is the capital city"
+      ]
+    },
+    documents: [
+      { icon: "fa-solid fa-file-lines", label: "Class X and XII Mark Sheets" },
+      { icon: "fa-solid fa-envelope-open-text", label: "University Invitation Letter" },
+      { icon: "fa-solid fa-chart-column", label: "NEET Scorecard" },
+      { icon: "fa-solid fa-building-columns", label: "Bank Statement" },
+      { icon: "fa-solid fa-notes-medical", label: "Medical Test Reports (Covid & HIV)" },
+      { icon: "fa-solid fa-image", label: "Passport-size Photographs" }
+    ],
+    advantages: [
+      "Simple and hassle-free admission process",
+      "No visa required for Indian students",
+      "Good FMGE passing percentage (around 37.13% and improving)",
+      "Nepalese cuisine is similar to Indian food",
+      "Low travel time and cost due to close proximity",
+      "Favorable climate for Indian students",
+      "MBBS curriculum similar to India",
+      "Affordable tuition fees compared to private Indian colleges"
+    ],
+    studentLife: {
+      intro: "Life for MBBS students in Nepal",
+      list: [
+        "Modern infrastructure with digital laboratories and open theatres",
+        "On-campus facilities including libraries, museums, auditoriums, and hostels",
+        "Off-campus private apartments available near college campuses",
+        "Accommodation cost varies based on location",
+        "Access to quality medical treatment for international students",
+        "Opportunities to participate in extracurricular activities and sports",
+        "Culturally similar environment to India",
+        "Comfortable and student-friendly lifestyle"
+      ]
+    }
+  },
+  "china": {
+    title: "MBBS in China",
+    heroImage: "https://images.unsplash.com/photo-1508804185872-d7badad00f7d?auto=format&fit=crop&q=80&w=1600",
+    intro: {
+      text: "China is a world leader in medical education, offering state-of-the-art infrastructure and top-ranked universities. With English-medium programs and globally recognized degrees, China is a preferred destination for students seeking high-quality education.",
+      image: "https://images.unsplash.com/photo-1547981609-4b6bfe6770b0?auto=format&fit=crop&q=80&w=870"
+    },
+    highlights: [
+      { title: "Duration", value: "6 Years" },
+      { title: "Medium", value: "English" },
+      { title: "Recognition", value: "WHO, NMC, MOE China" },
+      { title: "Ranking", value: "Top Global Ranks" }
+    ],
+    topUniversities: [
+      "Nanjing Medical University",
+      "Jilin University",
+      "China Medical University",
+      "Dalian Medical University",
+      "Capital Medical University"
+    ],
+    facts: {
+      intro: "China Facts",
+      list: [
+        "World's second-largest economy",
+        "Advanced technology and infrastructure",
+        "Rich history and culture",
+        "Safe and disciplined society"
+      ]
+    },
+    documents: [
+      { icon: "fa-solid fa-passport", label: "Valid Passport" },
+      { icon: "fa-solid fa-file-lines", label: "Academic Transcripts" },
+      { icon: "fa-solid fa-chart-column", label: "NEET Scorecard" },
+      { icon: "fa-solid fa-image", label: "Photos" }
+    ],
+    advantages: [
+      "World-class infrastructure and labs",
+      "Top-ranked universities globally",
+      "English medium instruction",
+      "High patient flow for clinical exposure",
+      "Safe and modern living environment"
+    ],
+    studentLife: {
+      intro: "Student Life in China",
+      list: [
+        "Modern campuses with all amenities",
+        "International student communities",
+        "Affordable food and travel",
+        "Opportunity to learn Mandarin"
+      ]
+    }
+  },
+  "egypt": {
+    title: "MBBS in Egypt",
+    heroImage: "https://images.unsplash.com/photo-1572252009286-268acec5ca0a?auto=format&fit=crop&q=80&w=1600",
+    intro: {
+      text: "Egypt offers high-quality medical education with a rich history of academic excellence. Known for its clinical exposure and affordable fees, Egypt is becoming a popular choice for international medical students.",
+      image: "https://images.unsplash.com/photo-1539650116455-251d93d5ce3d?auto=format&fit=crop&q=80&w=870"
+    },
+    highlights: [
+      { title: "Duration", value: "5+2 Years" },
+      { title: "Medium", value: "English" },
+      { title: "Recognition", value: "WHO, NMC" },
+      { title: "Clinical", value: "High Exposure" }
+    ],
+    topUniversities: [
+      "Cairo University",
+      "Ain Shams University",
+      "Alexandria University",
+      "Mansoura University"
+    ],
+    facts: {
+      intro: "Egypt Facts",
+      list: [
+        "Cradle of civilization",
+        "Located in North Africa",
+        "High standard of living at low cost",
+        "Warm and welcoming culture"
+      ]
+    },
+    documents: [
+      { icon: "fa-solid fa-passport", label: "Valid Passport" },
+      { icon: "fa-solid fa-file-lines", label: "Academic Transcripts" },
+      { icon: "fa-solid fa-chart-column", label: "NEET Scorecard" },
+      { icon: "fa-solid fa-image", label: "Photos" }
+    ],
+    advantages: [
+      "High quality of education",
+      "English medium instruction",
+      "Affordable tuition fees",
+      "Excellent clinical training",
+      "Recognized worldwide"
+    ],
+    studentLife: {
+      intro: "Student Life in Egypt",
+      list: [
+        "Rich cultural heritage to explore",
+        "Friendly environment",
+        "Affordable accommodation",
+        "Good connectivity"
+      ]
+    }
+  }
 };
 
 export const EXAMS_DETAILED = {
