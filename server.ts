@@ -7,10 +7,6 @@ import { getStorage, ref, uploadBytes, getDownloadURL, deleteObject } from "fire
 import dotenv from "dotenv";
 import multer from "multer";
 import cors from "cors";
-import XHR2 from "xhr2";
-
-// Polyfill XMLHttpRequest for Firebase Storage
-global.XMLHttpRequest = XHR2 as any;
 
 // Load environment variables
 dotenv.config();
@@ -21,7 +17,7 @@ const firebaseConfig = {
   apiKey: "AIzaSyAerlaB_Lb05q9gqErAjNxOemiijuhO3f0",
   authDomain: "iexplainwebsite.firebaseapp.com",
   projectId: "iexplainwebsite",
-  storageBucket: "iexplainwebsite.firebasestorage.app",
+  storageBucket: "iexplainwebsite.appspot.com",
   messagingSenderId: "438305327858",
   appId: "1:438305327858:web:18713e75400a609c25de6b"
 };
