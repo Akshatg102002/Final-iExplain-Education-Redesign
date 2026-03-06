@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { 
   db, 
-  storage, 
   collection, 
   addDoc, 
   deleteDoc, 
@@ -9,11 +8,7 @@ import {
   query, 
   orderBy, 
   onSnapshot, 
-  serverTimestamp,
-  ref,
-  uploadBytesResumable,
-  getDownloadURL,
-  deleteObject
+  serverTimestamp
 } from '../firebase';
 import { MediaItem } from '../types';
 
@@ -67,60 +62,53 @@ const MediaManager: React.FC<MediaManagerProps> = ({ onLock }) => {
 
     for (let i = 0; i < files.length; i++) {
       const file = files[i];
-      setUploadProgress(prev => prev ? { ...prev, currentFileIndex: i + 1, currentFileName: file.name, currentFileProgress: 0 } : null);
+      setUploadProgress(prev => prev ? { ...prev, currentFileIndex: i + 1, currentFileName: file.name, currentFileProgress: 10 } : null);
 
       try {
-        const storagePath = `media/${Date.now()}_${file.name}`;
-        const storageRef = ref(storage, storagePath);
-        const uploadTask = uploadBytesResumable(storageRef, file);
+        const formData = new FormData();
+        formData.append('file', file);
 
-        await new Promise<void>((resolve, reject) => {
-          uploadTask.on('state_changed',
-            (snapshot) => {
-              const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-              setUploadProgress(prev => prev ? { ...prev, currentFileProgress: progress } : null);
-            },
-            (error) => {
-              console.error("Upload error:", error);
-              reject(error);
-            },
-            async () => {
-              const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
-              
-              // Determine type
-              let type: 'image' | 'video' | 'file' = 'file';
-              if (file.type.startsWith('image/')) type = 'image';
-              else if (file.type.startsWith('video/')) type = 'video';
+        // Simulate progress since fetch doesn't support it easily
+        const progressInterval = setInterval(() => {
+          setUploadProgress(prev => {
+            if (!prev || prev.currentFileProgress >= 90) return prev;
+            return { ...prev, currentFileProgress: prev.currentFileProgress + 10 };
+          });
+        }, 500);
 
-              // Save to Firestore
-              await addDoc(collection(db, 'media'), {
-                fileName: file.name,
-                fileURL: downloadURL,
-                storagePath: storagePath,
-                type: type,
-                size: file.size,
-                uploadedAt: serverTimestamp()
-              });
-              resolve();
-            }
-          );
+        const response = await fetch('/api/upload', {
+          method: 'POST',
+          body: formData
+        });
+
+        clearInterval(progressInterval);
+
+        if (!response.ok) {
+          throw new Error('Upload failed');
+        }
+
+        const data = await response.json();
+        
+        setUploadProgress(prev => prev ? { ...prev, currentFileProgress: 100 } : null);
+
+        // Determine type
+        let type: 'image' | 'video' | 'file' = 'file';
+        if (file.type.startsWith('image/')) type = 'image';
+        else if (file.type.startsWith('video/')) type = 'video';
+
+        // Save to Firestore
+        await addDoc(collection(db, 'media'), {
+          fileName: file.name,
+          fileURL: data.url,
+          storagePath: data.storagePath,
+          type: type,
+          size: file.size,
+          uploadedAt: serverTimestamp()
         });
 
       } catch (error: any) {
         console.error(`Failed to upload ${file.name}`, error);
-        
-        let errorMessage = `Failed to upload ${file.name}`;
-        
-        // Check for CORS or Network errors
-        if (error.code === 'storage/retry-limit-exceeded' || 
-            error.message?.includes('network') || 
-            error.message?.includes('CORS') ||
-            // Firebase Storage CORS errors often manifest as generic network errors or 0 status
-            error.code === 'storage/unknown') {
-          errorMessage = `Upload failed due to a network or CORS configuration issue.\n\nPlease ensure you have configured CORS for your Firebase Storage bucket.\n\nI have created a 'cors.json' file in your project root. You may need to run:\ngsutil cors set cors.json gs://<your-bucket-name>`;
-        }
-        
-        alert(errorMessage);
+        alert(`Failed to upload ${file.name}: ${error.message}`);
       }
     }
 
@@ -133,9 +121,18 @@ const MediaManager: React.FC<MediaManagerProps> = ({ onLock }) => {
     if (!window.confirm(`Are you sure you want to delete ${item.fileName}?`)) return;
 
     try {
-      // Delete from Storage
-      const storageRef = ref(storage, item.storagePath);
-      await deleteObject(storageRef);
+      // Delete via Proxy API
+      const response = await fetch('/api/delete', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ storagePath: item.storagePath })
+      });
+
+      if (!response.ok) {
+        throw new Error('Delete failed');
+      }
 
       // Delete from Firestore
       if (item.id) {

@@ -26,7 +26,7 @@ import {
   deleteObject 
 } from "firebase/storage";
 
-const firebaseConfig = {
+export const firebaseConfig = {
   apiKey: "AIzaSyAerlaB_Lb05q9gqErAjNxOemiijuhO3f0",
   authDomain: "iexplainwebsite.firebaseapp.com",
   projectId: "iexplainwebsite",
