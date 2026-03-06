@@ -106,9 +106,21 @@ const MediaManager: React.FC<MediaManagerProps> = ({ onLock }) => {
           );
         });
 
-      } catch (error) {
+      } catch (error: any) {
         console.error(`Failed to upload ${file.name}`, error);
-        alert(`Failed to upload ${file.name}`);
+        
+        let errorMessage = `Failed to upload ${file.name}`;
+        
+        // Check for CORS or Network errors
+        if (error.code === 'storage/retry-limit-exceeded' || 
+            error.message?.includes('network') || 
+            error.message?.includes('CORS') ||
+            // Firebase Storage CORS errors often manifest as generic network errors or 0 status
+            error.code === 'storage/unknown') {
+          errorMessage = `Upload failed due to a network or CORS configuration issue.\n\nPlease ensure you have configured CORS for your Firebase Storage bucket.\n\nI have created a 'cors.json' file in your project root. You may need to run:\ngsutil cors set cors.json gs://<your-bucket-name>`;
+        }
+        
+        alert(errorMessage);
       }
     }
 
