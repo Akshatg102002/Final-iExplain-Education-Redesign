@@ -13,6 +13,7 @@ import {
 } from '../firebase.ts';
 import { Blog, BlogCategory, SiteSettings, MediaItem, VideoStory, CollegeDetailData } from '../types';
 import { LOGO_URL, FOOTER_COLLEGES } from '../data.ts';
+import MediaManager from './MediaManager';
 
 type AdminTab = 'dashboard' | 'blogs' | 'categories' | 'colleges' | 'entries' | 'media' | 'stories' | 'settings';
 type ViewMode = 'list' | 'create' | 'edit';
@@ -52,6 +53,7 @@ const AdminPanel: React.FC<{ onExit: () => void }> = ({ onExit }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [isLocked, setIsLocked] = useState(false);
   
   // Data lists
   const [blogs, setBlogs] = useState<any[]>([]);
@@ -69,7 +71,7 @@ const AdminPanel: React.FC<{ onExit: () => void }> = ({ onExit }) => {
   // Forms
   const [blogForm, setBlogForm] = useState<Partial<Blog>>({});
   const [categoryForm, setCategoryForm] = useState<Partial<BlogCategory>>({});
-  const [mediaForm, setMediaForm] = useState<Partial<MediaItem>>({});
+  // Removed mediaForm state as it is handled by MediaManager
   const [storyForm, setStoryForm] = useState<Partial<VideoStory>>({});
   const [settingsForm, setSettingsForm] = useState<Partial<SiteSettings>>({});
   
@@ -156,7 +158,7 @@ const AdminPanel: React.FC<{ onExit: () => void }> = ({ onExit }) => {
       date: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
     });
     setCategoryForm({ name: '', slug: '' });
-    setMediaForm({ url: '', title: '', alt: '', type: 'image' });
+    // Removed mediaForm reset
     setStoryForm({ studentName: '', university: '', videoUrl: '', thumbnailUrl: '', tagline: '' });
     setCollegeForm(initialCollegeState);
     setImagePreview(null);
@@ -216,7 +218,11 @@ const AdminPanel: React.FC<{ onExit: () => void }> = ({ onExit }) => {
   }
 
   const SidebarItem: React.FC<{ id: AdminTab; icon: string; label: string }> = ({ id, icon, label }) => (
-    <button onClick={() => { setActiveTab(id); setViewMode('list'); resetForms(); }} className={`w-full flex items-center space-x-3 px-6 py-4 transition-all border-l-4 ${activeTab === id ? 'bg-white/10 text-brand-gold border-brand-gold font-bold' : 'border-transparent text-white/60 hover:text-white hover:bg-white/5'}`}>
+    <button 
+      disabled={isLocked}
+      onClick={() => { setActiveTab(id); setViewMode('list'); resetForms(); }} 
+      className={`w-full flex items-center space-x-3 px-6 py-4 transition-all border-l-4 ${activeTab === id ? 'bg-white/10 text-brand-gold border-brand-gold font-bold' : 'border-transparent text-white/60 hover:text-white hover:bg-white/5'} ${isLocked ? 'opacity-50 cursor-not-allowed' : ''}`}
+    >
       <i className={`fa-solid ${icon} w-5`}></i>
       <span className="text-sm">{label}</span>
     </button>
@@ -243,7 +249,7 @@ const AdminPanel: React.FC<{ onExit: () => void }> = ({ onExit }) => {
           <SidebarItem id="settings" icon="fa-sliders" label="Settings" />
         </nav>
         <div className="p-6 border-t border-white/10">
-          <button onClick={onExit} className="w-full py-3 bg-red-500/10 text-red-400 rounded-xl text-xs font-black uppercase tracking-widest hover:bg-red-500 transition-all">Logout</button>
+          <button disabled={isLocked} onClick={onExit} className={`w-full py-3 bg-red-500/10 text-red-400 rounded-xl text-xs font-black uppercase tracking-widest hover:bg-red-500 transition-all ${isLocked ? 'opacity-50 cursor-not-allowed' : ''}`}>Logout</button>
         </div>
       </aside>
 
@@ -510,6 +516,12 @@ const AdminPanel: React.FC<{ onExit: () => void }> = ({ onExit }) => {
                      </form>
                   </div>
                )}
+            </div>
+          )}
+
+          {activeTab === 'media' && (
+            <div className="animate-fade-in">
+              <MediaManager onLock={setIsLocked} />
             </div>
           )}
 

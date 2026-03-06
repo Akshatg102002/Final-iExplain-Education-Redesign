@@ -163,10 +163,12 @@ export interface BlogCategory {
 
 export interface MediaItem {
   id?: string;
-  url: string;
-  type: 'image' | 'video';
-  title: string;
-  alt: string;
+  fileName: string;
+  fileURL: string;
+  storagePath: string;
+  type: 'image' | 'video' | 'file';
+  size: number;
+  uploadedAt: any;
 }
 
 export interface VideoStory {

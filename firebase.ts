@@ -15,8 +15,16 @@ import {
   query, 
   orderBy, 
   where, 
-  setDoc 
+  setDoc,
+  onSnapshot
 } from "firebase/firestore";
+import { 
+  getStorage, 
+  ref, 
+  uploadBytesResumable, 
+  getDownloadURL, 
+  deleteObject 
+} from "firebase/storage";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAerlaB_Lb05q9gqErAjNxOemiijuhO3f0",
@@ -31,10 +39,12 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
+const storage = getStorage(app);
 
 // Export centralized instances and methods
 export { 
   db, 
+  storage,
   collection, 
   getDocs, 
   // Exporting getDoc so it can be used in components like App
@@ -48,5 +58,10 @@ export {
   query, 
   orderBy, 
   where, 
-  setDoc 
+  setDoc,
+  onSnapshot,
+  ref,
+  uploadBytesResumable,
+  getDownloadURL,
+  deleteObject
 };
