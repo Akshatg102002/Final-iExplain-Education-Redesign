@@ -7,10 +7,10 @@ import { getStorage, ref, uploadBytes, getDownloadURL, deleteObject } from "fire
 import dotenv from "dotenv";
 import multer from "multer";
 import cors from "cors";
-import { XMLHttpRequest } from "xhr2";
+import XHR2 from "xhr2";
 
 // Polyfill XMLHttpRequest for Firebase Storage
-global.XMLHttpRequest = XMLHttpRequest;
+global.XMLHttpRequest = XHR2 as any;
 
 // Load environment variables
 dotenv.config();
