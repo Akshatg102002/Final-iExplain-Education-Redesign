@@ -56,6 +56,7 @@ async function startServer() {
       const storageRef = ref(storage, `uploads/${timestamp}_${file.originalname}`);
 
       // Upload the file buffer to Firebase Storage
+      console.log(`Attempting to upload to bucket: ${firebaseConfig.storageBucket}, path: ${storageRef.fullPath}`);
       const snapshot = await uploadBytes(storageRef, file.buffer);
 
       // Get the download URL
@@ -66,8 +67,17 @@ async function startServer() {
         storagePath: snapshot.ref.fullPath
       });
     } catch (error: any) {
-      console.error("Upload error:", error);
-      res.status(500).json({ error: "Upload failed", details: error.message });
+      console.error("Upload error details:", JSON.stringify(error, null, 2));
+      console.error("Error code:", error.code);
+      console.error("Error message:", error.message);
+      console.error("Server response:", error.customData?.serverResponse);
+      
+      res.status(500).json({ 
+        error: "Upload failed", 
+        details: error.message,
+        code: error.code,
+        bucket: firebaseConfig.storageBucket
+      });
     }
   });
 

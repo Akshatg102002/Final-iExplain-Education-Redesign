@@ -30,7 +30,7 @@ export const firebaseConfig = {
   apiKey: "AIzaSyAerlaB_Lb05q9gqErAjNxOemiijuhO3f0",
   authDomain: "iexplainwebsite.firebaseapp.com",
   projectId: "iexplainwebsite",
-  storageBucket: "iexplainwebsite.firebasestorage.app",
+  storageBucket: "iexplainwebsite.appspot.com",
   messagingSenderId: "438305327858",
   appId: "1:438305327858:web:18713e75400a609c25de6b",
   measurementId: "G-JZDRBBZL2S"
