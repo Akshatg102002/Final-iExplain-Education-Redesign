@@ -118,8 +118,13 @@ const AdminPanel: React.FC<{ onExit: () => void }> = ({ onExit }) => {
       } catch (e) {
         console.log("Sitemap fetch error", e);
       }
-    } catch (err) {
+    } catch (err: any) {
       console.error("Fetch error:", err);
+      if (err.code === 'permission-denied') {
+        alert("Permission denied. Please check your Firestore security rules.");
+      } else {
+        alert("Failed to load data. See console for details.");
+      }
     } finally {
       setLoading(false);
     }

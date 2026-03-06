@@ -35,6 +35,12 @@ const MediaManager: React.FC<MediaManagerProps> = ({ onLock }) => {
       const items = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as MediaItem));
       setMediaItems(items);
       setLoading(false);
+    }, (error) => {
+      console.error("Media snapshot error:", error);
+      setLoading(false);
+      if (error.code === 'permission-denied') {
+        alert("Permission denied. Please check your Firestore security rules.");
+      }
     });
     return () => unsubscribe();
   }, []);
