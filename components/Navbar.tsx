@@ -11,7 +11,10 @@ interface NavbarProps {
   logoUrl?: string;
 }
 
-// ... (FlagIcon and helper functions remain same)
+const FlagIcon = ({ code }: { code: string }) => {
+  const Flag = (Flags as any)[code];
+  return Flag ? <Flag className="w-6 h-4 rounded shadow-sm object-cover" /> : null;
+};
 
 // Helper for distance calculation
 function getDistanceFromLatLonInKm(lat1: number, lon1: number, lat2: number, lon2: number) {
