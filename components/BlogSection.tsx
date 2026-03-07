@@ -71,7 +71,15 @@ const BlogSection: React.FC = () => {
                 className="group bg-white dark:bg-slate-800 rounded-[2rem] overflow-hidden shadow-sm border border-gray-100 dark:border-slate-700 hover:shadow-2xl transition-all"
               >
                 <div className="aspect-[16/10] overflow-hidden">
-                  <img src={post.img} alt={post.imgAlt || post.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                  <img 
+                    src={post.img} 
+                    alt={post.imgAlt || post.title} 
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      target.src = "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&q=80&w=600";
+                    }}
+                  />
                 </div>
                 <div className="p-8">
                   <div className="text-[10px] font-black text-brand-gold uppercase tracking-widest mb-3">{post.category || 'Admissions'}</div>

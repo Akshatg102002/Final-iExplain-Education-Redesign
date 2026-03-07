@@ -159,6 +159,13 @@ export const MediaGrid: React.FC<MediaGridProps> = ({ onSelect, selectable = fal
                       src={file.fileURL || file.data} 
                       alt={file.name} 
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                      onError={(e) => {
+                        const target = e.target as HTMLImageElement;
+                        if (file.fileURL && target.src !== file.data) {
+                          // If URL failed, fallback to direct base64 data
+                          target.src = file.data;
+                        }
+                      }}
                     />
                   ) : (
                     <div className="w-full h-full flex items-center justify-center text-gray-400">
@@ -174,7 +181,7 @@ export const MediaGrid: React.FC<MediaGridProps> = ({ onSelect, selectable = fal
                         handleCopy(file);
                       }}
                       className="p-2 bg-white/20 hover:bg-white/40 rounded-full text-white transition"
-                      title="Copy Path (Base64)"
+                      title={file.fileURL ? "Copy Image URL" : "Copy Base64 Data"}
                     >
                       {copiedId === file.id ? <Check size={18} /> : <Copy size={18} />}
                     </button>

@@ -24,7 +24,17 @@ const CollegeDetailPage: React.FC<CollegeDetailPageProps> = ({ data }) => {
       {/* Hero Section */}
       <div className="relative h-[60vh] min-h-[500px] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
-          <img src={data.image} className="w-full h-full object-cover" alt={data.name} />
+          <img 
+            src={data.image} 
+            className="w-full h-full object-cover" 
+            alt={data.name} 
+            onError={(e) => {
+              const target = e.target as HTMLImageElement;
+              console.error("Image load failed:", data.image);
+              // Fallback to a placeholder if it fails
+              target.src = "https://images.unsplash.com/photo-1541339907198-e08759dfc3ef?auto=format&fit=crop&q=80&w=1200";
+            }}
+          />
           <div className="absolute inset-0 bg-gradient-to-t from-brand-blue via-brand-blue/70 to-brand-blue/30"></div>
         </div>
         <div className="relative z-10 text-center max-w-5xl mx-auto px-4 mt-16 animate-fade-in">

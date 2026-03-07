@@ -59,13 +59,13 @@ async function startServer() {
       
       // Since we don't have the ID, we must query.
       const mediaRef = collection(db, "media");
-      // Query by fileURL which stores the relative path /assets/filename
-      const q = query(mediaRef, where("fileURL", "==", `/assets/${filename}`));
+      // Query by 'name' field which stores the unique filename
+      const q = query(mediaRef, where("name", "==", filename));
       const querySnapshot = await getDocs(q);
 
       if (querySnapshot.empty) {
-        // Fallback: try querying by 'url' field for backward compatibility or if I change my mind
-        const q2 = query(mediaRef, where("url", "==", `/assets/${filename}`));
+        // Fallback: try querying by 'fileURL' field for backward compatibility
+        const q2 = query(mediaRef, where("fileURL", "==", `/assets/${filename}`));
         const querySnapshot2 = await getDocs(q2);
         
         if (querySnapshot2.empty) {
@@ -87,22 +87,23 @@ async function startServer() {
   });
 
   function serveBase64(res: any, base64Data: string) {
-      if (!base64Data || !base64Data.startsWith('data:')) {
+      if (!base64Data || !base64Data.includes(';base64,')) {
         return res.status(500).send("Invalid file data");
       }
 
-      // Parse Data URI
-      const matches = base64Data.match(/^data:([A-Za-z-+\/]+);base64,(.+)$/);
-      if (!matches || matches.length !== 3) {
-        return res.status(500).send("Invalid base64 string");
+      try {
+        // More robust parsing using split instead of regex
+        const [header, base64] = base64Data.split(';base64,');
+        const type = header.split(':')[1];
+        const buffer = Buffer.from(base64, 'base64');
+
+        res.setHeader('Content-Type', type);
+        res.setHeader('Cache-Control', 'public, max-age=86400'); // Cache for 1 day
+        res.send(buffer);
+      } catch (error) {
+        console.error("Error decoding base64:", error);
+        res.status(500).send("Error processing image");
       }
-
-      const type = matches[1];
-      const buffer = Buffer.from(matches[2], 'base64');
-
-      res.setHeader('Content-Type', type);
-      res.setHeader('Cache-Control', 'public, max-age=86400'); // Cache for 1 day
-      res.send(buffer);
   }
 
   // Sitemap Route

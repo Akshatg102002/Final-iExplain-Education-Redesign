@@ -146,6 +146,10 @@ const PopularColleges: React.FC = () => {
                         src={college.image}
                         alt={college.name}
                         className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                        onError={(e) => {
+                          const target = e.target as HTMLImageElement;
+                          target.src = "https://images.unsplash.com/photo-1541339907198-e08759dfc3ef?auto=format&fit=crop&q=80&w=1200";
+                        }}
                       />
                     </div>
                     <div className="p-5 text-center bg-gray-50 dark:bg-slate-800/50 border-t border-gray-100 dark:border-slate-700 mt-auto min-h-[80px] flex items-center justify-center">

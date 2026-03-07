@@ -101,6 +101,10 @@ const BlogDetailPage: React.FC<BlogDetailPageProps> = ({ slug }) => {
           src={post.img || HERO_IMG_URL} 
           alt={post.title} 
           className="absolute inset-0 w-full h-full object-cover"
+          onError={(e) => {
+            const target = e.target as HTMLImageElement;
+            target.src = HERO_IMG_URL;
+          }}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/60 to-transparent"></div>
         <div className="absolute inset-0 flex items-end">
