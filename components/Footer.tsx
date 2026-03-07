@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { 
   LOGO_URL, 
   FOOTER_COLLEGES,
@@ -50,9 +51,9 @@ const Footer: React.FC<FooterProps> = ({ logoUrl, helpline, email }) => {
                 <ul className="space-y-3">
                 {mbbsCountries.map((country) => (
                     <li key={country}>
-                    <a href={`#/mbbs-abroad/${createSlug(country)}`} className="text-xs font-medium text-gray-500 dark:text-gray-400 hover:text-brand-blue dark:hover:text-white hover:pl-1 transition-all block">
+                    <Link to={`/mbbs-abroad/${createSlug(country)}`} className="text-xs font-medium text-gray-500 dark:text-gray-400 hover:text-brand-blue dark:hover:text-white hover:pl-1 transition-all block">
                         {country}
-                    </a>
+                    </Link>
                     </li>
                 ))}
                 </ul>
@@ -64,9 +65,9 @@ const Footer: React.FC<FooterProps> = ({ logoUrl, helpline, email }) => {
                 <ul className="space-y-3">
                 {studyCountries.map((country) => (
                     <li key={country}>
-                    <a href={`#/study-abroad/${createSlug(country)}`} className="text-xs font-medium text-gray-500 dark:text-gray-400 hover:text-brand-blue dark:hover:text-white hover:pl-1 transition-all block">
+                    <Link to={`/study-abroad/${createSlug(country)}`} className="text-xs font-medium text-gray-500 dark:text-gray-400 hover:text-brand-blue dark:hover:text-white hover:pl-1 transition-all block">
                         {country}
-                    </a>
+                    </Link>
                     </li>
                 ))}
                 </ul>
@@ -96,9 +97,9 @@ const Footer: React.FC<FooterProps> = ({ logoUrl, helpline, email }) => {
                     <ul className="space-y-2.5">
                         {section.names.map((name, i) => (
                         <li key={i}>
-                            <a href={`#/college/${createSlug(name)}`} className="text-[11px] font-bold text-gray-500 dark:text-gray-400 hover:text-brand-blue dark:hover:text-white transition-colors leading-tight block">
+                            <Link to={`/college/${createSlug(name)}`} className="text-[11px] font-bold text-gray-500 dark:text-gray-400 hover:text-brand-blue dark:hover:text-white transition-colors leading-tight block">
                             {name}
-                            </a>
+                            </Link>
                         </li>
                         ))}
                     </ul>
@@ -117,9 +118,9 @@ const Footer: React.FC<FooterProps> = ({ logoUrl, helpline, email }) => {
                     <ul className="space-y-2.5">
                         {section.names.map((name, i) => (
                         <li key={i}>
-                            <a href={`#/college/${createSlug(name)}`} className="text-[11px] font-bold text-gray-500 dark:text-gray-400 hover:text-brand-blue dark:hover:text-white transition-colors leading-tight block">
+                            <Link to={`/college/${createSlug(name)}`} className="text-[11px] font-bold text-gray-500 dark:text-gray-400 hover:text-brand-blue dark:hover:text-white transition-colors leading-tight block">
                             {name}
-                            </a>
+                            </Link>
                         </li>
                         ))}
                     </ul>
@@ -148,7 +149,7 @@ const Footer: React.FC<FooterProps> = ({ logoUrl, helpline, email }) => {
                         <p className="text-sm font-medium text-white/80 leading-relaxed min-h-[40px]">{off.address}</p>
                      </div>
                      <div className="flex space-x-3">
-                        <a href={`#/office/${off.slug}`} className="px-4 py-2 bg-white/10 border border-white/20 rounded-md text-[10px] font-black uppercase tracking-widest hover:bg-brand-gold hover:text-white transition-all">Details</a>
+                        <Link to={`/office/${off.slug}`} className="px-4 py-2 bg-white/10 border border-white/20 rounded-md text-[10px] font-black uppercase tracking-widest hover:bg-brand-gold hover:text-white transition-all">Details</Link>
                         <a href={`tel:${off.phone}`} className="px-4 py-2 bg-white/10 border border-white/20 rounded-md text-[10px] font-black uppercase tracking-widest hover:bg-brand-gold hover:text-white transition-all">Call</a>
                      </div>
                   </div>

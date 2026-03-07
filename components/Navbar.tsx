@@ -12,8 +12,22 @@ interface NavbarProps {
 }
 
 const FlagIcon = ({ code }: { code: string }) => {
-  const Flag = (Flags as any)[code];
-  return Flag ? <Flag className="w-6 h-4 rounded shadow-sm object-cover" /> : null;
+  if (!code) return null;
+  // Use flagcdn.com for reliable flag rendering
+  // EU is supported by flagcdn
+  const flagUrl = `https://flagcdn.com/w40/${code.toLowerCase()}.png`;
+  
+  return (
+    <img 
+      src={flagUrl} 
+      alt={code} 
+      className="w-6 h-4 rounded shadow-sm object-cover"
+      onError={(e) => {
+        // Fallback to library if image fails, or just hide
+        e.currentTarget.style.display = 'none';
+      }}
+    />
+  );
 };
 
 // Helper for distance calculation
