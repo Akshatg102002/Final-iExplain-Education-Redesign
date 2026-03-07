@@ -3,9 +3,7 @@ import express from "express";
 import { createServer as createViteServer } from "vite";
 import { initializeApp } from "firebase/app";
 import { getFirestore, doc, getDoc } from "firebase/firestore";
-import { getStorage, ref, uploadBytes, getDownloadURL, deleteObject } from "firebase/storage";
 import dotenv from "dotenv";
-import multer from "multer";
 import cors from "cors";
 
 // Load environment variables
@@ -25,10 +23,6 @@ const firebaseConfig = {
 // Initialize Firebase
 const firebaseApp = initializeApp(firebaseConfig);
 const db = getFirestore(firebaseApp);
-const storage = getStorage(firebaseApp);
-
-// Configure multer for handling file uploads
-const upload = multer({ storage: multer.memoryStorage() });
 
 async function startServer() {
   const app = express();
@@ -40,63 +34,6 @@ async function startServer() {
   // API Routes
   app.get("/api/health", (req, res) => {
     res.json({ status: "ok" });
-  });
-
-  // File Upload Proxy Route
-  app.post("/api/upload", upload.single("file"), async (req, res) => {
-    try {
-      if (!req.file) {
-        return res.status(400).json({ error: "No file uploaded" });
-      }
-
-      const file = req.file;
-      // Create a storage reference
-      // Use the original filename, but maybe add a timestamp to avoid collisions
-      const timestamp = Date.now();
-      const storageRef = ref(storage, `uploads/${timestamp}_${file.originalname}`);
-
-      // Upload the file buffer to Firebase Storage
-      console.log(`Attempting to upload to bucket: ${firebaseConfig.storageBucket}, path: ${storageRef.fullPath}`);
-      const snapshot = await uploadBytes(storageRef, file.buffer);
-
-      // Get the download URL
-      const downloadURL = await getDownloadURL(snapshot.ref);
-
-      res.json({ 
-        url: downloadURL,
-        storagePath: snapshot.ref.fullPath
-      });
-    } catch (error: any) {
-      console.error("Upload error details:", JSON.stringify(error, null, 2));
-      console.error("Error code:", error.code);
-      console.error("Error message:", error.message);
-      console.error("Server response:", error.customData?.serverResponse);
-      
-      res.status(500).json({ 
-        error: "Upload failed", 
-        details: error.message,
-        code: error.code,
-        bucket: firebaseConfig.storageBucket
-      });
-    }
-  });
-
-  // File Delete Proxy Route
-  app.post("/api/delete", async (req, res) => {
-    try {
-      const { storagePath } = req.body;
-      if (!storagePath) {
-        return res.status(400).json({ error: "No storagePath provided" });
-      }
-
-      const storageRef = ref(storage, storagePath);
-      await deleteObject(storageRef);
-
-      res.json({ success: true });
-    } catch (error: any) {
-      console.error("Delete error:", error);
-      res.status(500).json({ error: "Delete failed", details: error.message });
-    }
   });
 
   // Sitemap Route

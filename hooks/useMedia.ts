@@ -6,8 +6,8 @@ export interface MediaFile {
   name: string;
   type: string;
   size: number;
-  data: string; // URL
-  storagePath: string; // For deletion
+  data: string; // Base64 string
+  storagePath: string; // Kept for compatibility, but will be empty or "firestore"
   createdAt: any;
 }
 
@@ -34,30 +34,32 @@ export const useMedia = () => {
     return () => unsubscribe();
   }, []);
 
+  const convertFileToBase64 = (file: File): Promise<string> => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result as string);
+      reader.onerror = (error) => reject(error);
+    });
+  };
+
   const uploadFile = async (file: File) => {
     setError(null);
-    const formData = new FormData();
-    formData.append('file', file);
+    
+    // Check file size (approx 700KB limit for safety with Firestore 1MB limit)
+    if (file.size > 700 * 1024) {
+      throw new Error("File is too large. Please upload files smaller than 700KB.");
+    }
 
     try {
-      const response = await fetch('/api/upload', {
-        method: 'POST',
-        body: formData,
-      });
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.details || 'Upload failed');
-      }
-
-      const { url, storagePath } = await response.json();
+      const base64Data = await convertFileToBase64(file);
 
       await addDoc(collection(db, 'media'), {
         name: file.name,
         type: file.type,
         size: file.size,
-        data: url,
-        storagePath: storagePath,
+        data: base64Data,
+        storagePath: 'firestore', // Marker for direct storage
         createdAt: serverTimestamp(),
       });
     } catch (err: any) {
@@ -70,25 +72,7 @@ export const useMedia = () => {
   const deleteFile = async (id: string) => {
     setError(null);
     try {
-      const fileToDelete = media.find(f => f.id === id);
-      if (!fileToDelete) return;
-
-      // Delete from storage via API
-      if (fileToDelete.storagePath) {
-        const response = await fetch('/api/delete', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ storagePath: fileToDelete.storagePath }),
-        });
-
-        if (!response.ok) {
-            console.warn("Failed to delete from storage, but proceeding to delete from Firestore.");
-        }
-      }
-
-      // Delete from Firestore
+      // Just delete from Firestore since data is stored there
       await deleteDoc(doc(db, 'media', id));
     } catch (err: any) {
       console.error("Delete error:", err);
