@@ -2,7 +2,7 @@
 import express from "express";
 import { createServer as createViteServer } from "vite";
 import { initializeApp } from "firebase/app";
-import { getFirestore, doc, getDoc } from "firebase/firestore";
+import { getFirestore, doc, getDoc, collection, query, where, getDocs } from "firebase/firestore";
 import dotenv from "dotenv";
 import cors from "cors";
 
@@ -35,6 +35,75 @@ async function startServer() {
   app.get("/api/health", (req, res) => {
     res.json({ status: "ok" });
   });
+
+  // Media Asset Route
+  app.get("/assets/:filename", async (req, res) => {
+    try {
+      const filename = req.params.filename;
+      // Query Firestore for the media document with this filename
+      // Note: We need to query by 'url' or 'name'. 
+      // Since we are constructing the URL as /assets/filename, we can query by that.
+      // Or better, query by the 'name' field if we ensure it matches the filename in URL.
+      
+      // However, Firestore query requires importing 'query', 'where', 'getDocs', 'collection'
+      // We need to import these at the top level.
+      // But wait, server.ts already imports getFirestore, doc, getDoc.
+      // We need to add collection, query, where, getDocs to imports.
+      
+      // Let's use a simple scan if we can't easily add imports, OR update imports.
+      // Updating imports is better.
+      
+      // For now, let's assume we can query.
+      // Actually, to avoid complex queries without proper indexes, 
+      // let's try to find the document.
+      
+      // Since we don't have the ID, we must query.
+      const mediaRef = collection(db, "media");
+      // Query by fileURL which stores the relative path /assets/filename
+      const q = query(mediaRef, where("fileURL", "==", `/assets/${filename}`));
+      const querySnapshot = await getDocs(q);
+
+      if (querySnapshot.empty) {
+        // Fallback: try querying by 'url' field for backward compatibility or if I change my mind
+        const q2 = query(mediaRef, where("url", "==", `/assets/${filename}`));
+        const querySnapshot2 = await getDocs(q2);
+        
+        if (querySnapshot2.empty) {
+             console.log(`File not found: ${filename}`);
+             return res.status(404).send("File not found");
+        }
+        
+        const docData = querySnapshot2.docs[0].data();
+        return serveBase64(res, docData.data);
+      }
+
+      const docData = querySnapshot.docs[0].data();
+      serveBase64(res, docData.data);
+
+    } catch (error) {
+      console.error("Error serving asset:", error);
+      res.status(500).send("Internal Server Error");
+    }
+  });
+
+  function serveBase64(res: any, base64Data: string) {
+      if (!base64Data || !base64Data.startsWith('data:')) {
+        return res.status(500).send("Invalid file data");
+      }
+
+      // Parse Data URI
+      const matches = base64Data.match(/^data:([A-Za-z-+\/]+);base64,(.+)$/);
+      if (!matches || matches.length !== 3) {
+        return res.status(500).send("Invalid base64 string");
+      }
+
+      const type = matches[1];
+      const buffer = Buffer.from(matches[2], 'base64');
+
+      res.setHeader('Content-Type', type);
+      res.setHeader('Cache-Control', 'public, max-age=86400'); // Cache for 1 day
+      res.send(buffer);
+  }
 
   // Sitemap Route
   app.get("/sitemap.xml", async (req, res) => {

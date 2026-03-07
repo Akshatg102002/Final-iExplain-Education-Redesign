@@ -16,7 +16,8 @@ export const MediaGrid: React.FC<MediaGridProps> = ({ onSelect, selectable = fal
   const [uploadProgress, setUploadProgress] = useState({ current: 0, total: 0 });
 
   const handleCopy = (file: MediaFile) => {
-    navigator.clipboard.writeText(file.data);
+    const urlToCopy = file.fileURL ? `${window.location.origin}${file.fileURL}` : file.data;
+    navigator.clipboard.writeText(urlToCopy);
     setCopiedId(file.id);
     setTimeout(() => setCopiedId(null), 2000);
   };
@@ -155,7 +156,7 @@ export const MediaGrid: React.FC<MediaGridProps> = ({ onSelect, selectable = fal
                 <div className="aspect-square bg-gray-100 dark:bg-gray-800 relative overflow-hidden">
                   {file.type.startsWith('image/') ? (
                     <img 
-                      src={file.data} 
+                      src={file.fileURL || file.data} 
                       alt={file.name} 
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                     />

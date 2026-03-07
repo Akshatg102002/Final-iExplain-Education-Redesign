@@ -53,12 +53,20 @@ export const useMedia = () => {
 
     try {
       const base64Data = await convertFileToBase64(file);
+      
+      // Sanitize filename and add timestamp for uniqueness
+      const timestamp = Date.now();
+      const sanitizedName = file.name.replace(/[^a-zA-Z0-9.-]/g, '_');
+      const uniqueName = `${timestamp}-${sanitizedName}`;
+      const fileURL = `/assets/${uniqueName}`;
 
       await addDoc(collection(db, 'media'), {
-        name: file.name,
+        name: uniqueName, // Use unique name for storage/retrieval
+        originalName: file.name, // Keep original name for display if needed
         type: file.type,
         size: file.size,
         data: base64Data,
+        fileURL: fileURL, // This is the public URL
         storagePath: 'firestore', // Marker for direct storage
         createdAt: serverTimestamp(),
       });
