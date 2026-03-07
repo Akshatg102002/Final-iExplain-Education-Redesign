@@ -63,14 +63,54 @@ const ContactMapSection = () => {
     <section id="contact-section" className="py-12 bg-gray-50 dark:bg-slate-900">
       <div className="max-w-7xl mx-auto px-4">
         <div className="bg-white dark:bg-slate-800 rounded-[3rem] overflow-hidden shadow-2xl border border-gray-100 dark:border-slate-700 flex flex-col lg:flex-row">
-          <div className="lg:w-1/2 h-[500px] lg:h-auto min-h-[400px] relative">
-            <iframe 
-              src={hq.mapEmbed} 
-              className="absolute inset-0 w-full h-full grayscale hover:grayscale-0 transition-all duration-700" 
-              loading="lazy" 
-              referrerPolicy="no-referrer-when-downgrade"
-            ></iframe>
+          {/* LHS: Company Info */}
+          <div className="lg:w-1/2 bg-brand-blue text-white p-12 lg:p-16 flex flex-col justify-between relative overflow-hidden">
+            {/* Background Pattern */}
+            <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20"></div>
+            <div className="absolute top-0 right-0 w-64 h-64 bg-brand-gold rounded-full blur-[100px] opacity-20"></div>
+            
+            <div className="relative z-10">
+              <div className="mb-10">
+                 <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=800&auto=format&fit=crop" alt="Office" className="w-full h-64 object-cover rounded-3xl mb-8 shadow-lg border-4 border-white/10" />
+                 <h3 className="text-3xl font-black mb-2">Get In Touch</h3>
+                 <p className="text-white/70 font-medium">We are here to help you shape your future.</p>
+              </div>
+
+              <div className="space-y-8">
+                 <div className="flex items-start gap-4">
+                    <div className="w-12 h-12 bg-white/10 rounded-2xl flex items-center justify-center text-brand-gold text-xl shrink-0">
+                       <i className="fa-solid fa-phone"></i>
+                    </div>
+                    <div>
+                       <p className="text-[10px] font-black uppercase tracking-widest text-white/50 mb-1">Call Us</p>
+                       <p className="text-xl font-bold">{hq.phone}</p>
+                    </div>
+                 </div>
+
+                 <div className="flex items-start gap-4">
+                    <div className="w-12 h-12 bg-white/10 rounded-2xl flex items-center justify-center text-brand-gold text-xl shrink-0">
+                       <i className="fa-solid fa-envelope"></i>
+                    </div>
+                    <div>
+                       <p className="text-[10px] font-black uppercase tracking-widest text-white/50 mb-1">Email Us</p>
+                       <p className="text-xl font-bold">info@iexplaineducation.in</p>
+                    </div>
+                 </div>
+
+                 <div className="flex items-start gap-4">
+                    <div className="w-12 h-12 bg-white/10 rounded-2xl flex items-center justify-center text-brand-gold text-xl shrink-0">
+                       <i className="fa-solid fa-clock"></i>
+                    </div>
+                    <div>
+                       <p className="text-[10px] font-black uppercase tracking-widest text-white/50 mb-1">Working Hours</p>
+                       <p className="text-lg font-bold">Mon - Sat: 10:00 AM - 7:00 PM</p>
+                    </div>
+                 </div>
+              </div>
+            </div>
           </div>
+
+          {/* RHS: Contact Form */}
           <div className="lg:w-1/2 p-12 lg:p-16">
             <ContactForm />
           </div>
@@ -392,17 +432,36 @@ const App: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isAICounselorOpen, setIsAICounselorOpen] = useState(false);
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
+  const [hasTriggeredPopup, setHasTriggeredPopup] = useState(false);
 
-  // Trigger contact modal after 5 seconds on route change
+  // Reset popup trigger on route change
   useEffect(() => {
-    // Don't auto-trigger on contact page as it already has a form
-    if (route.view === 'contact') return;
-
-    const timer = setTimeout(() => {
-      setIsContactModalOpen(true);
-    }, 5000);
-    return () => clearTimeout(timer);
+    setHasTriggeredPopup(false);
   }, [route]);
+
+  // Trigger contact modal on 40-50% scroll
+  useEffect(() => {
+    if (route.view === 'contact') return;
+    if (hasTriggeredPopup) return; // Don't add listener if already triggered
+
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY;
+      const windowHeight = window.innerHeight;
+      const documentHeight = document.documentElement.scrollHeight;
+      
+      const scrollPercentage = (scrollPosition / (documentHeight - windowHeight)) * 100;
+
+      if (scrollPercentage >= 40 && scrollPercentage <= 50) {
+        if (!isContactModalOpen && !hasTriggeredPopup) {
+            setIsContactModalOpen(true);
+            setHasTriggeredPopup(true);
+        }
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [route, isContactModalOpen, hasTriggeredPopup]);
 
   useEffect(() => {
     const handleHashChange = () => {

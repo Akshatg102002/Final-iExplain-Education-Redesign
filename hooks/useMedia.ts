@@ -7,6 +7,7 @@ export interface MediaFile {
   type: string;
   size: number;
   data: string; // Base64 string
+  fileURL?: string;
   storagePath: string; // Kept for compatibility, but will be empty or "firestore"
   createdAt: any;
 }

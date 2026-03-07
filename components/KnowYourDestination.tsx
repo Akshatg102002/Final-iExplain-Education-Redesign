@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { KNOW_YOUR_DESTINATIONS } from '../data.ts';
+import { createSlug } from '../utils.ts';
 
 const KnowYourDestination: React.FC = () => {
   return (
@@ -18,8 +19,9 @@ const KnowYourDestination: React.FC = () => {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {KNOW_YOUR_DESTINATIONS.map((dest, i) => (
-            <div 
+            <a 
               key={i} 
+              href={`#/study-abroad/${createSlug(dest.name)}`}
               className="group relative h-64 rounded-[1.5rem] overflow-hidden shadow-lg cursor-pointer transform transition-transform hover:scale-[1.02]"
             >
               <img 
@@ -31,7 +33,7 @@ const KnowYourDestination: React.FC = () => {
               <div className="absolute inset-0 flex items-center justify-center">
                 <h3 className="text-white text-2xl font-black tracking-tight">{dest.name}</h3>
               </div>
-            </div>
+            </a>
           ))}
         </div>
       </div>

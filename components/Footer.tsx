@@ -72,19 +72,17 @@ const Footer: React.FC<FooterProps> = ({ logoUrl, helpline, email }) => {
                 </ul>
             </div>
 
-            {/* Column 4: Quick Links Box */}
-            <div className="bg-gray-50 dark:bg-slate-800 p-8 rounded-[2rem] border border-gray-100 dark:border-slate-700">
-                <h4 className="font-black text-sm text-brand-blue dark:text-white mb-6">Quick Links</h4>
-                <ul className="space-y-4">
-                    {['About Us', 'Terms & Conditions', 'Privacy Policy', 'Contact Us'].map((link) => (
-                    <li key={link}>
-                        <a href={`#/${link.toLowerCase().replace(/ & /g, '-').replace(/ /g, '-')}`} className="flex items-center text-xs font-bold text-gray-500 dark:text-gray-400 hover:text-brand-gold transition-colors">
-                        <i className="fa-solid fa-chevron-right text-[8px] mr-3 text-brand-gold/50"></i>
-                        {link}
-                        </a>
-                    </li>
-                    ))}
-                </ul>
+            {/* Column 4: Map */}
+            <div className="bg-gray-50 dark:bg-slate-800 p-2 rounded-[2rem] border border-gray-100 dark:border-slate-700 h-64 overflow-hidden relative">
+                <iframe 
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14008.114827184275!2d77.2065322!3d28.6289017!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cfd37b741d057%3A0xcdee88e47393c3f1!2sConnaught%20Place%2C%20New%20Delhi%2C%20Delhi%20110001!5e0!3m2!1sen!2sin!4v1689613765239!5m2!1sen!2sin" 
+                  className="w-full h-full rounded-[1.5rem] grayscale hover:grayscale-0 transition-all duration-700" 
+                  loading="lazy" 
+                  referrerPolicy="no-referrer-when-downgrade"
+                ></iframe>
+                <div className="absolute bottom-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-lg text-[10px] font-bold text-brand-blue shadow-sm pointer-events-none">
+                   Head Office
+                </div>
             </div>
             </div>
 

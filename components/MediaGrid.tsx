@@ -108,14 +108,14 @@ export const MediaGrid: React.FC<MediaGridProps> = ({ onSelect, selectable = fal
           />
         </div>
         
-        <label className="cursor-pointer bg-primary hover:bg-secondary text-white px-6 py-2 rounded-lg flex items-center gap-2 transition-all shadow-lg shadow-primary/20 whitespace-nowrap">
+        <label className="cursor-pointer bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg flex items-center gap-2 transition-all shadow-lg shadow-blue-500/20 whitespace-nowrap">
           <Upload size={18} />
           <span>{isUploading ? 'Uploading...' : 'Upload Media'}</span>
-          <input 
-            type="file" 
-            className="hidden" 
-            multiple 
-            accept="image/*" 
+          <input
+            type="file"
+            className="hidden"
+            multiple
+            accept="image/*"
             onChange={handleFileUpload}
             disabled={isUploading}
           />

@@ -9,61 +9,47 @@ interface HeroProps {
 
 const Hero: React.FC<HeroProps> = ({ onBookSession }) => {
   return (
-    <section className="bg-white dark:bg-slate-900 pt-12 pb-20 lg:pt-12 lg:pb-20 border-b border-gray-100 dark:border-slate-800 relative overflow-hidden">
-      {/* Decorative Elements */}
-      <div className="absolute top-0 right-0 w-1/2 h-full bg-brand-light dark:bg-slate-800/20 -skew-x-12 transform translate-x-1/3 z-0 pointer-events-none"></div>
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      {/* Background Image */}
+      <div className="absolute inset-0 z-0">
+        <img 
+          src="https://images.unsplash.com/20/cambridge.JPG?q=80&w=1920" 
+          alt="Hero Background" 
+          className="w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-black/60"></div>
+      </div>
       
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="lg:flex lg:items-center lg:gap-24">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+        <div className="flex flex-col items-center text-center lg:text-left lg:items-start lg:w-2/3">
           
-          <div className="lg:w-1/2 mb-16 lg:mb-0">
-            <div className="inline-flex items-center gap-3 px-5 py-2 bg-brand-gold/10 rounded-full mb-8">
-              <div className="w-2 h-2 bg-brand-gold rounded-full animate-pulse"></div>
-              <span className="text-brand-gold font-black text-[10px] uppercase tracking-[0.3em]">Opening Doors To Success</span>
-            </div>
-            
-            <h1 className="text-4xl lg:text-5xl font-black text-brand-blue dark:text-white leading-[1.1] mb-10 tracking-tight">
-              Explore Education <br/> 
-              Beyond <span className="text-brand-gold">Borders.</span>
-            </h1>
-            
-            <p className="text-lg text-gray-500 dark:text-gray-400 font-medium mb-12 max-w-xl leading-relaxed">
-              Fulfill Your Study Abroad Dreams. One Platform Does It All. Connect with World Leading Universities for MBBS, Engineering, and more.
-            </p>
-            
-            <div className="flex flex-wrap gap-6">
-              <button 
-                onClick={onBookSession}
-                className="px-10 py-5 bg-brand-blue text-white rounded-[1.25rem] font-black text-xs uppercase tracking-widest hover:bg-brand-gold transition-all shadow-2xl shadow-brand-blue/30 flex items-center gap-4 group"
-              >
-                <i className="fa-solid fa-star group-hover:rotate-12 transition-transform"></i>
-                Free Counseling Session
-              </button>
-              <button className="px-10 py-5 bg-white dark:bg-slate-800 text-brand-blue dark:text-white rounded-[1.25rem] font-black text-xs uppercase tracking-widest border border-gray-200 dark:border-slate-700 hover:shadow-xl transition-all flex items-center gap-4">
-                Explore Verticals
-              </button>
-            </div>
+          <div className="inline-flex items-center gap-3 px-5 py-2 bg-white/10 backdrop-blur-md border border-white/20 rounded-full mb-8 animate-fade-in-up">
+            <div className="w-2 h-2 bg-brand-gold rounded-full animate-pulse"></div>
+            <span className="text-brand-gold font-black text-[10px] uppercase tracking-[0.3em]">Opening Doors To Success</span>
           </div>
-
-          <div className="lg:w-1/2 relative">
-            <div className="relative z-10 aspect-hero overflow-hidden rounded-[3rem] shadow-[0_48px_100px_rgba(2,56,90,0.15)] border-8 border-white dark:border-slate-800 bg-gray-50">
-              <img 
-                src="https://images.unsplash.com/20/cambridge.JPG?q=80&w=847" 
-                alt="iExplain Education Success" 
-                className="w-full h-full object-cover transition-all duration-1000 hover:scale-110"
-              />
-            </div>
-            {/* Float Badge */}
-            <div className="absolute -bottom-10 -left-10 bg-brand-gold p-8 rounded-[2.5rem] text-white shadow-2xl z-20 animate-fade-in hidden sm:block">
-               <div className="flex -space-x-3 mb-3">
-                  <div className="w-8 h-8 rounded-full border-2 border-brand-gold bg-white overflow-hidden"><Flags.US className="w-full h-full object-cover" /></div>
-                  <div className="w-8 h-8 rounded-full border-2 border-brand-gold bg-white overflow-hidden"><Flags.GB className="w-full h-full object-cover" /></div>
-                  <div className="w-8 h-8 rounded-full border-2 border-brand-gold bg-white overflow-hidden"><Flags.CA className="w-full h-full object-cover" /></div>
-                  <div className="w-8 h-8 rounded-full border-2 border-brand-gold bg-white overflow-hidden"><Flags.AU className="w-full h-full object-cover" /></div>
-               </div>
-               <p className="text-5xl font-black mb-1">20+</p>
-               <p className="text-[10px] font-bold uppercase tracking-widest opacity-80">Global Destinations</p>
-            </div>
+          
+          <h1 className="text-4xl lg:text-6xl font-black text-white leading-[1.1] mb-8 tracking-tight animate-fade-in-up delay-100">
+            Unlock global opportunities with <span className="text-brand-gold">iExplain Education.</span>
+          </h1>
+          
+          <p className="text-lg lg:text-xl text-gray-200 font-medium mb-10 max-w-2xl leading-relaxed animate-fade-in-up delay-200">
+            We specialize in MBBS India, MBBS Abroad, and Study Abroad programs, guiding students toward the best universities worldwide.
+          </p>
+          
+          <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto animate-fade-in-up delay-300">
+            <button 
+              onClick={onBookSession}
+              className="px-8 py-4 bg-brand-gold text-white rounded-xl font-black text-xs uppercase tracking-widest hover:bg-brand-blue transition-all shadow-lg shadow-brand-gold/20 flex items-center justify-center gap-3 group"
+            >
+              <i className="fa-solid fa-star group-hover:rotate-12 transition-transform"></i>
+              Free Counseling Session
+            </button>
+            <a 
+              href="#/services"
+              className="px-8 py-4 bg-white/10 backdrop-blur-md text-white rounded-xl font-black text-xs uppercase tracking-widest border border-white/20 hover:bg-white hover:text-brand-blue transition-all flex items-center justify-center gap-3"
+            >
+              Explore Verticals
+            </a>
           </div>
 
         </div>
