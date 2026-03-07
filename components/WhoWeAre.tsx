@@ -1,6 +1,6 @@
-
 import React from 'react';
 import { WHO_WE_ARE_CONTENT } from '../home_content.ts';
+import { Link } from 'react-router-dom';
 
 const WhoWeAre: React.FC = () => {
   return (
@@ -23,9 +23,9 @@ const WhoWeAre: React.FC = () => {
               ))}
             </div>
             <div className="mt-8">
-              <a href="#/about" className="inline-flex items-center text-brand-gold font-black uppercase tracking-widest text-xs hover:underline">
+              <Link to="/about" className="inline-flex items-center text-brand-gold font-black uppercase tracking-widest text-xs hover:underline">
                 Read More About Us <i className="fa-solid fa-arrow-right ml-2"></i>
-              </a>
+              </Link>
             </div>
           </div>
 

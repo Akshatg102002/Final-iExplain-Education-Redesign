@@ -273,36 +273,36 @@ export const INDIA_COURSES_DETAILED: Record<string, StudyIndiaDetailData> = {
 
 export const MEGA_MENU_DATA = {
   "STUDY ABROAD": [
-    { name: "USA", link: "#/study-abroad/usa", code: "US" },
-    { name: "UK", link: "#/study-abroad/uk", code: "GB" },
-    { name: "Canada", link: "#/study-abroad/canada", code: "CA" },
-    { name: "Australia", link: "#/study-abroad/australia", code: "AU" },
-    { name: "New Zealand", link: "#/study-abroad/new-zealand", code: "NZ" },
-    { name: "Dubai", link: "#/study-abroad/dubai", code: "AE" },
-    { name: "Europe", link: "#/study-abroad/europe", code: "EU" }
+    { name: "USA", link: "/study-abroad/usa", code: "US" },
+    { name: "UK", link: "/study-abroad/uk", code: "GB" },
+    { name: "Canada", link: "/study-abroad/canada", code: "CA" },
+    { name: "Australia", link: "/study-abroad/australia", code: "AU" },
+    { name: "New Zealand", link: "/study-abroad/new-zealand", code: "NZ" },
+    { name: "Dubai", link: "/study-abroad/dubai", code: "AE" },
+    { name: "Europe", link: "/study-abroad/europe", code: "EU" }
   ],
   "MBBS ABROAD": [
-    { name: "Eastern Europe", link: "#/mbbs-abroad/eastern-europe", code: "EU" },
-    { name: "Central Asia", link: "#/mbbs-abroad/central-asia", code: "KZ" },
-    { name: "Philippines", link: "#/mbbs-abroad/philippines", code: "PH" },
-    { name: "Bangladesh", link: "#/mbbs-abroad/bangladesh", code: "BD" },
-    { name: "Nepal", link: "#/mbbs-abroad/nepal", code: "NP" },
-    { name: "China", link: "#/mbbs-abroad/china", code: "CN" },
-    { name: "Egypt", link: "#/mbbs-abroad/egypt", code: "EG" }
+    { name: "Eastern Europe", link: "/mbbs-abroad/eastern-europe", code: "EU" },
+    { name: "Central Asia", link: "/mbbs-abroad/central-asia", code: "KZ" },
+    { name: "Philippines", link: "/mbbs-abroad/philippines", code: "PH" },
+    { name: "Bangladesh", link: "/mbbs-abroad/bangladesh", code: "BD" },
+    { name: "Nepal", link: "/mbbs-abroad/nepal", code: "NP" },
+    { name: "China", link: "/mbbs-abroad/china", code: "CN" },
+    { name: "Egypt", link: "/mbbs-abroad/egypt", code: "EG" }
   ],
   "STUDY IN INDIA": [
-    { name: "MBBS", link: "#/study-india/mbbs", icon: "fa-solid fa-user-doctor" },
-    { name: "B.Tech", link: "#/study-india/btech", icon: "fa-solid fa-microchip" },
-    { name: "MBA", link: "#/study-india/mba", icon: "fa-solid fa-briefcase" },
-    { name: "BBA", link: "#/study-india/bba", icon: "fa-solid fa-chart-line" },
-    { name: "PGDM", link: "#/study-india/pgdm", icon: "fa-solid fa-graduation-cap" }
+    { name: "MBBS", link: "/study-india/mbbs", icon: "fa-solid fa-user-doctor" },
+    { name: "B.Tech", link: "/study-india/btech", icon: "fa-solid fa-microchip" },
+    { name: "MBA", link: "/study-india/mba", icon: "fa-solid fa-briefcase" },
+    { name: "BBA", link: "/study-india/bba", icon: "fa-solid fa-chart-line" },
+    { name: "PGDM", link: "/study-india/pgdm", icon: "fa-solid fa-graduation-cap" }
   ],
   "ENTRANCE EXAMS": [
-    { name: "NEET UG", link: "#/exams/neet-ug", icon: "fa-solid fa-file-medical" },
-    { name: "JEE Main", link: "#/exams/jee-main", icon: "fa-solid fa-calculator" },
-    { name: "CAT", link: "#/exams/cat", icon: "fa-solid fa-chart-pie" },
-    { name: "CLAT", link: "#/exams/clat", icon: "fa-solid fa-scale-balanced" },
-    { name: "CUET", link: "#/exams/cuet", icon: "fa-solid fa-pen-to-square" }
+    { name: "NEET UG", link: "/exams/neet-ug", icon: "fa-solid fa-file-medical" },
+    { name: "JEE Main", link: "/exams/jee-main", icon: "fa-solid fa-calculator" },
+    { name: "CAT", link: "/exams/cat", icon: "fa-solid fa-chart-pie" },
+    { name: "CLAT", link: "/exams/clat", icon: "fa-solid fa-scale-balanced" },
+    { name: "CUET", link: "/exams/cuet", icon: "fa-solid fa-pen-to-square" }
   ]
 };
 

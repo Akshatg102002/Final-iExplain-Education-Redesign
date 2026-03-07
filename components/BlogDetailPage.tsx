@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { BLOG_POSTS, HERO_IMG_URL } from '../data.ts';
 import { db, collection, getDocs, query } from '../firebase.ts';
 import ContactForm from './ContactForm.tsx';
+import { Link } from 'react-router-dom';
 
 // Helper to generate slugs (duplicated to avoid circular dependency with App.tsx)
 const createSlug = (text: string) => text ? text.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '') : '';
@@ -82,12 +83,12 @@ const BlogDetailPage: React.FC<BlogDetailPageProps> = ({ slug }) => {
         <p className="text-gray-500 dark:text-gray-400 font-medium mb-8 max-w-md">
           The article you are looking for does not exist or has been moved.
         </p>
-        <a 
-          href="#/blog-list"
+        <Link 
+          to="/blog-list"
           className="px-8 py-3 bg-brand-blue text-white rounded-xl font-bold text-xs uppercase tracking-widest hover:bg-brand-gold transition-all shadow-lg"
         >
           Back to Blogs
-        </a>
+        </Link>
       </div>
     );
   }
@@ -170,9 +171,9 @@ const BlogDetailPage: React.FC<BlogDetailPageProps> = ({ slug }) => {
                </h4>
                <div className="space-y-6">
                   {relatedPosts.map((rPost, idx) => (
-                    <a 
+                    <Link 
                       key={idx} 
-                      href={`#/blog/${createSlug(rPost.category || 'General')}/${createSlug(rPost.title)}`}
+                      to={`/blog/${createSlug(rPost.category || 'General')}/${createSlug(rPost.title)}`}
                       className="group flex items-start gap-4 hover:bg-gray-50 dark:hover:bg-slate-700/50 p-2 rounded-xl transition-colors -mx-2"
                     >
                        <div className="w-20 h-20 shrink-0 rounded-xl overflow-hidden bg-gray-200">
@@ -185,7 +186,7 @@ const BlogDetailPage: React.FC<BlogDetailPageProps> = ({ slug }) => {
                           </h5>
                           <span className="text-[10px] text-gray-400 font-bold mt-2 block">{rPost.date}</span>
                        </div>
-                    </a>
+                    </Link>
                   ))}
                   {relatedPosts.length === 0 && <p className="text-gray-400 text-xs">No related articles found.</p>}
                </div>

@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { db, collection, addDoc, serverTimestamp } from '../firebase.ts';
 import { LOGO_URL } from '../data.ts';
+import { Link } from 'react-router-dom';
 
 interface ContactModalProps {
   onClose: () => void;
@@ -224,7 +225,7 @@ const ContactModal: React.FC<ContactModalProps> = ({ onClose }) => {
 
               {/* Footer Text */}
               <div className="text-[10px] text-center text-gray-400 dark:text-gray-500 leading-relaxed pt-2">
-                By submitting, you agree to our <a href="#/terms-conditions" onClick={onClose} className="underline hover:text-[#01304A] dark:hover:text-white">Terms</a> & <a href="#/privacy-policy" onClick={onClose} className="underline hover:text-[#01304A] dark:hover:text-white">Privacy Policy</a>.
+                By submitting, you agree to our <Link to="/terms-conditions" onClick={onClose} className="underline hover:text-[#01304A] dark:hover:text-white">Terms</Link> & <Link to="/privacy-policy" onClick={onClose} className="underline hover:text-[#01304A] dark:hover:text-white">Privacy Policy</Link>.
               </div>
             </form>
           )}

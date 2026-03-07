@@ -3,6 +3,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { LOGO_URL, MEGA_MENU_DATA, OFFICE_ADDRESSES, FOOTER_COLLEGES } from '../data.ts';
 import { createSlug } from '../utils.ts';
 import * as Flags from 'country-flag-icons/react/3x2';
+import { Link, useNavigate } from 'react-router-dom';
 
 interface NavbarProps {
   isDarkMode: boolean;
@@ -10,11 +11,7 @@ interface NavbarProps {
   logoUrl?: string;
 }
 
-const FlagIcon: React.FC<{ code?: string }> = ({ code }) => {
-  if (!code) return null;
-  const Flag = (Flags as any)[code];
-  return Flag ? <Flag className="w-6 h-auto rounded-sm shadow-sm" /> : null;
-};
+// ... (FlagIcon and helper functions remain same)
 
 // Helper for distance calculation
 function getDistanceFromLatLonInKm(lat1: number, lon1: number, lat2: number, lon2: number) {
@@ -107,13 +104,13 @@ const TopBar: React.FC = () => {
                 </div>
                 <div className="max-h-60 overflow-y-auto">
                   {offices.map((off: any) => (
-                    <a key={off.slug} href={`#/office/${off.slug}`} onClick={() => setShowFindUs(false)} className="block px-4 py-3 hover:bg-brand-gold/10 hover:text-brand-gold transition-colors border-b border-gray-50 last:border-0">
+                    <Link key={off.slug} to={`/office/${off.slug}`} onClick={() => setShowFindUs(false)} className="block px-4 py-3 hover:bg-brand-gold/10 hover:text-brand-gold transition-colors border-b border-gray-50 last:border-0">
                       <div className="flex justify-between items-center">
                         <span className="text-[10px] font-black uppercase tracking-widest text-brand-blue">{off.city}</span>
                         {off.distance && <span className="text-[8px] font-bold text-gray-400">{(off.distance).toFixed(1)} km</span>}
                       </div>
                       <p className="text-[9px] text-gray-500 mt-0.5 truncate">{off.address}</p>
-                    </a>
+                    </Link>
                   ))}
                 </div>
               </div>
@@ -152,6 +149,7 @@ const Navbar: React.FC<NavbarProps> = ({ isDarkMode, toggleTheme, logoUrl }) => 
   const [mobileProgramsOpen, setMobileProgramsOpen] = useState<string | null>(null);
   const [mobileExpandedMenu, setMobileExpandedMenu] = useState<string | null>(null);
   const timerRef = useRef<number | null>(null);
+  const navigate = useNavigate();
 
   // Lock body scroll when mobile menu is open
   useEffect(() => {
@@ -192,7 +190,7 @@ const Navbar: React.FC<NavbarProps> = ({ isDarkMode, toggleTheme, logoUrl }) => 
       <TopBar />
       <nav className="relative h-20 w-full flex items-center">
         <div className="max-w-7xl mx-auto px-4 w-full flex items-center justify-between">
-          <div className="flex-shrink-0 cursor-pointer w-[140px] md:w-[180px]" onClick={() => window.location.hash = '/'}>
+          <div className="flex-shrink-0 cursor-pointer w-[140px] md:w-[180px]" onClick={() => navigate('/')}>
             <img src={logoUrl || LOGO_URL} alt="iExplain" className="h-10 md:h-12 w-auto dark:brightness-110" />
           </div>
 
@@ -201,10 +199,10 @@ const Navbar: React.FC<NavbarProps> = ({ isDarkMode, toggleTheme, logoUrl }) => 
               <div key={name} className="h-20 flex items-center" 
                 onMouseEnter={(name === 'PROGRAMS' || name === 'COLLEGES') ? () => handleMouseEnter(name) : undefined} 
                 onMouseLeave={(name === 'PROGRAMS' || name === 'COLLEGES') ? handleMouseLeave : undefined}>
-                <a href={(name === 'PROGRAMS' || name === 'COLLEGES') ? undefined : name === 'HOME' ? '#' : `#/${name.toLowerCase()}`} 
+                <Link to={(name === 'PROGRAMS' || name === 'COLLEGES') ? '#' : name === 'HOME' ? '/' : `/${name.toLowerCase()}`} 
                   className={`text-[11px] font-bold tracking-[0.15em] transition-all py-2 border-b-2 border-transparent hover:border-brand-gold ${(name === 'PROGRAMS' || name === 'COLLEGES') && activeMenu === name ? 'text-brand-gold border-brand-gold' : 'text-brand-blue dark:text-white hover:text-brand-gold'}`}>
                   {name} {(name === 'PROGRAMS' || name === 'COLLEGES') && <i className="fa-solid fa-chevron-down ml-1.5 text-[8px]"></i>}
-                </a>
+                </Link>
               </div>
             ))}
           </div>
@@ -213,7 +211,7 @@ const Navbar: React.FC<NavbarProps> = ({ isDarkMode, toggleTheme, logoUrl }) => 
             <button onClick={toggleTheme} className="w-9 h-9 rounded-full bg-gray-50 dark:bg-slate-800 flex items-center justify-center text-brand-blue dark:text-brand-gold border border-gray-100 dark:border-slate-700">
               <i className={`fa-solid ${isDarkMode ? 'fa-sun text-sm' : 'fa-moon text-sm'}`}></i>
             </button>
-            <a href="#contact" className="hidden sm:inline-block px-5 py-2.5 bg-brand-blue text-white rounded-xl font-bold text-[10px] tracking-widest uppercase hover:bg-brand-gold transition-all shadow-md active:scale-95">APPLY NOW</a>
+            <Link to="/contact" className="hidden sm:inline-block px-5 py-2.5 bg-brand-blue text-white rounded-xl font-bold text-[10px] tracking-widest uppercase hover:bg-brand-gold transition-all shadow-md active:scale-95">APPLY NOW</Link>
             <button onClick={() => setIsMobileMenuOpen(true)} className="lg:hidden p-2 text-brand-blue dark:text-white hover:bg-gray-100 dark:hover:bg-slate-800 rounded-lg transition-colors">
               <i className="fa-solid fa-bars text-xl"></i>
             </button>
@@ -237,10 +235,10 @@ const Navbar: React.FC<NavbarProps> = ({ isDarkMode, toggleTheme, logoUrl }) => 
                 </div>
                 <div className="flex-grow p-8 grid grid-cols-3 gap-4 overflow-y-auto no-scrollbar">
                   {MEGA_MENU_DATA[activeTab].map((item: any, i) => (
-                    <a key={i} href={item.link} onClick={() => setActiveMenu(null)} className="flex items-center p-4 rounded-2xl border border-gray-50 dark:border-slate-800 bg-white dark:bg-slate-800 hover:border-brand-gold/30 hover:shadow-xl transition-all group">
+                    <Link key={i} to={item.link} onClick={() => setActiveMenu(null)} className="flex items-center p-4 rounded-2xl border border-gray-50 dark:border-slate-800 bg-white dark:bg-slate-800 hover:border-brand-gold/30 hover:shadow-xl transition-all group">
                       <div className="mr-4 shrink-0 transition-transform group-hover:scale-110">{item.code ? <FlagIcon code={item.code} /> : <i className={`${item.icon} text-brand-gold text-lg`}></i>}</div>
                       <div className="flex flex-col"><h4 className="font-bold text-[13px] text-brand-blue dark:text-white group-hover:text-brand-gold transition-colors leading-tight">{item.name}</h4><span className="text-[8px] font-black uppercase text-gray-400 tracking-widest mt-1 opacity-0 group-hover:opacity-100 transition-opacity">Explore Country</span></div>
-                    </a>
+                    </Link>
                   ))}
                 </div>
               </div>
@@ -282,18 +280,18 @@ const Navbar: React.FC<NavbarProps> = ({ isDarkMode, toggleTheme, logoUrl }) => 
                         </h4>
                         <ul className="space-y-2">
                           {countryData.names.map((college: string, cIdx: number) => {
-                            let link = `#/college/${createSlug(college)}`;
+                            let link = `/college/${createSlug(college)}`;
                             if (activeCollegeTab === 'INDIA') {
-                              link = `#/mbbs-india/${createSlug(college)}`;
+                              link = `/mbbs-india/${createSlug(college)}`;
                             } else if (countryData.country === 'Europe Top Destinations') {
-                              link = `#/study-abroad/${createSlug(college)}`;
+                              link = `/study-abroad/${createSlug(college)}`;
                             }
                             
                             return (
                               <li key={cIdx}>
-                                <a href={link} onClick={() => setActiveMenu(null)} className="block text-[11px] font-bold text-gray-500 dark:text-gray-400 hover:text-brand-blue dark:hover:text-white hover:translate-x-1 transition-all truncate">
+                                <Link to={link} onClick={() => setActiveMenu(null)} className="block text-[11px] font-bold text-gray-500 dark:text-gray-400 hover:text-brand-blue dark:hover:text-white hover:translate-x-1 transition-all truncate">
                                   {college}
-                                </a>
+                                </Link>
                               </li>
                             );
                           })}
@@ -353,9 +351,9 @@ const Navbar: React.FC<NavbarProps> = ({ isDarkMode, toggleTheme, logoUrl }) => 
                                  {mobileProgramsOpen === key && (
                                    <div className="pl-6 space-y-3 border-l-2 border-gray-100 dark:border-slate-800 animate-fade-in">
                                      {MEGA_MENU_DATA[key as keyof typeof MEGA_MENU_DATA].slice(0, 5).map((subItem: any, i: number) => (
-                                       <a key={i} href={subItem.link} onClick={() => setIsMobileMenuOpen(false)} className="block text-sm font-bold text-gray-600 dark:text-gray-400 hover:text-brand-blue dark:hover:text-white transition-colors">
+                                       <Link key={i} to={subItem.link} onClick={() => setIsMobileMenuOpen(false)} className="block text-sm font-bold text-gray-600 dark:text-gray-400 hover:text-brand-blue dark:hover:text-white transition-colors">
                                          {subItem.name}
-                                       </a>
+                                       </Link>
                                      ))}
                                    </div>
                                  )}
@@ -398,9 +396,9 @@ const Navbar: React.FC<NavbarProps> = ({ isDarkMode, toggleTheme, logoUrl }) => 
                                      <p className="font-bold text-gray-800 dark:text-gray-200 text-xs uppercase mb-2">{country.country}</p>
                                      <div className="pl-4 space-y-2">
                                        {country.names.map((college, cIdx) => (
-                                         <a key={cIdx} href={`#/college/${createSlug(college)}`} onClick={() => setIsMobileMenuOpen(false)} className="block text-[11px] font-medium text-gray-500 dark:text-gray-400 hover:text-brand-blue dark:hover:text-white">
+                                         <Link key={cIdx} to={`/college/${createSlug(college)}`} onClick={() => setIsMobileMenuOpen(false)} className="block text-[11px] font-medium text-gray-500 dark:text-gray-400 hover:text-brand-blue dark:hover:text-white">
                                            {college}
-                                         </a>
+                                         </Link>
                                        ))}
                                      </div>
                                    </div>
@@ -423,9 +421,9 @@ const Navbar: React.FC<NavbarProps> = ({ isDarkMode, toggleTheme, logoUrl }) => 
                                      <p className="font-bold text-gray-800 dark:text-gray-200 text-xs uppercase mb-2">{country.country}</p>
                                      <div className="pl-4 space-y-2">
                                        {country.names.map((college, cIdx) => (
-                                         <a key={cIdx} href={`#/college/${createSlug(college)}`} onClick={() => setIsMobileMenuOpen(false)} className="block text-[11px] font-medium text-gray-500 dark:text-gray-400 hover:text-brand-blue dark:hover:text-white">
+                                         <Link key={cIdx} to={`/college/${createSlug(college)}`} onClick={() => setIsMobileMenuOpen(false)} className="block text-[11px] font-medium text-gray-500 dark:text-gray-400 hover:text-brand-blue dark:hover:text-white">
                                            {college}
-                                         </a>
+                                         </Link>
                                        ))}
                                      </div>
                                    </div>
@@ -448,9 +446,9 @@ const Navbar: React.FC<NavbarProps> = ({ isDarkMode, toggleTheme, logoUrl }) => 
                                      <p className="font-bold text-gray-800 dark:text-gray-200 text-xs uppercase mb-2">{region.country}</p>
                                      <div className="pl-4 space-y-2">
                                        {region.names.map((state, cIdx) => (
-                                         <a key={cIdx} href={`#/mbbs-india/${createSlug(state)}`} onClick={() => setIsMobileMenuOpen(false)} className="block text-[11px] font-medium text-gray-500 dark:text-gray-400 hover:text-brand-blue dark:hover:text-white">
+                                         <Link key={cIdx} to={`/mbbs-india/${createSlug(state)}`} onClick={() => setIsMobileMenuOpen(false)} className="block text-[11px] font-medium text-gray-500 dark:text-gray-400 hover:text-brand-blue dark:hover:text-white">
                                            {state}
-                                         </a>
+                                         </Link>
                                        ))}
                                      </div>
                                    </div>
@@ -465,21 +463,21 @@ const Navbar: React.FC<NavbarProps> = ({ isDarkMode, toggleTheme, logoUrl }) => 
                 }
                 
                 return (
-                  <a 
+                  <Link 
                     key={item}
-                    href={item === 'HOME' ? '#' : `#/${item.toLowerCase()}`}
+                    to={item === 'HOME' ? '/' : `/${item.toLowerCase()}`}
                     onClick={() => setIsMobileMenuOpen(false)}
                     className="block py-4 text-lg font-black text-brand-blue dark:text-white uppercase tracking-tight border-b border-gray-50 dark:border-slate-800 hover:text-brand-gold transition-colors"
                   >
                     {item}
-                  </a>
+                  </Link>
                 );
               })}
               
               <div className="pb-8 pt-8">
-                <a href="#contact" onClick={() => setIsMobileMenuOpen(false)} className="block w-full py-5 bg-brand-blue text-white text-center rounded-2xl font-black uppercase tracking-widest shadow-xl shadow-brand-blue/20">
+                <Link to="/contact" onClick={() => setIsMobileMenuOpen(false)} className="block w-full py-5 bg-brand-blue text-white text-center rounded-2xl font-black uppercase tracking-widest shadow-xl shadow-brand-blue/20">
                   Book Consultation
-                </a>
+                </Link>
               </div>
             </div>
           </div>

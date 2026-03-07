@@ -1,6 +1,6 @@
-
 import React, { useState, useEffect } from 'react';
 import { BLOG_POSTS } from '../data.ts';
+import { Link } from 'react-router-dom';
 import { 
   db, 
   collection, 
@@ -50,12 +50,12 @@ const BlogSection: React.FC = () => {
           <p className="text-lg text-gray-500 dark:text-gray-400 font-medium max-w-2xl mx-auto leading-relaxed mb-8">
             Stay updated with the latest news and guides on international medical education and global admissions.
           </p>
-          <a 
-            href="#/blog-list"
+          <Link 
+            to="/blog-list"
             className="inline-block px-8 py-3 bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-xl text-brand-blue dark:text-brand-gold font-bold text-xs uppercase tracking-widest hover:shadow-xl hover:-translate-y-1 transition-all"
           >
             Read All Articles
-          </a>
+          </Link>
         </div>
 
         {loading ? (
@@ -65,9 +65,9 @@ const BlogSection: React.FC = () => {
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
             {posts.slice(0, 3).map((post: any) => (
-              <a 
+              <Link 
                 key={post.id} 
-                href={`#/blog/${createSlug(post.category || 'General')}/${createSlug(post.title)}`}
+                to={`/blog/${createSlug(post.category || 'General')}/${createSlug(post.title)}`}
                 className="group bg-white dark:bg-slate-800 rounded-[2rem] overflow-hidden shadow-sm border border-gray-100 dark:border-slate-700 hover:shadow-2xl transition-all"
               >
                 <div className="aspect-[16/10] overflow-hidden">
@@ -83,7 +83,7 @@ const BlogSection: React.FC = () => {
                     {post.date}
                   </div>
                 </div>
-              </a>
+              </Link>
             ))}
           </div>
         )}

@@ -2,6 +2,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { db, collection, getDocs } from '../firebase.ts';
 import { VideoStory } from '../types.ts';
+import { Link } from 'react-router-dom';
 
 const DEFAULT_STORIES: VideoStory[] = [
   {
@@ -196,9 +197,9 @@ const VideoStories: React.FC = () => {
                  <a href="https://wa.me/919773847799" target="_blank" rel="noreferrer" className="flex-1 py-3 bg-[#25D366] text-white rounded-xl font-bold text-xs uppercase tracking-widest flex items-center justify-center gap-2 hover:brightness-110 transition-all">
                    <i className="fa-brands fa-whatsapp text-lg"></i> Chat
                  </a>
-                 <a href="#contact" onClick={handleClose} className="flex-1 py-3 bg-white text-brand-blue rounded-xl font-bold text-xs uppercase tracking-widest flex items-center justify-center gap-2 hover:bg-brand-gold hover:text-white transition-all">
+                 <Link to="/contact" onClick={handleClose} className="flex-1 py-3 bg-white text-brand-blue rounded-xl font-bold text-xs uppercase tracking-widest flex items-center justify-center gap-2 hover:bg-brand-gold hover:text-white transition-all">
                    Apply Now
-                 </a>
+                 </Link>
                </div>
             </div>
           </div>

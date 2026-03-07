@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import Navbar from './components/Navbar.tsx';
 import Hero from './components/Hero.tsx';
@@ -44,6 +43,7 @@ import {
 } from './data.ts';
 import { RouteState, SiteSettings } from './types.ts';
 import { db, collection, getDocs, doc, getDoc, query, orderBy, where } from './firebase.ts';
+import { Routes, Route, useLocation, Link, useNavigate, useParams } from 'react-router-dom';
 
 import { createSlug } from './utils.ts';
 
@@ -154,9 +154,9 @@ const ServicesPage = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {STUDENT_SERVICES_DATA.map((service, idx) => (
-            <a 
+            <Link 
               key={idx}
-              href={`#/service-detail/${service.id}`}
+              to={`/service-detail/${service.id}`}
               className="group bg-white dark:bg-slate-800 p-8 rounded-[2rem] shadow-sm border border-gray-100 dark:border-slate-700 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 flex flex-col"
             >
               <div className="w-16 h-16 bg-blue-50 dark:bg-slate-700 rounded-2xl flex items-center justify-center text-brand-blue dark:text-white text-2xl mb-6 group-hover:bg-brand-blue group-hover:text-white transition-colors">
@@ -169,7 +169,7 @@ const ServicesPage = () => {
               <div className="flex items-center text-brand-gold font-black text-[10px] uppercase tracking-widest group-hover:translate-x-2 transition-transform">
                 Read More <i className="fa-solid fa-arrow-right ml-2"></i>
               </div>
-            </a>
+            </Link>
           ))}
         </div>
       </div>
@@ -178,7 +178,8 @@ const ServicesPage = () => {
 };
 
 // --- SERVICE DETAIL PAGE ---
-const ServiceDetailPage = ({ id }: { id?: string }) => {
+const ServiceDetailPage = () => {
+  const { id } = useParams<{ id: string }>();
   const service = STUDENT_SERVICES_DATA.find(s => s.id === id);
 
   if (!service) return (
@@ -187,7 +188,7 @@ const ServiceDetailPage = ({ id }: { id?: string }) => {
          <i className="fa-solid fa-triangle-exclamation text-3xl"></i>
        </div>
        <h2 className="text-2xl font-black text-brand-blue dark:text-white mb-4">Service Not Found</h2>
-       <a href="#/services" className="px-6 py-3 bg-brand-gold text-white rounded-xl font-bold text-xs uppercase tracking-widest">Back to Services</a>
+       <Link to="/services" className="px-6 py-3 bg-brand-gold text-white rounded-xl font-bold text-xs uppercase tracking-widest">Back to Services</Link>
     </div>
   );
 
@@ -274,7 +275,8 @@ const ServiceDetailPage = ({ id }: { id?: string }) => {
 };
 
 // --- OFFICE DETAIL PAGE ---
-const OfficeDetailPage = ({ slug }: { slug: string }) => {
+const OfficeDetailPage = () => {
+  const { slug } = useParams<{ slug: string }>();
   const office = OFFICE_ADDRESSES.find(o => o.slug === slug);
 
   if (!office) return (
@@ -283,7 +285,7 @@ const OfficeDetailPage = ({ slug }: { slug: string }) => {
         <i className="fa-solid fa-location-slash text-3xl"></i>
       </div>
       <h2 className="text-2xl font-black text-brand-blue dark:text-white mb-4">Location Not Found</h2>
-      <a href="#/" className="px-6 py-3 bg-brand-gold text-white rounded-xl font-bold text-xs uppercase tracking-widest">Back to Home</a>
+      <Link to="/" className="px-6 py-3 bg-brand-gold text-white rounded-xl font-bold text-xs uppercase tracking-widest">Back to Home</Link>
     </div>
   );
 
@@ -357,7 +359,10 @@ const OfficeDetailPage = ({ slug }: { slug: string }) => {
   );
 };
 
-const ExamPage = ({ data }: { data: any }) => {
+const ExamPage = () => {
+   const { subPath } = useParams<{ subPath: string }>();
+   const data = EXAMS_DETAILED[subPath || 'neet-ug'];
+
    if (!data) return <div className="py-20 text-center font-bold text-gray-500">Exam information not available.</div>;
 
    // Mapping legacy exam data to new ProgramDetailPage format
@@ -386,7 +391,8 @@ const BlogListPage = () => <BlogSection />;
 const ContactPage = () => <div className="py-20 text-center"><h1 className="text-4xl font-bold">Contact</h1><ContactMapSection /></div>;
 
 // --- DYNAMIC COLLEGE PAGE WRAPPER ---
-const CollegeDetailWrapper = ({ slug }: { slug: string }) => {
+const CollegeDetailWrapper = () => {
+  const { slug } = useParams<{ slug: string }>();
   const [data, setData] = useState<any>(null);
   const [loading, setLoading] = useState(true);
 
@@ -402,7 +408,7 @@ const CollegeDetailWrapper = ({ slug }: { slug: string }) => {
           setData(querySnapshot.docs[0].data());
         } else {
           // Fallback to local constants
-          if (COLLEGE_DETAILS[slug]) {
+          if (slug && COLLEGE_DETAILS[slug]) {
             setData(COLLEGE_DETAILS[slug]);
           } else {
             setData(null);
@@ -411,7 +417,7 @@ const CollegeDetailWrapper = ({ slug }: { slug: string }) => {
       } catch (e) {
         console.error("College fetch failed", e);
         // Fallback on error
-        setData(COLLEGE_DETAILS[slug] || null);
+        if (slug) setData(COLLEGE_DETAILS[slug] || null);
       } finally {
         setLoading(false);
       }
@@ -426,22 +432,48 @@ const CollegeDetailWrapper = ({ slug }: { slug: string }) => {
   return <CollegeDetailPage data={data} />;
 };
 
+const StudyIndiaWrapper = () => {
+  const { subPath } = useParams<{ subPath: string }>();
+  return <StudyIndiaDetailPage data={INDIA_COURSES_DETAILED[subPath || 'mbbs']} />;
+};
+
+const StudyAbroadWrapper = () => {
+  const { subPath } = useParams<{ subPath: string }>();
+  return <ProgramDetailPage data={STUDY_ABROAD_DETAILED[subPath || 'usa']} type="country" />;
+};
+
+const MBBSAbroadWrapper = () => {
+  const { subPath } = useParams<{ subPath: string }>();
+  return <MBBSDetailPage data={MBBS_ABROAD_DETAILED[subPath || 'russia']} />;
+};
+
+const BlogDetailWrapper = () => {
+  const { category, slug } = useParams<{ category: string, slug: string }>();
+  // Handle both /blog/:slug and /blog/:category/:slug
+  // If only slug is present, it might be in the first param if route is defined differently
+  // But we will define routes clearly.
+  return <BlogDetailPage slug={slug || ''} />;
+};
+
+
 const App: React.FC = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
-  const [route, setRoute] = useState<RouteState>({ view: 'home' });
   const [isLoading, setIsLoading] = useState(false);
   const [isAICounselorOpen, setIsAICounselorOpen] = useState(false);
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
   const [hasTriggeredPopup, setHasTriggeredPopup] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
 
   // Reset popup trigger on route change
   useEffect(() => {
     setHasTriggeredPopup(false);
-  }, [route]);
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
 
   // Trigger contact modal on 40-50% scroll
   useEffect(() => {
-    if (route.view === 'contact') return;
+    if (location.pathname === '/contact') return;
     if (hasTriggeredPopup) return; // Don't add listener if already triggered
 
     const handleScroll = () => {
@@ -461,109 +493,73 @@ const App: React.FC = () => {
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [route, isContactModalOpen, hasTriggeredPopup]);
-
-  useEffect(() => {
-    const handleHashChange = () => {
-      setIsLoading(true);
-      const hash = window.location.hash;
-      const parts = hash.split('/').filter(p => p !== '#' && p !== '');
-      
-      setTimeout(() => {
-        if (parts[0] === 'admin') setRoute({ view: 'admin' });
-        else if (parts[0] === 'about') setRoute({ view: 'about' });
-        else if (parts[0] === 'services') setRoute({ view: 'services' });
-        else if (parts[0] === 'blogs' || parts[0] === 'blog-list') setRoute({ view: 'blog-list' });
-        else if (parts[0] === 'blog') {
-             if (parts.length >= 3) {
-                 setRoute({ view: 'blog-detail' as any, subPath: parts[2] });
-             } else {
-                 setRoute({ view: 'blog-detail' as any, subPath: parts[1] });
-             }
-        }
-        else if (parts[0] === 'contact') setRoute({ view: 'contact' });
-        else if (parts[0] === 'service-detail') setRoute({ view: 'service-detail', subPath: parts[1] });
-        else if (parts[0] === 'office') setRoute({ view: 'office-detail', subPath: parts[1] });
-        else if (parts[0] === 'study-india') setRoute({ view: 'study-india', subPath: parts[1] });
-        else if (parts[0] === 'study-abroad') setRoute({ view: 'study-abroad', subPath: parts[1] });
-        else if (parts[0] === 'mbbs-abroad') setRoute({ view: 'mbbs-abroad', subPath: parts[1] });
-        else if (parts[0] === 'exams') setRoute({ view: 'exams', subPath: parts[1] });
-        else if (parts[0] === 'college') setRoute({ view: 'college-detail', subPath: parts[1] });
-        else if (parts[0] === 'privacy-policy') setRoute({ view: 'legal' as any, subPath: 'privacy' });
-        else if (parts[0] === 'terms-conditions') setRoute({ view: 'legal' as any, subPath: 'terms' });
-        else setRoute({ view: 'home' });
-        
-        window.scrollTo(0, 0);
-        setIsLoading(false);
-      }, 300);
-    };
-    
-    window.addEventListener('hashchange', handleHashChange);
-    handleHashChange();
-    return () => window.removeEventListener('hashchange', handleHashChange);
-  }, []);
+  }, [location.pathname, isContactModalOpen, hasTriggeredPopup]);
 
   useEffect(() => {
     if (isDarkMode) document.documentElement.classList.add('dark');
     else document.documentElement.classList.remove('dark');
   }, [isDarkMode]);
 
-  if (route.view === 'admin') return <AdminPanel onExit={() => { window.location.hash = '/'; }} />;
-
-  const renderContent = () => {
-    switch (route.view) {
-      case 'about': return <AboutPage />;
-      case 'services': return <ServicesPage />;
-      case 'blog-list': return <BlogListPage />;
-      case 'blog-detail' as any: return <BlogDetailPage slug={route.subPath || ''} />;
-      case 'contact': return <ContactPage />;
-      case 'study-india': return <StudyIndiaDetailPage data={INDIA_COURSES_DETAILED[route.subPath || 'mbbs']} />;
-      case 'study-abroad': return <ProgramDetailPage data={STUDY_ABROAD_DETAILED[route.subPath || 'usa']} type="country" />;
-      case 'mbbs-abroad': return <MBBSDetailPage data={MBBS_ABROAD_DETAILED[route.subPath || 'russia']} />;
-      case 'exams': return <ExamPage data={EXAMS_DETAILED[route.subPath || 'neet-ug']} />;
-      case 'office-detail': return <OfficeDetailPage slug={route.subPath || ''} />;
-      case 'college-detail': return <CollegeDetailWrapper slug={route.subPath || ''} />;
-      case 'service-detail': return <ServiceDetailPage id={route.subPath} />;
-      case 'legal' as any: 
-        if (route.subPath === 'privacy') return <PolicyPage title="Privacy Policy" content={PRIVACY_POLICY_CONTENT} />;
-        if (route.subPath === 'terms') return <PolicyPage title="Terms & Conditions" content={TERMS_CONTENT} />;
-        return <div className="p-20">Page Not Found</div>;
-      case 'home':
-      default: return (
-        <>
-          <Hero onBookSession={() => setIsContactModalOpen(true)} />
-          <StatsSection />
-          <WhoWeAre />
-          <IndiaSection />
-          <PopularColleges />
-          <Roadmap onBookSession={() => setIsContactModalOpen(true)} />
-          <AirportDiaries />
-          <KnowYourDestination />
-          <StudentReviews />
-          <AwardsAchievements />
-          <VideoStories />
-          <BlogSection />
-          <ContactMapSection />
-        </>
-      );
-    }
+  // Handle Admin Exit
+  const handleAdminExit = () => {
+    navigate('/');
   };
 
   return (
     <div className="min-h-screen flex flex-col relative transition-colors duration-300 font-sans bg-white dark:bg-slate-900 overflow-x-hidden">
       {isLoading && <LoadingOverlay />}
-      <Navbar isDarkMode={isDarkMode} toggleTheme={() => setIsDarkMode(!isDarkMode)} />
+      
+      {/* Conditionally render Navbar based on route if needed, but usually it's always there except maybe admin */}
+      {location.pathname !== '/admin' && (
+        <Navbar isDarkMode={isDarkMode} toggleTheme={() => setIsDarkMode(!isDarkMode)} />
+      )}
       
       <main className="flex-grow">
-        {renderContent()}
+        <Routes>
+          <Route path="/" element={
+            <>
+              <Hero onBookSession={() => setIsContactModalOpen(true)} />
+              <StatsSection />
+              <WhoWeAre />
+              <IndiaSection />
+              <PopularColleges />
+              <Roadmap onBookSession={() => setIsContactModalOpen(true)} />
+              <AirportDiaries />
+              <KnowYourDestination />
+              <StudentReviews />
+              <AwardsAchievements />
+              <VideoStories />
+              <BlogSection />
+              <ContactMapSection />
+            </>
+          } />
+          
+          <Route path="/admin" element={<AdminPanel onExit={handleAdminExit} />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/services" element={<ServicesPage />} />
+          <Route path="/service-detail/:id" element={<ServiceDetailPage />} />
+          <Route path="/blog-list" element={<BlogListPage />} />
+          <Route path="/blog/:category/:slug" element={<BlogDetailWrapper />} />
+          <Route path="/blog/:slug" element={<BlogDetailWrapper />} />
+          <Route path="/contact" element={<ContactPage />} />
+          <Route path="/study-india/:subPath" element={<StudyIndiaWrapper />} />
+          <Route path="/study-abroad/:subPath" element={<StudyAbroadWrapper />} />
+          <Route path="/mbbs-abroad/:subPath" element={<MBBSAbroadWrapper />} />
+          <Route path="/exams/:subPath" element={<ExamPage />} />
+          <Route path="/office/:slug" element={<OfficeDetailPage />} />
+          <Route path="/college/:slug" element={<CollegeDetailWrapper />} />
+          <Route path="/privacy-policy" element={<PolicyPage title="Privacy Policy" content={PRIVACY_POLICY_CONTENT} />} />
+          <Route path="/terms-conditions" element={<PolicyPage title="Terms & Conditions" content={TERMS_CONTENT} />} />
+          <Route path="*" element={<div className="p-20 text-center">Page Not Found</div>} />
+        </Routes>
         
         {/* Global CTA Strip on all pages except Home and Contact */}
-        {route.view !== 'home' && route.view !== 'contact' && (
+        {location.pathname !== '/' && location.pathname !== '/contact' && location.pathname !== '/admin' && (
           <GlobalCallToAction onOpen={() => setIsContactModalOpen(true)} />
         )}
       </main>
       
-      <Footer />
+      {location.pathname !== '/admin' && <Footer />}
       
       {/* Floating Buttons */}
       <FloatingActions />
