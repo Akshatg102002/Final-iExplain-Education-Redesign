@@ -18,7 +18,7 @@ import GoogleReviewsWidget from './components/GoogleReviewsWidget.tsx';
 import GlobalCallToAction from './components/GlobalCallToAction.tsx';
 import FloatingActions from './components/FloatingActions.tsx';
 import ContactModal from './components/ContactModal.tsx';
-import VideoStories from './components/VideoStories.tsx';
+import ExpertCounselorsCTA from './components/ExpertCounselorsCTA.tsx';
 import CollegeDetailPage from './components/CollegeDetailPage.tsx';
 import ProgramDetailPage from './components/ProgramDetailPage.tsx';
 import StudyIndiaDetailPage from './components/StudyIndiaDetailPage.tsx';
@@ -528,7 +528,7 @@ const App: React.FC = () => {
               <KnowYourDestination />
               <StudentReviews />
               <AwardsAchievements />
-              <VideoStories />
+              <ExpertCounselorsCTA />
               <BlogSection />
               <ContactMapSection />
             </>

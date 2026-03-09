@@ -84,24 +84,78 @@ export interface MBBSDetailData {
     text: string;
     image: string;
   };
-  highlights: {
-    title: string;
-    value: string;
-  }[];
-  topUniversities: string[];
-  facts: {
-    intro: string;
-    list: string[];
+  quickFacts: {
+    country: string;
+    capital: string;
+    currency: string;
+    language: string;
+    population: string;
+    climate: string;
+    timeDifference: string;
+    popularCities: string;
+    safety: string;
   };
-  documents: {
-    icon: string; // FontAwesome class
-    label: string;
-  }[];
-  advantages: string[];
-  studentLife: {
-    intro: string;
-    list: string[];
+  quickOverview: {
+    courseName: string;
+    duration: string;
+    medium: string;
+    eligibility: string;
+    neet: string;
+    recognition: string;
+    intake: string;
   };
+  forIndianStudents: string;
+  benefits: string[];
+  duration: {
+    mbbs: string;
+    internship: string;
+  };
+  eligibility: {
+    academic: string;
+    marks: string;
+    neet: string;
+    age: string;
+  };
+  documents: string[];
+  indiaVsCountry: {
+    fees: { india: string; country: string };
+    exam: { india: string; country: string };
+    donation: { india: string; country: string };
+    exposure: { india: string; country: string };
+    infrastructure: { india: string; country: string };
+  };
+  topUniversities: {
+    name: string;
+    description: string;
+    established: string;
+    location: string;
+    tuitionFees: string;
+    hostelFees: string;
+    firstYearPackage: string;
+    totalPackage: string;
+    recognition: string;
+  }[];
+  whyChooseUs: string[];
+  checklist: {
+    item: string;
+    required: boolean;
+  }[];
+  hostelFacilities: {
+    intro: string;
+    features: string[];
+  };
+  careerOpportunities: {
+    practiceInIndia: string;
+    postgraduate: string;
+    research: string;
+    administration: string;
+    teaching: string;
+    practiceAbroad: string;
+  };
+  faqs: {
+    question: string;
+    answer: string;
+  }[];
 }
 
 export interface StudyIndiaDetailData {
