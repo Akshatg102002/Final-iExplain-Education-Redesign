@@ -4,10 +4,10 @@ import React from 'react';
 const AwardsAchievements: React.FC = () => {
   // Placeholder images for certificates - replace with actual certificate URLs
   const certificates = [
-    "https://placehold.co/400x300/png?text=Certificate+1",
-    "https://placehold.co/400x300/png?text=Certificate+2",
-    "https://placehold.co/400x300/png?text=Certificate+3",
-    "https://placehold.co/400x300/png?text=Certificate+4"
+    "https://socialfoundationindia.org/wp-content/uploads/2026/03/C3.jpeg",
+    "https://socialfoundationindia.org/wp-content/uploads/2026/03/C2.jpeg",
+    "https://socialfoundationindia.org/wp-content/uploads/2026/03/C1.jpeg",
+    "https://socialfoundationindia.org/wp-content/uploads/2026/03/C4.jpeg"
   ];
 
   return (

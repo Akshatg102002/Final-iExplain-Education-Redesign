@@ -3,11 +3,14 @@ import React from 'react';
 import { StudyIndiaDetailData } from '../types.ts';
 import ContactForm from './ContactForm.tsx';
 
+import { useNavigate } from 'react-router-dom';
+
 interface StudyIndiaDetailPageProps {
   data: StudyIndiaDetailData;
 }
 
 const StudyIndiaDetailPage: React.FC<StudyIndiaDetailPageProps> = ({ data }) => {
+  const navigate = useNavigate();
   if (!data) return (
     <div className="min-h-[60vh] flex flex-col items-center justify-center text-center p-8 bg-white dark:bg-slate-900">
       <div className="w-24 h-24 bg-brand-light dark:bg-slate-800 rounded-full flex items-center justify-center mb-6 animate-pulse">
@@ -15,7 +18,7 @@ const StudyIndiaDetailPage: React.FC<StudyIndiaDetailPageProps> = ({ data }) => 
       </div>
       <h2 className="text-3xl font-black text-brand-blue dark:text-white mb-4">Content Updating</h2>
       <p className="text-gray-500 font-medium max-w-md">We are curating the details for this program.</p>
-      <button onClick={() => window.location.hash = '#/contact'} className="mt-8 px-8 py-4 bg-brand-blue text-white rounded-xl text-xs font-black uppercase tracking-widest hover:bg-brand-gold transition-all">Contact Us</button>
+      <button onClick={() => navigate('/contact')} className="mt-8 px-8 py-4 bg-brand-blue text-white rounded-xl text-xs font-black uppercase tracking-widest hover:bg-brand-gold transition-all">Contact Us</button>
     </div>
   );
 

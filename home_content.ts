@@ -36,35 +36,31 @@ export const AIRPORT_DIARIES = [
 export const STUDENT_REVIEWS = [
   {
     id: 1,
-    name: "Aditi Sharma",
-    course: "MBBS in Russia",
-    university: "Kazan Federal University",
-    review: "iExplain Education made my dream of studying MBBS abroad a reality. The counselors were extremely helpful throughout the entire process, from university selection to visa application. Highly recommended!",
-    avatar: "https://randomuser.me/api/portraits/women/44.jpg"
+    name: "Ashish Naikwadi",
+    review:
+      "I am incredibly grateful to iExplain Education for their exceptional support and guidance throughout my university admission process. My Master’s degree journey would not have been possible without the unwavering help of Sakshi Ma’am and Bhumika.",
+    avatar: "https://socialfoundationindia.org/wp-content/uploads/2026/03/Ashish-Naikwadi.jpeg"
   },
   {
     id: 2,
-    name: "Rahul Verma",
-    course: "MBA in UK",
-    university: "University of Leeds",
-    review: "The guidance I received for my MBA application was exceptional. They helped me shortlist the best universities and guided me through the complex documentation process. Thank you, iExplain!",
-    avatar: "https://randomuser.me/api/portraits/men/32.jpg"
+    name: "Poorva Singh",
+    review:
+      "I’m from Delhi, and I’m heading to NIMS University Jaipur this year with the help of iExplain Education. Honestly, they made the entire process seamless, from securing my admission. Their team guided me at every step, patiently addressing all my questions and concerns.",
+    avatar: "https://socialfoundationindia.org/wp-content/uploads/2026/03/Poorva-Singh.jpeg"
   },
   {
     id: 3,
-    name: "Sneha Gupta",
-    course: "MBBS in Uzbekistan",
-    university: "Tashkent Medical Academy",
-    review: "I was very confused about choosing the right country for MBBS. The team at iExplain cleared all my doubts and helped me choose Uzbekistan. The support at the airport and after arrival was also great.",
-    avatar: "https://randomuser.me/api/portraits/women/68.jpg"
+    name: "Afsana Shaikh",
+    review:
+      "I am Afsana Shaikh from Maharashtra, and I am delighted to recommend Mr. Sunil Baranwal from iExplain Education for his outstanding assistance in helping me secure admission in ISM Bishkek, Kyrgyzstan for my MBBS studies. From the very beginning, Mr. Baranwal's expertise and dedication shone through, providing me with invaluable guidance throughout the admission process.",
+    avatar: "https://socialfoundationindia.org/wp-content/uploads/2026/03/Afsana-Shaikh.jpeg"
   },
   {
     id: 4,
-    name: "Vikram Singh",
-    course: "Study Abroad",
-    university: "Canada",
-    review: "Professional and transparent services. They helped me with my visa processing which was approved in record time. I am now happily studying in Canada.",
-    avatar: "https://randomuser.me/api/portraits/men/85.jpg"
+    name: "Mohit Malik",
+    review:
+      "Thank you so much for making my visa application process so simple. The team members especially Sakshi Ma’am and Sushant Sir are so cooperative, helpful and nice. They helped me reach the UK and make my dream come true.",
+    avatar: "https://socialfoundationindia.org/wp-content/uploads/2026/03/Mohit-malik.jpeg"
   }
 ];
 

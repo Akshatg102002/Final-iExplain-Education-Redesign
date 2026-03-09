@@ -3,11 +3,14 @@ import React from 'react';
 import { CollegeDetailData } from '../types.ts';
 import ContactForm from './ContactForm.tsx';
 
+import { useNavigate } from 'react-router-dom';
+
 interface CollegeDetailPageProps {
   data: CollegeDetailData;
 }
 
 const CollegeDetailPage: React.FC<CollegeDetailPageProps> = ({ data }) => {
+  const navigate = useNavigate();
   if (!data) return (
     <div className="min-h-[60vh] flex flex-col items-center justify-center text-center p-8 animate-fade-in bg-white dark:bg-slate-900">
       <div className="w-24 h-24 bg-brand-light dark:bg-slate-800 rounded-full flex items-center justify-center mb-6 animate-pulse">
@@ -15,7 +18,7 @@ const CollegeDetailPage: React.FC<CollegeDetailPageProps> = ({ data }) => {
       </div>
       <h2 className="text-3xl font-black text-brand-blue dark:text-white mb-4">College Details Updating</h2>
       <p className="text-gray-500 font-medium max-w-md">We are currently curating the latest details for this university. Please contact us for the official brochure.</p>
-      <button onClick={() => window.location.hash = '#/contact'} className="mt-8 px-8 py-4 bg-brand-blue text-white rounded-xl text-xs font-black uppercase tracking-widest hover:bg-brand-gold transition-all">Request Brochure</button>
+      <button onClick={() => navigate('/contact')} className="mt-8 px-8 py-4 bg-brand-blue text-white rounded-xl text-xs font-black uppercase tracking-widest hover:bg-brand-gold transition-all">Request Brochure</button>
     </div>
   );
 
