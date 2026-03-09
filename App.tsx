@@ -515,7 +515,7 @@ const App: React.FC = () => {
       )}
       
       <main className="flex-grow">
-        <Routes>
+        <Routes location={location}>
           <Route path="/" element={
             <>
               <Hero onBookSession={() => setIsContactModalOpen(true)} />

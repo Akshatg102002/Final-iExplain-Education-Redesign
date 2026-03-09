@@ -146,6 +146,11 @@ async function startServer() {
   } else {
     // Production static file serving (if built)
     app.use(express.static("dist"));
+    
+    // SPA Fallback for production
+    app.get("*", (req, res) => {
+      res.sendFile(new URL('./dist/index.html', import.meta.url).pathname);
+    });
   }
 
   app.listen(PORT, "0.0.0.0", () => {
