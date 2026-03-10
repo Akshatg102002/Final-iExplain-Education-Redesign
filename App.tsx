@@ -22,6 +22,7 @@ import ExpertCounselorsCTA from './components/ExpertCounselorsCTA.tsx';
 import CollegeDetailPage from './components/CollegeDetailPage.tsx';
 import ProgramDetailPage from './components/ProgramDetailPage.tsx';
 import StudyIndiaDetailPage from './components/StudyIndiaDetailPage.tsx';
+import StudyAbroadDetailPage from './components/StudyAbroadDetailPage.tsx';
 import MBBSDetailPage from './components/MBBSDetailPage.tsx';
 import WhoWeAre from './components/WhoWeAre.tsx';
 import AirportDiaries from './components/AirportDiaries.tsx';
@@ -439,7 +440,7 @@ const StudyIndiaWrapper = () => {
 
 const StudyAbroadWrapper = () => {
   const { subPath } = useParams<{ subPath: string }>();
-  return <MBBSDetailPage data={STUDY_ABROAD_DETAILED[subPath || 'usa']} />;
+  return <StudyAbroadDetailPage data={STUDY_ABROAD_DETAILED[subPath || 'usa']} />;
 };
 
 const MBBSAbroadWrapper = () => {
