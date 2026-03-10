@@ -5,9 +5,12 @@ import { initializeApp } from "firebase/app";
 import { getFirestore, doc, getDoc, collection, query, where, getDocs } from "firebase/firestore";
 import dotenv from "dotenv";
 import cors from "cors";
+import { Resend } from "resend";
 
 // Load environment variables
 dotenv.config();
+
+const resend = new Resend(process.env.RESEND_API_KEY || "re_Yb66eeKq_3X7ct1z8YA6Uy6e1KVrJDsGd");
 
 // Firebase Configuration (Server-side)
 // Using hardcoded values to match client-side firebase.ts and ensure availability
@@ -34,6 +37,42 @@ async function startServer() {
   // API Routes
   app.get("/api/health", (req, res) => {
     res.json({ status: "ok" });
+  });
+
+  app.post("/api/contact", async (req, res) => {
+    try {
+      const { name, email, phone, city, course, targetCountry, category, source } = req.body;
+
+      // Construct email content
+      const htmlContent = `
+        <h2>New Lead from ${source || 'Website Contact Form'}</h2>
+        <p><strong>Name:</strong> ${name}</p>
+        <p><strong>Email:</strong> ${email}</p>
+        <p><strong>Phone:</strong> ${phone}</p>
+        ${city ? `<p><strong>City:</strong> ${city}</p>` : ''}
+        <p><strong>Category:</strong> ${category}</p>
+        <p><strong>Course:</strong> ${course}</p>
+        <p><strong>Target Country:</strong> ${targetCountry}</p>
+      `;
+
+      // Send email via Resend
+      const { data, error } = await resend.emails.send({
+        from: 'iExplain Education <onboarding@resend.dev>', // Use verified domain in production
+        to: ['akshatg193@gmail.com'], // Send to the user's email
+        subject: `New Lead: ${name} - ${category}`,
+        html: htmlContent,
+      });
+
+      if (error) {
+        console.error("Resend error:", error);
+        return res.status(500).json({ error: "Failed to send email" });
+      }
+
+      res.status(200).json({ success: true, data });
+    } catch (error) {
+      console.error("Error processing contact form:", error);
+      res.status(500).json({ error: "Internal Server Error" });
+    }
   });
 
   // Media Asset Route

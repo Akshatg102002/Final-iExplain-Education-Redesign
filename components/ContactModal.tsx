@@ -65,12 +65,27 @@ const ContactModal: React.FC<ContactModalProps> = ({ onClose }) => {
     setLoading(true);
 
     try {
+      // Save to Firebase
       await addDoc(collection(db, 'leads'), {
         ...formData,
         category: activeTab,
         timestamp: serverTimestamp(),
         source: 'Popup Modal'
       });
+
+      // Send email via backend API
+      await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          ...formData,
+          category: activeTab,
+          source: 'Popup Modal'
+        }),
+      });
+
       setSubmitted(true);
       setTimeout(() => {
         onClose();

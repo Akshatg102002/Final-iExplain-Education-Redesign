@@ -50,11 +50,25 @@ const ContactForm: React.FC = () => {
     setLoading(true);
     
     try {
+      // Save to Firebase
       await addDoc(collection(db, 'leads'), {
         ...formData,
         category: activeTab,
         timestamp: serverTimestamp(),
         source: 'Website Contact Form'
+      });
+
+      // Send email via backend API
+      await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          ...formData,
+          category: activeTab,
+          source: 'Website Contact Form'
+        }),
       });
 
       // Local fallback sync
