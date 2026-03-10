@@ -1,4 +1,3 @@
-
 import { Destination, Office, Blog, Testimonial, College, CollegeDetailData, ProgramDetailData, MBBSDetailData, StudyIndiaDetailData, Service } from './types';
 export { MBBS_ABROAD_DETAILED } from './mbbs_data.ts';
 export { STUDY_ABROAD_DETAILED } from './studyAbroad_Data.ts';
@@ -315,9 +314,94 @@ export const STUDENT_SERVICES_DATA = [
   { id: "loan", title: "Education Loan", icon: "fa-solid fa-money-check-dollar", desc: "Financial support for your education." }
 ];
 
-export const BLOG_POSTS = [
-  { id: "1", title: "Top 10 Universities in USA", image: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&q=80&w=600", date: "Oct 10, 2023", excerpt: "Discover the best universities in the USA for international students." },
-  { id: "2", title: "MBBS in Russia: A Complete Guide", image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&q=80&w=600", date: "Sep 25, 2023", excerpt: "Everything you need to know about studying MBBS in Russia." }
+export const BLOG_POSTS: Blog[] = [
+  {
+    id: "1",
+    title: "Top 5 Countries for MBBS Abroad in 2025",
+    img: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&q=80&w=800",
+    date: "Jan 15, 2025",
+    category: "MBBS Abroad",
+    author: "Admin",
+    content: `
+      <p>Choosing the right destination for your MBBS degree is a crucial decision that shapes your future medical career. In 2025, several countries have emerged as top choices for Indian students due to their affordable fees, high-quality education, and NMC recognition. Here is a curated list of the top 5 countries to consider.</p>
+      
+      <h3>1. Russia</h3>
+      <p>Russia remains the undisputed leader for medical education abroad. With universities like Kazan Federal University and First Moscow State Medical University, it offers world-class infrastructure at a fraction of the cost of Indian private colleges. The medium of instruction is English, and degrees are recognized globally by WHO and NMC.</p>
+      <blockquote>"Russia offers a blend of theoretical knowledge and extensive clinical exposure, making it a prime choice for aspiring doctors."</blockquote>
+
+      <h3>2. Georgia</h3>
+      <p>Georgia has rapidly climbed the ranks to become a favorite. Known for its safety and European standard of living, colleges like Tbilisi State Medical University provide education that is 100% in English. The climate is pleasant, and the community is welcoming to Indian students.</p>
+
+      <h3>3. Kazakhstan</h3>
+      <p>For students looking for the most budget-friendly options without compromising on quality, Kazakhstan is the answer. Universities here have a 5-year course duration, similar to India, which is a significant advantage.</p>
+
+      <h3>4. Philippines</h3>
+      <p>The Philippines follows the American curriculum, which is excellent for students aiming to crack the USMLE. The disease patterns are similar to India, providing relevant clinical experience.</p>
+
+      <h3>5. Bangladesh</h3>
+      <p>With a culture, food, and climate almost identical to India, Bangladesh offers a home away from home. The syllabus is also very similar to the NMC curriculum, leading to high FMGE passing rates.</p>
+
+      <h3>Conclusion</h3>
+      <p>Each of these countries has unique advantages. Your choice should depend on your budget, career goals, and preference for climate and culture. Contact iExplain Education today for a personalized counseling session to help you decide.</p>
+    `,
+    readTime: "5 min"
+  },
+  {
+    id: "2",
+    title: "How to Crack NEET 2025: Expert Tips",
+    img: "https://images.unsplash.com/photo-1606326608606-aa0b62935f2b?auto=format&fit=crop&q=80&w=800",
+    date: "Jan 10, 2025",
+    category: "Entrance Exams",
+    author: "Dr. Sharma",
+    content: `
+      <p>The National Eligibility cum Entrance Test (NEET) is the gateway to medical colleges in India. With competition increasing every year, cracking NEET 2025 requires not just hard work, but smart work. Here are expert tips to guide your preparation.</p>
+
+      <h3>1. Master the NCERT</h3>
+      <p>The NCERT textbooks are your bible. 80-90% of the biology questions and a significant portion of chemistry and physics questions come directly from NCERT. Ensure you read every line, summary, and diagram.</p>
+
+      <h3>2. Strategic Time Management</h3>
+      <p>Create a timetable that allocates time for all three subjects. Don't neglect Physics; it is often the rank decider. Practice solving questions within a time limit to improve your speed and accuracy.</p>
+
+      <h3>3. Mock Tests and Analysis</h3>
+      <p>Taking mock tests is crucial, but analyzing them is even more important. Identify your weak areas after every test and work on them. Understand why you got a question wrong – was it a conceptual error or a silly mistake?</p>
+
+      <h3>4. Health is Wealth</h3>
+      <p>A burnt-out mind cannot retain information. Ensure you get 7 hours of sleep, eat healthy, and take short breaks. A calm mind performs significantly better in exams.</p>
+
+      <p>Remember, consistency is key. Stay focused, stay positive, and you will achieve your dream of becoming a doctor.</p>
+    `,
+    readTime: "4 min"
+  },
+  {
+    id: "3",
+    title: "Study in UK Without IELTS",
+    img: "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&q=80&w=800",
+    date: "Jan 05, 2025",
+    category: "Study Abroad",
+    author: "Admin",
+    content: `
+      <p>Dreaming of studying in the United Kingdom but worried about the IELTS exam? Good news! Many prestigious UK universities accept students without IELTS scores based on their Class 12th English marks or other criteria. Let's explore how.</p>
+
+      <h3>Alternative Criteria</h3>
+      <p>Universities often waive the IELTS requirement if you have scored over 70-75% in English in your Class 12th board exams (CBSE/ICSE). Some universities may also conduct their own internal English test or a video interview to assess your proficiency.</p>
+
+      <h3>Top Universities Accepting MOI</h3>
+      <p>Medium of Instruction (MOI) letters from your previous institution stating that your education was in English can also work. Some universities accepting alternatives include:</p>
+      <ul>
+        <li>University of Bristol</li>
+        <li>University of Warwick</li>
+        <li>Sheffield Hallam University</li>
+        <li>University of Greenwich</li>
+        <li>Swansea University</li>
+      </ul>
+
+      <h3>Benefits of Studying in UK</h3>
+      <p>The UK offers 1-year Master's programs, which saves you time and money. Additionally, the 2-year Post-Study Work (PSW) visa allows you to stay and work in the UK after graduation, providing excellent career exposure.</p>
+
+      <p>Don't let language tests be a barrier. Contact iExplain Education to assess your profile and apply to the best UK universities today.</p>
+    `,
+    readTime: "6 min"
+  }
 ];
 
 export const EXAMS_DETAILED = {
@@ -364,10 +448,12 @@ export const ROADMAP_STEPS = [
 ];
 
 export const INDIA_COURSES = [
-  { name: "MBBS", slug: "mbbs", image: "https://images.unsplash.com/photo-1551076805-e1869033e561?auto=format&fit=crop&q=80&w=600" },
-  { name: "B.Tech", slug: "btech", image: "https://images.unsplash.com/photo-1581092921461-eab62e97a782?auto=format&fit=crop&q=80&w=600" },
-  { name: "MBA", slug: "mba", image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=600" }
+  { id: "mbbs", title: "MBBS", desc: "Top Govt & Private Colleges", icon: "fa-solid fa-user-doctor" },
+  { id: "engineering", title: "Engineering", desc: "B.Tech in CS, IT, ECE", icon: "fa-solid fa-microchip" },
+  { id: "management", title: "Management", desc: "MBA, BBA, PGDM", icon: "fa-solid fa-chart-pie" },
+  { id: "law", title: "Law", desc: "LLB, BA LLB", icon: "fa-solid fa-scale-balanced" }
 ];
+
 
 export const STATS = [
   { label: "Students Counseled", value: "10,000+" },
@@ -375,10 +461,85 @@ export const STATS = [
   { label: "Years of Experience", value: "15+" }
 ];
 
-export const POPULAR_COLLEGES = [
-  { name: "Kazan Federal University", country: "Russia", image: "https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&q=80&w=600", slug: "kazan-federal-university" },
-  { name: "Northeastern University", country: "USA", image: "https://images.unsplash.com/photo-1498243691581-b145c3f54a5a?auto=format&fit=crop&q=80&w=600", slug: "northeastern-university" },
-  { name: "University of Leeds", country: "UK", image: "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&q=80&w=600", slug: "university-of-leeds" }
+export const POPULAR_COLLEGES: College[] = [
+  // --- MBBS ABROAD ---
+  // Russia
+  { name: "Kazan Federal University", country: "Russia", category: "MBBS Abroad", image: "https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&q=80&w=600" },
+  { name: "Bashkir State Medical University", country: "Russia", category: "MBBS Abroad", image: "https://www.ruseducation.in/wp-content/uploads/2022/01/Bashkir-State-Medical-University.webp" },
+  { name: "Orenburg State Medical University", country: "Russia", category: "MBBS Abroad", image: "https://images.unsplash.com/photo-1559135197-8a45ea74d367?auto=format&fit=crop&q=80&w=600" },
+  { name: "Crimea Federal University", country: "Russia", category: "MBBS Abroad", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSvJuVumuwTMTGSGfSzzLKYgVzkA8k-kJHb_w&s" },
+  { name: "First Moscow State Medical University", country: "Russia", category: "MBBS Abroad", image: "https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&q=80&w=600" },
+  // Georgia
+  { name: "Tbilisi State Medical University", country: "Georgia", category: "MBBS Abroad", image: "https://images.shiksha.com/mediadata/images/1702625100phpu2Kbnu.jpeg" },
+  { name: "Batumi Shota Rustaveli State University", country: "Georgia", category: "MBBS Abroad", image: "https://images.unsplash.com/photo-1559135197-8a45ea74d367?auto=format&fit=crop&q=80&w=600" },
+  { name: "David Tvildiani Medical University", country: "Georgia", category: "MBBS Abroad", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRO5z5QqOOgc6KWCqeUoBFkNNRqY64riK5QDQ&s" },
+  { name: "European University Georgia", country: "Georgia", category: "MBBS Abroad", image: "https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&q=80&w=600" },
+  // Philippines
+  { name: "University of Santo Tomas", country: "Philippines", category: "MBBS Abroad", image: "https://images.unsplash.com/photo-1544531586-fde5298cdd40?auto=format&fit=crop&q=80&w=600" },
+  { name: "AMA School of Medicine", country: "Philippines", category: "MBBS Abroad", image: "https://images.unsplash.com/photo-1559135197-8a45ea74d367?auto=format&fit=crop&q=80&w=600" },
+  { name: "Our Lady of Fatima University", country: "Philippines", category: "MBBS Abroad", image: "https://www.careerplus.org.in/philippines-medical-college/our-lady-of-fatima-university.jpg " },
+  { name: "University of the East Ramon Magsaysay", country: "Philippines", category: "MBBS Abroad", image: "https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&q=80&w=600" },
+  // Bangladesh
+  { name: "Dhaka National Medical College", country: "Bangladesh", category: "MBBS Abroad", image: "https://images.unsplash.com/photo-1544531586-fde5298cdd40?auto=format&fit=crop&q=80&w=600" },
+  { name: "Bangladesh Medical College", country: "Bangladesh", category: "MBBS Abroad", image: "https://images.unsplash.com/photo-1559135197-8a45ea74d367?auto=format&fit=crop&q=80&w=600" },
+  { name: "Jahurul Islam Medical College", country: "Bangladesh", category: "MBBS Abroad", image: "https://images.unsplash.com/photo-1559135197-8a45ea74d367?auto=format&fit=crop&q=80&w=600" },
+  { name: "Holy Family Red Crescent Medical College", country: "Bangladesh", category: "MBBS Abroad", image: "https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&q=80&w=600" },
+  // Nepal
+  { name: "Tribhuvan University Institute of Medicine", country: "Nepal", category: "MBBS Abroad", image: "https://images.unsplash.com/photo-1544531586-fde5298cdd40?auto=format&fit=crop&q=80&w=600" },
+  { name: "Kathmandu University School of Medical Sciences", country: "Nepal", category: "MBBS Abroad", image: "https://images.unsplash.com/photo-1559135197-8a45ea74d367?auto=format&fit=crop&q=80&w=600" },
+  { name: "B.P. Koirala Institute of Health Sciences", country: "Nepal", category: "MBBS Abroad", image: "https://images.unsplash.com/photo-1592280771800-bcf9de2312b4?auto=format&fit=crop&q=80&w=600" },
+  { name: "Patan Academy of Health Sciences", country: "Nepal", category: "MBBS Abroad", image: "https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&q=80&w=600" },
+  // Kazakhstan
+  { name: "Al-Farabi Kazakh National University", country: "Kazakhstan", category: "MBBS Abroad", image: "https://images.unsplash.com/photo-1544531586-fde5298cdd40?auto=format&fit=crop&q=80&w=600" },
+  { name: "Kazakh National Medical University", country: "Kazakhstan", category: "MBBS Abroad", image: "https://images.unsplash.com/photo-1559135197-8a45ea74d367?auto=format&fit=crop&q=80&w=600" },
+  { name: "Astana Medical University", country: "Kazakhstan", category: "MBBS Abroad", image: "https://images.unsplash.com/photo-1592280771800-bcf9de2312b4?auto=format&fit=crop&q=80&w=600" },
+  { name: "South Kazakhstan Medical Academy", country: "Kazakhstan", category: "MBBS Abroad", image: "https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&q=80&w=600" },
+  // Uzbekistan
+  { name: "Tashkent Medical Academy", country: "Uzbekistan", category: "MBBS Abroad", image: "https://images.unsplash.com/photo-1544531586-fde5298cdd40?auto=format&fit=crop&q=80&w=600" },
+  { name: "Samarkand State Medical University", country: "Uzbekistan", category: "MBBS Abroad", image: "https://images.unsplash.com/photo-1559135197-8a45ea74d367?auto=format&fit=crop&q=80&w=600" },
+  { name: "Bukhara State Medical Institute", country: "Uzbekistan", category: "MBBS Abroad", image: "https://images.unsplash.com/photo-1544531586-fde5298cdd40?auto=format&fit=crop&q=80&w=600" },
+  { name: "Andijan State Medical Institute", country: "Uzbekistan", category: "MBBS Abroad", image: "https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&q=80&w=600" },
+
+  // --- STUDY ABROAD ---
+  // USA
+  { name: "Northeastern University", country: "USA", category: "Study Abroad", image: "https://images.unsplash.com/photo-1544531586-fde5298cdd40?auto=format&fit=crop&q=80&w=600" },
+  { name: "Arizona State University", country: "USA", category: "Study Abroad", image: "https://images.unsplash.com/photo-1559135197-8a45ea74d367?auto=format&fit=crop&q=80&w=600" },
+  { name: "New York University", country: "USA", category: "Study Abroad", image: "https://uniplusglobal.com/media/university_images/New_York_University_439e3d1807.webp" },
+  { name: "University of Texas at Austin", country: "USA", category: "Study Abroad", image: "https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&q=80&w=600" },
+  { name: "University of Southern California", country: "USA", category: "Study Abroad", image: "https://images.unsplash.com/photo-1544531586-fde5298cdd40?auto=format&fit=crop&q=80&w=600" },
+  // UK
+  { name: "University of Leeds", country: "UK", category: "Study Abroad", image: "https://images.unsplash.com/photo-1559135197-8a45ea74d367?auto=format&fit=crop&q=80&w=600" },
+  { name: "University of Manchester", country: "UK", category: "Study Abroad", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSNInPUr5vU0dho3EQhK8ws6nP7kccU4TMzHQ&s" },
+  { name: "University of Birmingham", country: "UK", category: "Study Abroad", image: "https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&q=80&w=600" },
+  { name: "University of Warwick", country: "UK", category: "Study Abroad", image: "https://images.unsplash.com/photo-1544531586-fde5298cdd40?auto=format&fit=crop&q=80&w=600" },
+  { name: "Kings College London", country: "UK", category: "Study Abroad", image: "https://images.unsplash.com/photo-1559135197-8a45ea74d367?auto=format&fit=crop&q=80&w=600" },
+  // Australia
+  { name: "University of Melbourne", country: "Australia", category: "Study Abroad", image: "https://www.unimelb.edu.au/__data/assets/image/0012/3798804/video.jpg" },
+  { name: "Monash University", country: "Australia", category: "Study Abroad", image: "https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&q=80&w=600" },
+  { name: "University of Sydney", country: "Australia", category: "Study Abroad", image: "https://images.unsplash.com/photo-1544531586-fde5298cdd40?auto=format&fit=crop&q=80&w=600" },
+  { name: "Deakin University", country: "Australia", category: "Study Abroad", image: "https://images.unsplash.com/photo-1559135197-8a45ea74d367?auto=format&fit=crop&q=80&w=600" },
+  { name: "RMIT University", country: "Australia", category: "Study Abroad", image: "https://www.rmit.edu.au/content/dam/rmit/rmit-images/marketing-only/about-sub-mastheads/City-Campus-Masthead-1920x960.jpg" },
+  // Canada
+  { name: "University of Toronto", country: "Canada", category: "Study Abroad", image: "https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&q=80&w=600" },
+  { name: "University of British Columbia", country: "Canada", category: "Study Abroad", image: "https://images.unsplash.com/photo-1544531586-fde5298cdd40?auto=format&fit=crop&q=80&w=600" },
+  { name: "McGill University", country: "Canada", category: "Study Abroad", image: "https://images.unsplash.com/photo-1559135197-8a45ea74d367?auto=format&fit=crop&q=80&w=600" },
+  { name: "York University", country: "Canada", category: "Study Abroad", image: "https://images.unsplash.com/photo-1592280771800-bcf9de2312b4?auto=format&fit=crop&q=80&w=600" },
+  { name: "Seneca College", country: "Canada", category: "Study Abroad", image: "https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&q=80&w=600" },
+  // Ireland
+  { name: "Trinity College Dublin", country: "Ireland", category: "Study Abroad", image: "https://images.unsplash.com/photo-1544531586-fde5298cdd40?auto=format&fit=crop&q=80&w=600" },
+  { name: "University College Dublin", country: "Ireland", category: "Study Abroad", image: "https://images.unsplash.com/photo-1559135197-8a45ea74d367?auto=format&fit=crop&q=80&w=600" },
+  { name: "Dublin City University", country: "Ireland", category: "Study Abroad", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRcuIEI_sMygRQdUyGTXaSuq46og1TDBOVFOw&s" },
+  { name: "University of Limerick", country: "Ireland", category: "Study Abroad", image: "https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&q=80&w=600" },
+  // New Zealand
+  { name: "University of Auckland", country: "New Zealand", category: "Study Abroad", image: "https://images.unsplash.com/photo-1544531586-fde5298cdd40?auto=format&fit=crop&q=80&w=600" },
+  { name: "University of Otago", country: "New Zealand", category: "Study Abroad", image: "https://images.unsplash.com/photo-1559135197-8a45ea74d367?auto=format&fit=crop&q=80&w=600" },
+  { name: "Victoria University of Wellington", country: "New Zealand", category: "Study Abroad", image: "https://www.ilwindia.com/wp-content/uploads/2019/08/Victoria-University-of-Wellington-New-Zealand.jpg" },
+  { name: "Auckland University of Technology", country: "New Zealand", category: "Study Abroad", image: "https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&q=80&w=600" },
+  // Dubai
+  { name: "University of Birmingham Dubai", country: "Dubai", category: "Study Abroad", image: "https://images.unsplash.com/photo-1544531586-fde5298cdd40?auto=format&fit=crop&q=80&w=600" },
+  { name: "Middlesex University Dubai", country: "Dubai", category: "Study Abroad", image: "https://images.unsplash.com/photo-1559135197-8a45ea74d367?auto=format&fit=crop&q=80&w=600" },
+  { name: "Heriot-Watt University Dubai", country: "Dubai", category: "Study Abroad", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2UPd23SmEbM0JSG0O36KbCG5p6oXxnO6dcA&s" },
+  { name: "Manipal Academy of Higher Education Dubai", country: "Dubai", category: "Study Abroad", image: "https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&q=80&w=600" }
 ];
 
 export const COUNTRY_ICONS: Record<string, string> = {
@@ -401,10 +562,51 @@ export const COUNTRY_ICONS: Record<string, string> = {
 };
 
 export const KNOW_YOUR_DESTINATIONS = [
-  { name: "USA", image: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&q=80&w=600", slug: "usa" },
-  { name: "UK", image: "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&q=80&w=600", slug: "uk" },
-  { name: "Canada", image: "https://images.unsplash.com/photo-1517935706615-2717063c2225?auto=format&fit=crop&q=80&w=600", slug: "canada" },
-  { name: "Australia", image: "https://images.unsplash.com/photo-1523482580672-f109ba8cb9be?auto=format&fit=crop&q=80&w=600", slug: "australia" }
+  {
+    name: "Russia",
+    path: "/mbbs-abroad/russia",
+    image: "https://images.unsplash.com/photo-1513326738677-b964603b136d?auto=format&fit=crop&q=80&w=600"
+  },
+  {
+    name: "Georgia",
+    path: "/mbbs-abroad/georgia",
+    image: "https://images.unsplash.com/photo-1565008447742-97f6f38c985c?auto=format&fit=crop&q=80&w=600"
+  },
+  {
+    name: "USA",
+    path: "/study-abroad/usa",
+    image: "https://images.unsplash.com/photo-1501594907352-04cda38ebc29?auto=format&fit=crop&q=80&w=600"
+  },
+  {
+    name: "UK",
+    path: "/study-abroad/uk",
+    image: "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&q=80&w=600"
+  },
+  {
+    name: "Canada",
+    path: "/study-abroad/canada",
+    image: "https://plus.unsplash.com/premium_photo-1673241100156-2e04fca1a4af?q=80&w=870&auto=format&fit=crop"
+  },
+  {
+    name: "Australia",
+    path: "/study-abroad/australia",
+    image: "https://images.unsplash.com/photo-1523482580672-f109ba8cb9be?auto=format&fit=crop&q=80&w=600"
+  },
+  {
+    name: "Philippines",
+    path: "/mbbs-abroad/philippines",
+    image: "https://images.unsplash.com/photo-1518509562904-e7ef99cdcc86?auto=format&fit=crop&q=80&w=600"
+  },
+  {
+    name: "Uzbekistan",
+    path: "/mbbs-abroad/uzbekistan",
+    image: "https://images.unsplash.com/photo-1673446840855-1c82bafdb67d?q=80&w=863&auto=format&fit=crop"
+  },
+  {
+    name: "Dubai",
+    path: "/study-abroad/dubai",
+    image: "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&q=80&w=600"
+  }
 ];
 
 export const DESTINATIONS = [

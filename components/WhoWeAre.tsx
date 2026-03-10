@@ -33,7 +33,7 @@ const WhoWeAre: React.FC = () => {
           <div className="lg:w-1/2 order-1 lg:order-2">
             <div className="relative rounded-[2.5rem] overflow-hidden shadow-2xl border-4 border-white dark:border-slate-800">
               <img 
-                src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=1470&auto=format&fit=crop" 
+                src="https://socialfoundationindia.org/wp-content/uploads/2026/03/Abroad.jpeg" 
                 alt="Who We Are" 
                 className="w-full h-auto object-cover transform hover:scale-105 transition-transform duration-700" 
               />
