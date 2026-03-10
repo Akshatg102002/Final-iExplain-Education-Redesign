@@ -1,5 +1,7 @@
 
 import { Destination, Office, Blog, Testimonial, College, CollegeDetailData, ProgramDetailData, MBBSDetailData, StudyIndiaDetailData, Service } from './types';
+export { MBBS_ABROAD_DETAILED } from './mbbs_data.ts';
+export { STUDY_ABROAD_DETAILED } from './studyAbroad_Data.ts';
 
 export const LOGO_URL = "https://www.iexplaineducation.com/wp-content/uploads/2023/04/Logo-2-scaled-e1684926432756-768x307.jpg";
 export const HERO_IMG_URL = "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&q=80&w=1200";
@@ -317,61 +319,6 @@ export const BLOG_POSTS = [
   { id: "1", title: "Top 10 Universities in USA", image: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&q=80&w=600", date: "Oct 10, 2023", excerpt: "Discover the best universities in the USA for international students." },
   { id: "2", title: "MBBS in Russia: A Complete Guide", image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&q=80&w=600", date: "Sep 25, 2023", excerpt: "Everything you need to know about studying MBBS in Russia." }
 ];
-
-export const STUDY_ABROAD_DETAILED = {
-  "usa": { title: "Study in USA", heroImage: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&q=80&w=1200", intro: "The USA is a top destination...", universities: [] },
-  "uk": { title: "Study in UK", heroImage: "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&q=80&w=1200", intro: "The UK offers world-class education...", universities: [] },
-  "europe": {
-    title: "Study in Europe",
-    heroImage: "https://images.unsplash.com/photo-1485081669829-bacb8c7bb1f3?q=80&w=870&auto=format&fit=crop",
-    intro: "Europe is one of the most popular study destinations in the world, offering world-class education, rich cultural diversity, and excellent career prospects. Home to many top-ranked universities, Europe provides a wide range of programs taught in English. With low or no tuition fees in several countries, strong research opportunities, and easy travel across nations, Europe offers an unmatched international study experience.",
-    universities: [],
-    faqs: [
-      {
-        "question": "Why study in Europe?",
-        "answer": "Studying in Europe boosts career prospects through international exposure, world-class education, affordable tuition, and strong post-study employment opportunities."
-      },
-      {
-        "question": "Are European degrees internationally recognized?",
-        "answer": "Yes, European degrees follow the Bologna Process, ensuring that bachelor’s and master’s degrees are standardized and recognized across Europe and globally."
-      },
-      {
-        "question": "Can I study in English in Europe?",
-        "answer": "Yes, thousands of undergraduate and postgraduate programs across Europe are taught entirely in English."
-      },
-      {
-        "question": "What education system is followed in Europe?",
-        "answer": "Europe follows the International Standard Classification of Education (ISCED) and the Bologna system, offering bachelor’s, master’s, and doctoral programs with transferable credits through ECTS."
-      },
-      {
-        "question": "What study options are available in Europe?",
-        "answer": "Europe offers a wide range of programs across arts, science, engineering, business, medicine, humanities, and research-oriented fields at public and private universities."
-      },
-      {
-        "question": "Is studying in Europe affordable?",
-        "answer": "Many European countries offer low or no tuition fees at public universities, along with scholarships and financial support options for international students."
-      },
-      {
-        "question": "What are the living costs for international students in Europe?",
-        "answer": "Living costs vary by country, with relatively affordable options available in countries such as Italy, Spain, France, and parts of Northern and Eastern Europe."
-      },
-      {
-        "question": "Can international students travel within Europe?",
-        "answer": "Yes, students studying in the Schengen Area can travel freely across 26 European countries with a valid student visa."
-      },
-      {
-        "question": "What visa is required to study in Europe?",
-        "answer": "Non-EU students require a student visa issued by the host country, valid for the duration of the study program and renewable annually."
-      },
-      {
-        "question": "What documents are required for a European student visa?",
-        "answer": "Applicants must provide an admission letter, academic qualifications, proof of accommodation, health insurance, financial proof, completed application forms, and a valid passport."
-      }
-    ]
-  }
-};
-
-export { MBBS_ABROAD_DETAILED } from './mbbs_data.ts';
 
 export const EXAMS_DETAILED = {
   "neet-ug": { title: "NEET UG", heroImage: "https://images.unsplash.com/photo-1606326608606-aa0b62935f2b?auto=format&fit=crop&q=80&w=1200", intro: "National Eligibility cum Entrance Test...", syllabus: {} }

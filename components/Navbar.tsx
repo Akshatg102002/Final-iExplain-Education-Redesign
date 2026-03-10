@@ -138,10 +138,10 @@ const TopBar: React.FC = () => {
         <div className="flex items-center justify-end space-x-4">
           {/* Social Icons */}
           <div className="flex items-center space-x-3 text-white/80">
-            <a href="https://facebook.com" target="_blank" rel="noreferrer" className="hover:text-brand-gold transition-colors hover:scale-110"><i className="fa-brands fa-facebook-f"></i></a>
-            <a href="https://instagram.com" target="_blank" rel="noreferrer" className="hover:text-brand-gold transition-colors hover:scale-110"><i className="fa-brands fa-instagram"></i></a>
-            <a href="https://linkedin.com" target="_blank" rel="noreferrer" className="hover:text-brand-gold transition-colors hover:scale-110"><i className="fa-brands fa-linkedin-in"></i></a>
-            <a href="https://youtube.com" target="_blank" rel="noreferrer" className="hover:text-brand-gold transition-colors hover:scale-110"><i className="fa-brands fa-youtube"></i></a>
+            <a href="https://www.facebook.com/iexplainedu" target="_blank" rel="noreferrer" className="hover:text-brand-gold transition-colors hover:scale-110"><i className="fa-brands fa-facebook-f"></i></a>
+            <a href="https://www.instagram.com/iexplain.education/" target="https://www.instagram.com/iexplain.education/" rel="noreferrer" className="hover:text-brand-gold transition-colors hover:scale-110"><i className="fa-brands fa-instagram"></i></a>
+            <a href="https://www.linkedin.com/company/92837677/admin/page-posts/published/1" target="_blank" rel="noreferrer" className="hover:text-brand-gold transition-colors hover:scale-110"><i className="fa-brands fa-linkedin-in"></i></a>
+            <a href="https://www.youtube.com/@iExplainEducation" target="_blank" rel="noreferrer" className="hover:text-brand-gold transition-colors hover:scale-110"><i className="fa-brands fa-youtube"></i></a>
           </div>
 
           <div className="h-3 w-px bg-white/10 hidden sm:block"></div>

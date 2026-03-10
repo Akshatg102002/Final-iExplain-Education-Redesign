@@ -24,24 +24,38 @@ const MBBSDetailPage: React.FC<MBBSDetailPageProps> = ({ data }) => {
   return (
     <div className="bg-white dark:bg-slate-900 pb-20 animate-fade-in font-sans">
       {/* 1. Page Title Section */}
-      <div className="relative h-[60vh] min-h-[500px] flex items-center justify-center overflow-hidden">
+      <div className="relative h-[50vh] min-h-[400px] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
           <img src={data.heroImage} className="w-full h-full object-cover" alt={data.title} />
           <div className="absolute inset-0 bg-gradient-to-t from-brand-blue via-brand-blue/60 to-transparent"></div>
         </div>
-        <div className="relative z-10 text-center max-w-5xl mx-auto px-4 mt-32 animate-fade-in">
-          <h1 className="text-5xl lg:text-7xl font-black text-white mb-6 leading-tight drop-shadow-lg">{data.title}</h1>
-          <p className="text-lg lg:text-xl text-white/90 font-medium max-w-3xl mx-auto leading-relaxed mb-8">
-            {data.intro.text}
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button onClick={() => navigate('/contact')} className="px-8 py-4 bg-brand-gold text-white rounded-xl font-black text-xs uppercase tracking-widest hover:bg-white hover:text-brand-blue transition-all shadow-lg">
-              Apply Now
-            </button>
-            <button onClick={() => navigate('/contact')} className="px-8 py-4 bg-white/10 backdrop-blur-md text-white border border-white/20 rounded-xl font-black text-xs uppercase tracking-widest hover:bg-white hover:text-brand-blue transition-all">
-              Get Free Counseling
-            </button>
-          </div>
+
+        <div className="relative z-10 text-center max-w-5xl mx-auto px-4 animate-fade-in">
+          <h1 className="text-5xl lg:text-7xl font-black text-white leading-tight drop-shadow-lg">
+            {data.title}
+          </h1>
+        </div>
+      </div>
+
+      <div className="max-w-5xl mx-auto px-4 py-16 text-center">
+        <p className="text-lg lg:text-xl text-gray-700 font-medium leading-relaxed mb-8">
+          {data.intro.text}
+        </p>
+
+        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <button
+            onClick={() => navigate('/contact')}
+            className="px-8 py-4 bg-brand-gold text-white rounded-xl font-black text-xs uppercase tracking-widest hover:bg-brand-blue transition-all shadow-lg"
+          >
+            Apply Now
+          </button>
+
+          <button
+            onClick={() => navigate('/contact')}
+            className="px-8 py-4 bg-brand-blue text-white rounded-xl font-black text-xs uppercase tracking-widest hover:bg-brand-gold transition-all"
+          >
+            Get Free Counseling
+          </button>
         </div>
       </div>
 

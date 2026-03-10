@@ -30,7 +30,13 @@ const Hero: React.FC<HeroProps> = ({ onBookSession }) => {
           </div>
           
           <h1 className="text-4xl lg:text-6xl font-black text-white leading-[1.1] mb-8 tracking-tight animate-fade-in-up delay-100">
-            Unlock global opportunities with <span className="text-brand-gold drop-shadow-[0_0_10px_rgba(255,255,255,0.5)]">iExplain Education.</span>
+            Unlock global opportunities with <br />
+            <span
+              className="text-brand-gold inline-block pt-2"
+              style={{ WebkitTextStroke: "0.5px rgba(255,255,255,0.7)" }}
+            >
+              iExplain Education.
+            </span>
           </h1>
           
           <p className="text-lg lg:text-xl text-gray-200 font-medium mb-10 max-w-2xl leading-relaxed animate-fade-in-up delay-200">
