@@ -57,7 +57,7 @@ async function startServer() {
 
       // Send email via Resend
       const { data, error } = await resend.emails.send({
-        from: 'iExplain Education <onboarding@resend.dev>', // Use verified domain in production
+        from: 'iExplain Education <info@iexplaineducation.com>', // Use verified domain in production
         to: ['akshatg193@gmail.com'], // Send to the user's email
         subject: `New Lead: ${name} - ${category}`,
         html: htmlContent,
