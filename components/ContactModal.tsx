@@ -73,21 +73,35 @@ const ContactModal: React.FC<ContactModalProps> = ({ onClose }) => {
         source: 'Popup Modal'
       });
 
+      const payload = {
+        ...formData,
+        category: activeTab,
+        source: 'Popup Modal'
+      };
+
       // Send email via backend API
-      const response = await fetch('/api/contact', {
+      let response = await fetch('/api/contact', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          ...formData,
-          category: activeTab,
-          source: 'Popup Modal'
-        }),
+        body: JSON.stringify(payload),
       });
 
+      // Fallback for static hosting (like Hostinger) without Node.js backend
+      const contentType = response.headers.get("content-type");
+      if (response.status === 404 || (contentType && contentType.includes("text/html"))) {
+        response = await fetch('/contact.php', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(payload),
+        });
+      }
+
       if (!response.ok) {
-        console.error("Failed to send email via API");
+        console.error("Failed to send email via API or PHP fallback");
       }
 
       setSubmitted(true);
