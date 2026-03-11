@@ -1,6 +1,7 @@
 <?php
 header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Headers: Content-Type");
+header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
+header("Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With, Accept");
 header("Content-Type: application/json");
 
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
@@ -11,11 +12,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $data = json_decode(file_get_contents("php://input"), true);
     
-    $name = isset($data['name']) ? $data['name'] : '';
-    $email = isset($data['email']) ? $data['email'] : '';
-    $phone = isset($data['phone']) ? $data['phone'] : '';
+    $name = isset($data['name']) ? $data['name'] : 'Unknown';
+    $email = isset($data['email']) ? $data['email'] : 'No Email';
+    $phone = isset($data['phone']) ? $data['phone'] : 'No Phone';
     $city = isset($data['city']) ? $data['city'] : '';
-    $category = isset($data['category']) ? $data['category'] : '';
+    $category = isset($data['category']) ? $data['category'] : 'General';
     $course = isset($data['course']) ? $data['course'] : '';
     $targetCountry = isset($data['targetCountry']) ? $data['targetCountry'] : '';
     $source = isset($data['source']) ? $data['source'] : 'Website Contact Form';
@@ -52,13 +53,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $response = curl_exec($ch);
     $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    $curlError = curl_error($ch);
     curl_close($ch);
 
     if ($httpCode >= 200 && $httpCode < 300) {
-        echo json_encode(["success" => true]);
+        echo json_encode(["success" => true, "resend_response" => json_decode($response)]);
     } else {
         http_response_code(500);
-        echo json_encode(["error" => "Failed to send email via Resend", "details" => json_decode($response)]);
+        echo json_encode([
+            "error" => "Failed to send email via Resend", 
+            "httpCode" => $httpCode,
+            "curlError" => $curlError,
+            "details" => json_decode($response)
+        ]);
     }
 } else {
     http_response_code(405);

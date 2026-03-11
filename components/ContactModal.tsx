@@ -96,10 +96,11 @@ const ContactModal: React.FC<ContactModalProps> = ({ onClose }) => {
       // Fallback for static hosting (like Hostinger) without Node.js backend
       if (!response || !response.ok) {
         try {
-          response = await fetch('/contact.php', {
+          response = await fetch('/contact.php?t=' + Date.now(), {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
+              'Accept': 'application/json'
             },
             body: JSON.stringify(payload),
           });
@@ -112,6 +113,22 @@ const ContactModal: React.FC<ContactModalProps> = ({ onClose }) => {
         const errorText = response ? await response.text() : "Network error";
         console.error("Failed to send email via API or PHP fallback:", errorText);
         throw new Error("Failed to send email");
+      }
+
+      const contentType = response.headers.get("content-type");
+      if (contentType && contentType.includes("text/html")) {
+        console.error("Received HTML instead of JSON. The PHP script is not executing. This is usually caused by Hostinger routing the request to index.html.");
+        throw new Error("Server configuration error");
+      }
+
+      try {
+        const responseData = await response.json();
+        console.log("Email send response:", responseData);
+        if (!responseData.success) {
+          console.error("Server returned 200 but success is false:", responseData);
+        }
+      } catch (e) {
+        console.error("Failed to parse response JSON", e);
       }
 
       setSubmitted(true);
