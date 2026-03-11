@@ -9,36 +9,16 @@ interface ContactModalProps {
   onClose: () => void;
 }
 
-const CITIES = [
-  "New Delhi", "Mumbai", "Bangalore", "Chennai", "Hyderabad", "Kolkata", "Pune", 
-  "Ahmedabad", "Jaipur", "Lucknow", "Patna", "Dehradun", "Kota", "Chandigarh", 
-  "Indore", "Bhopal", "Nagpur", "Other"
-];
-
-const TABS = ['Study Abroad', 'MBBS Abroad', 'Study In India'] as const;
-type TabType = typeof TABS[number];
-
-const COURSES: Record<TabType, string[]> = {
-  'Study Abroad': ["Masters", "Bachelors", "MBA", "Engineering", "Other"],
-  'MBBS Abroad': ["MBBS", "BDS", "Pharmacy", "Nursing"],
-  'Study In India': ["MBBS", "B.Tech", "MBA", "MD/MS", "BBA", "BCA", "Other"]
-};
-
-const COUNTRIES: Record<TabType, string[]> = {
-  'Study Abroad': ["Germany", "USA", "UAE", "France", "Ireland", "UK", "Canada", "Australia", "Other"],
-  'MBBS Abroad': ["Russia", "Georgia", "Kazakhstan", "Kyrgyzstan", "Uzbekistan", "Philippines", "Bangladesh", "Nepal", "Egypt"],
-  'Study In India': ["India"]
-};
+const COURSES = ["Masters", "Bachelors", "MBA", "MBBS", "B.Tech", "Engineering", "Medical", "Other"];
+const COUNTRIES = ["USA", "UK", "Canada", "Australia", "Germany", "Ireland", "Russia", "Georgia", "India", "Other"];
 
 const ContactModal: React.FC<ContactModalProps> = ({ onClose }) => {
-  const [activeTab, setActiveTab] = useState<TabType>('Study Abroad');
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     phone: '',
-    city: '',
     course: '',
     targetCountry: ''
   });
@@ -52,27 +32,14 @@ const ContactModal: React.FC<ContactModalProps> = ({ onClose }) => {
     return () => window.removeEventListener('keydown', handleEsc);
   }, [onClose]);
 
-  // Set default country/course when tab changes
-  useEffect(() => {
-    setFormData(prev => ({
-      ...prev,
-      course: '',
-      targetCountry: ''
-    }));
-  }, [activeTab]);
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.course) {
       alert("Please select a course/degree.");
       return;
     }
-    if (!formData.targetCountry && activeTab !== 'Study In India') {
+    if (!formData.targetCountry) {
       alert("Please select a target country.");
-      return;
-    }
-    if (!formData.city && activeTab === 'Study In India') {
-      alert("Please select a city.");
       return;
     }
 
@@ -82,16 +49,14 @@ const ContactModal: React.FC<ContactModalProps> = ({ onClose }) => {
       // Save to Firebase
       await addDoc(collection(db, 'leads'), {
         ...formData,
-        category: activeTab,
         timestamp: serverTimestamp(),
         source: 'Popup Modal'
       });
 
       const payload = {
         ...formData,
-        category: activeTab,
         source: 'Popup Modal',
-        _subject: `New Lead: ${formData.name} - ${activeTab}`,
+        _subject: `New Lead: ${formData.name}`,
         _template: 'table',
         _captcha: 'false'
       };
@@ -167,24 +132,6 @@ const ContactModal: React.FC<ContactModalProps> = ({ onClose }) => {
           ) : (
             <form onSubmit={handleSubmit} className="space-y-4">
                
-              {/* Tabs */}
-              <div className="flex bg-gray-50 dark:bg-slate-800 p-1 rounded-xl w-full">
-                  {TABS.map(tab => (
-                    <button
-                      key={tab}
-                      type="button"
-                      onClick={() => setActiveTab(tab)}
-                      className={`flex-1 py-2 rounded-lg text-[11px] font-black uppercase tracking-wide transition-all ${
-                        activeTab === tab 
-                        ? 'bg-brand-blue text-white shadow-md' 
-                        : 'text-gray-500 hover:text-brand-blue dark:text-gray-400'
-                      }`}
-                    >
-                      {tab}
-                    </button>
-                  ))}
-              </div>
-
               {/* Inputs Grid - Compact */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <div className="relative">
@@ -237,32 +184,10 @@ const ContactModal: React.FC<ContactModalProps> = ({ onClose }) => {
 
               {/* Options as Pills */}
               <div className="space-y-3 mt-4">
-                {activeTab === 'Study In India' && (
-                  <div>
-                    <p className="text-xs font-semibold text-gray-700 dark:text-gray-300 mb-2">Select City*</p>
-                    <div className="flex flex-wrap gap-1.5">
-                      {CITIES.map(c => (
-                        <button
-                          key={c}
-                          type="button"
-                          onClick={() => setFormData({...formData, city: c})}
-                          className={`px-3 py-1.5 rounded-full border text-xs font-medium transition-all ${
-                            formData.city === c 
-                            ? 'border-brand-blue bg-brand-blue/10 text-brand-blue dark:bg-brand-blue/20 dark:text-white' 
-                            : 'border-gray-200 text-gray-600 hover:border-brand-blue/50 dark:border-slate-600 dark:text-gray-300'
-                          }`}
-                        >
-                          {c}
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-                )}
-
                 <div>
                   <p className="text-xs font-semibold text-gray-700 dark:text-gray-300 mb-2">Select Course*</p>
                   <div className="flex flex-wrap gap-1.5">
-                    {COURSES[activeTab].map(c => (
+                    {COURSES.map(c => (
                       <button
                         key={c}
                         type="button"
@@ -279,34 +204,32 @@ const ContactModal: React.FC<ContactModalProps> = ({ onClose }) => {
                   </div>
                 </div>
 
-                {activeTab !== 'Study In India' && (
-                  <div>
-                    <p className="text-xs font-semibold text-gray-700 dark:text-gray-300 mb-2">Select Country*</p>
-                    <div className="flex flex-wrap gap-1.5">
-                      {COUNTRIES[activeTab].map(c => (
-                        <button
-                          key={c}
-                          type="button"
-                          onClick={() => setFormData({...formData, targetCountry: c})}
-                          className={`px-3 py-1.5 rounded-full border text-xs font-medium transition-all ${
-                            formData.targetCountry === c 
-                            ? 'border-brand-blue bg-brand-blue/10 text-brand-blue dark:bg-brand-blue/20 dark:text-white' 
-                            : 'border-gray-200 text-gray-600 hover:border-brand-blue/50 dark:border-slate-600 dark:text-gray-300'
-                          }`}
-                        >
-                          {c}
-                        </button>
-                      ))}
-                    </div>
+                <div>
+                  <p className="text-xs font-semibold text-gray-700 dark:text-gray-300 mb-2">Select Country*</p>
+                  <div className="flex flex-wrap gap-1.5">
+                    {COUNTRIES.map(c => (
+                      <button
+                        key={c}
+                        type="button"
+                        onClick={() => setFormData({...formData, targetCountry: c})}
+                        className={`px-3 py-1.5 rounded-full border text-xs font-medium transition-all ${
+                          formData.targetCountry === c 
+                          ? 'border-brand-blue bg-brand-blue/10 text-brand-blue dark:bg-brand-blue/20 dark:text-white' 
+                          : 'border-gray-200 text-gray-600 hover:border-brand-blue/50 dark:border-slate-600 dark:text-gray-300'
+                        }`}
+                      >
+                        {c}
+                      </button>
+                    ))}
                   </div>
-                )}
+                </div>
               </div>
 
               {/* Submit Button */}
               <button 
                 type="submit" 
                 disabled={loading}
-                className="w-full py-3.5 bg-[#D92D4B] hover:bg-opacity-90 text-white rounded-xl font-bold text-lg transition-all shadow-lg flex items-center justify-center disabled:bg-gray-400 mt-4"
+                className="w-full py-3.5 bg-[#104264] hover:bg-opacity-90 text-white rounded-xl font-bold text-lg transition-all shadow-lg flex items-center justify-center disabled:bg-gray-400 mt-4"
               >
                 {loading ? <i className="fa-solid fa-spinner fa-spin mr-2"></i> : null}
                 {loading ? 'Processing...' : 'Submit'}

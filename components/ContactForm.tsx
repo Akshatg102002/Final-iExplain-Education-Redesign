@@ -3,48 +3,19 @@ import React, { useState, useEffect } from 'react';
 import { db, collection, addDoc, serverTimestamp } from '../firebase.ts';
 import { User, Phone, Mail } from 'lucide-react';
 
-const CITIES = [
-  "New Delhi", "Mumbai", "Bangalore", "Chennai", "Hyderabad", "Kolkata", "Pune", 
-  "Ahmedabad", "Jaipur", "Lucknow", "Patna", "Dehradun", "Kota", "Chandigarh", 
-  "Indore", "Bhopal", "Nagpur", "Other"
-];
-
-const TABS = ['Study Abroad', 'MBBS Abroad', 'Study In India'] as const;
-type TabType = typeof TABS[number];
-
-const COURSES: Record<TabType, string[]> = {
-  'Study Abroad': ["Masters", "Bachelors", "MBA", "Engineering", "Other"],
-  'MBBS Abroad': ["MBBS", "BDS", "Pharmacy", "Nursing"],
-  'Study In India': ["MBBS", "B.Tech", "MBA", "MD/MS", "BBA", "BCA", "Other"]
-};
-
-const COUNTRIES: Record<TabType, string[]> = {
-  'Study Abroad': ["Germany", "USA", "UAE", "France", "Ireland", "UK", "Canada", "Australia", "Other"],
-  'MBBS Abroad': ["Russia", "Georgia", "Kazakhstan", "Kyrgyzstan", "Uzbekistan", "Philippines", "Bangladesh", "Nepal", "Egypt"],
-  'Study In India': ["India"]
-};
+const COURSES = ["Masters", "Bachelors", "MBA", "MBBS", "B.Tech", "Engineering", "Medical", "Other"];
+const COUNTRIES = ["USA", "UK", "Canada", "Australia", "Germany", "Ireland", "Russia", "Georgia", "India", "Other"];
 
 const ContactForm: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<TabType>('Study Abroad');
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     phone: '',
-    city: '',
     course: '',
     targetCountry: ''
   });
-
-  // Set default country/course when tab changes
-  useEffect(() => {
-    setFormData(prev => ({
-      ...prev,
-      course: '',
-      targetCountry: ''
-    }));
-  }, [activeTab]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -52,7 +23,7 @@ const ContactForm: React.FC = () => {
       alert("Please select a course/degree.");
       return;
     }
-    if (!formData.targetCountry && activeTab !== 'Study In India') {
+    if (!formData.targetCountry) {
       alert("Please select a target country.");
       return;
     }
@@ -63,16 +34,14 @@ const ContactForm: React.FC = () => {
       // Save to Firebase
       await addDoc(collection(db, 'leads'), {
         ...formData,
-        category: activeTab,
         timestamp: serverTimestamp(),
         source: 'Website Contact Form'
       });
 
       const payload = {
         ...formData,
-        category: activeTab,
         source: 'Website Contact Form',
-        _subject: `New Lead: ${formData.name} - ${activeTab}`,
+        _subject: `New Lead: ${formData.name}`,
         _template: 'table',
         _captcha: 'false'
       };
@@ -94,7 +63,7 @@ const ContactForm: React.FC = () => {
       setSubmitted(true);
       setTimeout(() => {
         setSubmitted(false);
-        setFormData({ name: '', email: '', phone: '', city: '', course: '', targetCountry: '' });
+        setFormData({ name: '', email: '', phone: '', course: '', targetCountry: '' });
       }, 5000);
     } catch (error: any) {
       console.error("Error saving lead:", error);
@@ -120,24 +89,6 @@ const ContactForm: React.FC = () => {
             <h3 className="text-2xl md:text-3xl font-black text-brand-blue dark:text-white mb-2 leading-tight">
               Take the 1st step towards your study abroad journey
             </h3>
-            
-            {/* Tabs */}
-            <div className="flex bg-gray-100 dark:bg-slate-700 p-1 rounded-xl w-fit mx-auto mt-6 overflow-x-auto max-w-full">
-               {TABS.map(tab => (
-                 <button
-                   key={tab}
-                   type="button"
-                   onClick={() => setActiveTab(tab)}
-                   className={`px-4 py-2 rounded-lg text-xs font-bold transition-all whitespace-nowrap ${
-                     activeTab === tab 
-                     ? 'bg-white dark:bg-slate-600 text-brand-blue dark:text-white shadow-sm' 
-                     : 'text-gray-500 dark:text-gray-400 hover:text-gray-700'
-                   }`}
-                 >
-                   {tab}
-                 </button>
-               ))}
-            </div>
           </div>
 
           <div className="space-y-4">
@@ -194,34 +145,11 @@ const ContactForm: React.FC = () => {
               />
             </div>
 
-            {/* City - Only for Study In India */}
-            {activeTab === 'Study In India' && (
-              <div className="pt-2">
-                <p className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3">Which city are you from?*</p>
-                <div className="flex flex-wrap gap-2">
-                  {CITIES.map(c => (
-                    <button
-                      key={c}
-                      type="button"
-                      onClick={() => setFormData({...formData, city: c})}
-                      className={`px-4 py-2 rounded-full border text-sm font-medium transition-all ${
-                        formData.city === c 
-                        ? 'border-brand-blue bg-brand-blue/10 text-brand-blue dark:bg-brand-blue/20 dark:text-white' 
-                        : 'border-gray-200 text-gray-600 hover:border-brand-blue/50 dark:border-slate-600 dark:text-gray-300'
-                      }`}
-                    >
-                      {c}
-                    </button>
-                  ))}
-                </div>
-              </div>
-            )}
-
             {/* Course/Degree Selection */}
             <div className="pt-2">
               <p className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3">Which Degree do you want to pursue?*</p>
               <div className="flex flex-wrap gap-2">
-                {COURSES[activeTab].map(c => (
+                {COURSES.map(c => (
                   <button
                     key={c}
                     type="button"
@@ -239,27 +167,25 @@ const ContactForm: React.FC = () => {
             </div>
 
             {/* Country Selection */}
-            {activeTab !== 'Study In India' && (
-              <div className="pt-2">
-                <p className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3">Which country are you planning to study in?*</p>
-                <div className="flex flex-wrap gap-2">
-                  {COUNTRIES[activeTab].map(c => (
-                    <button
-                      key={c}
-                      type="button"
-                      onClick={() => setFormData({...formData, targetCountry: c})}
-                      className={`px-4 py-2 rounded-full border text-sm font-medium transition-all ${
-                        formData.targetCountry === c 
-                        ? 'border-brand-blue bg-brand-blue/10 text-brand-blue dark:bg-brand-blue/20 dark:text-white' 
-                        : 'border-gray-200 text-gray-600 hover:border-brand-blue/50 dark:border-slate-600 dark:text-gray-300'
-                      }`}
-                    >
-                      {c}
-                    </button>
-                  ))}
-                </div>
+            <div className="pt-2">
+              <p className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3">Which country are you planning to study in?*</p>
+              <div className="flex flex-wrap gap-2">
+                {COUNTRIES.map(c => (
+                  <button
+                    key={c}
+                    type="button"
+                    onClick={() => setFormData({...formData, targetCountry: c})}
+                    className={`px-4 py-2 rounded-full border text-sm font-medium transition-all ${
+                      formData.targetCountry === c 
+                      ? 'border-brand-blue bg-brand-blue/10 text-brand-blue dark:bg-brand-blue/20 dark:text-white' 
+                      : 'border-gray-200 text-gray-600 hover:border-brand-blue/50 dark:border-slate-600 dark:text-gray-300'
+                    }`}
+                  >
+                    {c}
+                  </button>
+                ))}
               </div>
-            )}
+            </div>
           </div>
 
           <div className="pt-4">
@@ -269,7 +195,7 @@ const ContactForm: React.FC = () => {
             <button 
               type="submit" 
               disabled={loading}
-              className="w-full py-4 bg-[#D92D4B] text-white rounded-xl font-bold text-lg hover:bg-opacity-90 transition-all shadow-lg flex items-center justify-center disabled:bg-gray-400"
+              className="w-full py-4 bg-[#104264] text-white rounded-xl font-bold text-lg hover:bg-opacity-90 transition-all shadow-lg flex items-center justify-center disabled:bg-gray-400"
             >
               {loading ? <i className="fa-solid fa-spinner fa-spin mr-2"></i> : null}
               {loading ? 'Processing...' : 'Submit'}
