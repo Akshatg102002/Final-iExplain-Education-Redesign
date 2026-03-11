@@ -59,7 +59,7 @@ const ContactForm: React.FC = () => {
       });
 
       // Send email via backend API
-      await fetch('/api/contact', {
+      const response = await fetch('/api/contact', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -71,9 +71,9 @@ const ContactForm: React.FC = () => {
         }),
       });
 
-      // Local fallback sync
-      const existingLeads = JSON.parse(localStorage.getItem('iexplain_leads') || '[]');
-      localStorage.setItem('iexplain_leads', JSON.stringify([{...formData, timestamp: new Date().toISOString()}, ...existingLeads]));
+      if (!response.ok) {
+        console.error("Failed to send email via API");
+      }
 
       setSubmitted(true);
       setTimeout(() => {

@@ -26,13 +26,21 @@ const PopularColleges: React.FC = () => {
         if (fetched.length > 0) {
           setColleges(fetched);
         } else {
-          const saved = JSON.parse(localStorage.getItem('iexplain_colleges') || '[]');
-          setColleges(saved.length > 0 ? saved : POPULAR_COLLEGES);
+          try {
+            const saved = JSON.parse(localStorage.getItem('iexplain_colleges') || '[]');
+            setColleges(saved.length > 0 ? saved : POPULAR_COLLEGES);
+          } catch (e) {
+            setColleges(POPULAR_COLLEGES);
+          }
         }
       } catch (error) {
         console.error("Colleges fetch error:", error);
-        const saved = JSON.parse(localStorage.getItem('iexplain_colleges') || '[]');
-        setColleges(saved.length > 0 ? saved : POPULAR_COLLEGES);
+        try {
+          const saved = JSON.parse(localStorage.getItem('iexplain_colleges') || '[]');
+          setColleges(saved.length > 0 ? saved : POPULAR_COLLEGES);
+        } catch (e) {
+          setColleges(POPULAR_COLLEGES);
+        }
       } finally {
         setLoading(false);
       }

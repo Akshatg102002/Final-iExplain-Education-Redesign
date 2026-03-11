@@ -74,7 +74,7 @@ const ContactModal: React.FC<ContactModalProps> = ({ onClose }) => {
       });
 
       // Send email via backend API
-      await fetch('/api/contact', {
+      const response = await fetch('/api/contact', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -85,6 +85,10 @@ const ContactModal: React.FC<ContactModalProps> = ({ onClose }) => {
           source: 'Popup Modal'
         }),
       });
+
+      if (!response.ok) {
+        console.error("Failed to send email via API");
+      }
 
       setSubmitted(true);
       setTimeout(() => {
