@@ -65,28 +65,38 @@ const ContactForm: React.FC = () => {
       };
 
       // Send email via backend API
-      let response = await fetch('/api/contact', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(payload),
-      });
-
-      // Fallback for static hosting (like Hostinger) without Node.js backend
-      const contentType = response.headers.get("content-type");
-      if (response.status === 404 || (contentType && contentType.includes("text/html"))) {
-        response = await fetch('/contact.php', {
+      let response;
+      try {
+        response = await fetch('/api/contact', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify(payload),
         });
+      } catch (err) {
+        console.warn("Primary API fetch failed, trying fallback...");
       }
 
-      if (!response.ok) {
-        console.error("Failed to send email via API or PHP fallback");
+      // Fallback for static hosting (like Hostinger) without Node.js backend
+      if (!response || !response.ok) {
+        try {
+          response = await fetch('/contact.php', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(payload),
+          });
+        } catch (err) {
+          console.error("Fallback fetch also failed", err);
+        }
+      }
+
+      if (!response || !response.ok) {
+        const errorText = response ? await response.text() : "Network error";
+        console.error("Failed to send email via API or PHP fallback:", errorText);
+        throw new Error("Failed to send email");
       }
 
       setSubmitted(true);
