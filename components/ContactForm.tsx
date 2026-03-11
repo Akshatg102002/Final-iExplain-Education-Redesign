@@ -61,61 +61,24 @@ const ContactForm: React.FC = () => {
       const payload = {
         ...formData,
         category: activeTab,
-        source: 'Website Contact Form'
+        source: 'Website Contact Form',
+        _subject: `New Lead: ${formData.name} - ${activeTab}`,
+        _template: 'table',
+        _captcha: 'false'
       };
 
-      // Send email via backend API
-      let response;
-      try {
-        response = await fetch('/api/contact', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(payload),
-        });
-      } catch (err) {
-        console.warn("Primary API fetch failed, trying fallback...");
-      }
+      // Send email via FormSubmit (No backend required, works on any static host)
+      const response = await fetch('https://formsubmit.co/ajax/iexplaineducation.online@gmail.com', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify(payload),
+      });
 
-      // Fallback for static hosting (like Hostinger) without Node.js backend
-      if (!response || !response.ok) {
-        try {
-          response = await fetch('/contact.php?t=' + Date.now(), {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'Accept': 'application/json'
-            },
-            body: JSON.stringify(payload),
-          });
-        } catch (err) {
-          console.error("Fallback fetch also failed", err);
-        }
-      }
-
-      if (!response || !response.ok) {
-        const errorText = response ? await response.text() : "Network error";
-        console.error("Failed to send email via API or PHP fallback:", errorText);
+      if (!response.ok) {
         throw new Error("Failed to send email");
-      }
-
-      const contentType = response.headers.get("content-type");
-      if (contentType && contentType.includes("text/html")) {
-        console.error("Received HTML instead of JSON. The PHP script is not executing. This is usually caused by Hostinger routing the request to index.html.");
-        throw new Error("HOSTINGER_ROUTING_ERROR");
-      }
-
-      try {
-        const responseData = await response.json();
-        console.log("Email send response:", responseData);
-        if (!responseData.success) {
-          console.error("Server returned 200 but success is false:", responseData);
-          throw new Error("Email failed to send");
-        }
-      } catch (e) {
-        console.error("Failed to parse response JSON", e);
-        throw new Error("Invalid server response");
       }
 
       setSubmitted(true);
@@ -125,11 +88,7 @@ const ContactForm: React.FC = () => {
       }, 5000);
     } catch (error: any) {
       console.error("Error saving lead:", error);
-      if (error.message === "HOSTINGER_ROUTING_ERROR") {
-        alert("Configuration Error: The contact.php file is missing from your Hostinger server, or the .htaccess file was not uploaded. Please ensure both files are in your public_html folder.");
-      } else {
-        alert("Something went wrong. Please try again.");
-      }
+      alert("Something went wrong. Please try again.");
     } finally {
       setLoading(false);
     }
