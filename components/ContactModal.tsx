@@ -118,7 +118,7 @@ const ContactModal: React.FC<ContactModalProps> = ({ onClose }) => {
       const contentType = response.headers.get("content-type");
       if (contentType && contentType.includes("text/html")) {
         console.error("Received HTML instead of JSON. The PHP script is not executing. This is usually caused by Hostinger routing the request to index.html.");
-        throw new Error("Server configuration error");
+        throw new Error("HOSTINGER_ROUTING_ERROR");
       }
 
       try {
@@ -126,9 +126,11 @@ const ContactModal: React.FC<ContactModalProps> = ({ onClose }) => {
         console.log("Email send response:", responseData);
         if (!responseData.success) {
           console.error("Server returned 200 but success is false:", responseData);
+          throw new Error("Email failed to send");
         }
       } catch (e) {
         console.error("Failed to parse response JSON", e);
+        throw new Error("Invalid server response");
       }
 
       setSubmitted(true);
@@ -136,9 +138,13 @@ const ContactModal: React.FC<ContactModalProps> = ({ onClose }) => {
         onClose();
         setSubmitted(false); // Reset if reopened quickly
       }, 3000);
-    } catch (error) {
+    } catch (error: any) {
       console.error("Error submitting form:", error);
-      alert("Something went wrong. Please try again.");
+      if (error.message === "HOSTINGER_ROUTING_ERROR") {
+        alert("Configuration Error: The contact.php file is missing from your Hostinger server, or the .htaccess file was not uploaded. Please ensure both files are in your public_html folder.");
+      } else {
+        alert("Something went wrong. Please try again.");
+      }
     } finally {
       setLoading(false);
     }
