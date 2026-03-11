@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { db, collection, addDoc, serverTimestamp } from '../firebase.ts';
 import { LOGO_URL } from '../data.ts';
 import { Link } from 'react-router-dom';
+import { User, Phone, Mail } from 'lucide-react';
 
 interface ContactModalProps {
   onClose: () => void;
@@ -18,13 +19,13 @@ const TABS = ['Study Abroad', 'MBBS Abroad', 'Study In India'] as const;
 type TabType = typeof TABS[number];
 
 const COURSES: Record<TabType, string[]> = {
-  'Study Abroad': ["MBA/Management", "Engineering (B.Tech/MS)", "Science", "Arts & Humanities", "Medical (Non-MBBS)", "Other"],
+  'Study Abroad': ["Masters", "Bachelors", "MBA", "Engineering", "Other"],
   'MBBS Abroad': ["MBBS", "BDS", "Pharmacy", "Nursing"],
-  'Study In India': ["MBBS", "B.Tech/Engineering", "MBA/PGDM", "MD/MS", "BBA", "BCA", "Other"]
+  'Study In India': ["MBBS", "B.Tech", "MBA", "MD/MS", "BBA", "BCA", "Other"]
 };
 
 const COUNTRIES: Record<TabType, string[]> = {
-  'Study Abroad': ["USA", "UK", "Canada", "Australia", "Germany", "Ireland", "New Zealand", "Dubai", "Singapore"],
+  'Study Abroad': ["Germany", "USA", "UAE", "France", "Ireland", "UK", "Canada", "Australia", "Other"],
   'MBBS Abroad': ["Russia", "Georgia", "Kazakhstan", "Kyrgyzstan", "Uzbekistan", "Philippines", "Bangladesh", "Nepal", "Egypt"],
   'Study In India': ["India"]
 };
@@ -56,12 +57,25 @@ const ContactModal: React.FC<ContactModalProps> = ({ onClose }) => {
     setFormData(prev => ({
       ...prev,
       course: '',
-      targetCountry: COUNTRIES[activeTab][0]
+      targetCountry: ''
     }));
   }, [activeTab]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!formData.course) {
+      alert("Please select a course/degree.");
+      return;
+    }
+    if (!formData.targetCountry && activeTab !== 'Study In India') {
+      alert("Please select a target country.");
+      return;
+    }
+    if (!formData.city && activeTab === 'Study In India') {
+      alert("Please select a city.");
+      return;
+    }
+
     setLoading(true);
 
     try {
@@ -123,7 +137,7 @@ const ContactModal: React.FC<ContactModalProps> = ({ onClose }) => {
       <div className="relative bg-white dark:bg-slate-900 w-full max-w-2xl rounded-2xl shadow-2xl overflow-hidden border border-gray-100 dark:border-slate-700 flex flex-col max-h-[95vh]">
         
         {/* Compact Header */}
-        <div className="bg-[#01304A] p-5 flex items-center justify-between shrink-0">
+        <div className="bg-brand-blue p-5 flex items-center justify-between shrink-0">
            <div className="flex items-center gap-4">
               <img src={LOGO_URL} alt="Logo" className="h-8 w-auto brightness-100" />
               <div className="h-6 w-px bg-white/20"></div>
@@ -134,7 +148,7 @@ const ContactModal: React.FC<ContactModalProps> = ({ onClose }) => {
            </div>
            <button 
             onClick={onClose}
-            className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-white hover:text-[#01304A] transition-all"
+            className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-white hover:text-brand-blue transition-all"
           >
             <i className="fa-solid fa-xmark"></i>
           </button>
@@ -147,7 +161,7 @@ const ContactModal: React.FC<ContactModalProps> = ({ onClose }) => {
               <div className="w-16 h-16 bg-green-100 text-green-600 rounded-full flex items-center justify-center mb-4 shadow-sm">
                 <i className="fa-solid fa-check text-2xl"></i>
               </div>
-              <h3 className="text-2xl font-black text-[#01304A] dark:text-white mb-1">Thank You!</h3>
+              <h3 className="text-2xl font-black text-brand-blue dark:text-white mb-1">Thank You!</h3>
               <p className="text-gray-500 font-medium text-sm">We will contact you shortly.</p>
             </div>
           ) : (
@@ -162,8 +176,8 @@ const ContactModal: React.FC<ContactModalProps> = ({ onClose }) => {
                       onClick={() => setActiveTab(tab)}
                       className={`flex-1 py-2 rounded-lg text-[11px] font-black uppercase tracking-wide transition-all ${
                         activeTab === tab 
-                        ? 'bg-[#01304A] text-white shadow-md' 
-                        : 'text-gray-500 hover:text-[#01304A] dark:text-gray-400'
+                        ? 'bg-brand-blue text-white shadow-md' 
+                        : 'text-gray-500 hover:text-brand-blue dark:text-gray-400'
                       }`}
                     >
                       {tab}
@@ -173,84 +187,134 @@ const ContactModal: React.FC<ContactModalProps> = ({ onClose }) => {
 
               {/* Inputs Grid - Compact */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  <input 
-                    type="text" 
-                    placeholder="Full Name" 
-                    required
-                    value={formData.name}
-                    onChange={e => setFormData({...formData, name: e.target.value})}
-                    className="w-full px-4 py-2.5 rounded-lg border border-gray-200 dark:border-slate-700 bg-gray-50 dark:bg-slate-800 text-sm font-medium focus:ring-1 focus:ring-[#BB962C] focus:border-[#BB962C] outline-none"
-                  />
-                  
-                  <input 
-                    type="email" 
-                    placeholder="Email Address" 
-                    required
-                    value={formData.email}
-                    onChange={e => setFormData({...formData, email: e.target.value})}
-                    className="w-full px-4 py-2.5 rounded-lg border border-gray-200 dark:border-slate-700 bg-gray-50 dark:bg-slate-800 text-sm font-medium focus:ring-1 focus:ring-[#BB962C] focus:border-[#BB962C] outline-none"
-                  />
-                  
-                  <input 
-                    type="tel" 
-                    placeholder="Phone Number" 
-                    required
-                    value={formData.phone}
-                    onChange={e => setFormData({...formData, phone: e.target.value})}
-                    className="w-full px-4 py-2.5 rounded-lg border border-gray-200 dark:border-slate-700 bg-gray-50 dark:bg-slate-800 text-sm font-medium focus:ring-1 focus:ring-[#BB962C] focus:border-[#BB962C] outline-none"
-                  />
-                  
-                  {activeTab === 'Study In India' && (
-                    <select 
-                      value={formData.city}
-                      onChange={e => setFormData({...formData, city: e.target.value})}
+                  <div className="relative">
+                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                      <User className="h-4 w-4 text-gray-400" />
+                    </div>
+                    <input 
+                      type="text" 
+                      placeholder="Full Name*" 
                       required
-                      className="w-full px-4 py-2.5 rounded-lg border border-gray-200 dark:border-slate-700 bg-gray-50 dark:bg-slate-800 text-sm font-medium focus:ring-1 focus:ring-[#BB962C] focus:border-[#BB962C] outline-none appearance-none"
-                    >
-                      <option value="" disabled>Select City</option>
-                      {CITIES.map(c => <option key={c} value={c}>{c}</option>)}
-                    </select>
-                  )}
+                      value={formData.name}
+                      onChange={e => setFormData({...formData, name: e.target.value})}
+                      className="w-full pl-9 pr-3 py-2.5 rounded-lg border border-gray-200 dark:border-slate-700 bg-gray-50 dark:bg-slate-800 text-sm font-medium focus:ring-1 focus:ring-[#BB962C] focus:border-[#BB962C] outline-none"
+                    />
+                  </div>
+                  
+                  <div className="relative">
+                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                      <Mail className="h-4 w-4 text-gray-400" />
+                    </div>
+                    <input 
+                      type="email" 
+                      placeholder="Email Address*" 
+                      required
+                      value={formData.email}
+                      onChange={e => setFormData({...formData, email: e.target.value})}
+                      className="w-full pl-9 pr-3 py-2.5 rounded-lg border border-gray-200 dark:border-slate-700 bg-gray-50 dark:bg-slate-800 text-sm font-medium focus:ring-1 focus:ring-[#BB962C] focus:border-[#BB962C] outline-none"
+                    />
+                  </div>
+                  
+                  <div className="flex gap-2 sm:col-span-2">
+                    <div className="flex items-center justify-center px-3 py-2.5 rounded-lg border border-gray-200 dark:border-slate-700 bg-gray-50 dark:bg-slate-800 text-sm font-medium shrink-0">
+                      <span className="mr-1.5">🇮🇳</span> +91
+                    </div>
+                    <div className="relative flex-1">
+                      <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <Phone className="h-4 w-4 text-gray-400" />
+                      </div>
+                      <input 
+                        type="tel" 
+                        placeholder="Phone Number*" 
+                        required
+                        value={formData.phone}
+                        onChange={e => setFormData({...formData, phone: e.target.value})}
+                        className="w-full pl-9 pr-3 py-2.5 rounded-lg border border-gray-200 dark:border-slate-700 bg-gray-50 dark:bg-slate-800 text-sm font-medium focus:ring-1 focus:ring-[#BB962C] focus:border-[#BB962C] outline-none"
+                      />
+                    </div>
+                  </div>
+              </div>
 
-                  <select 
-                    value={formData.course}
-                    onChange={e => setFormData({...formData, course: e.target.value})}
-                    required
-                    className="w-full px-4 py-2.5 rounded-lg border border-gray-200 dark:border-slate-700 bg-gray-50 dark:bg-slate-800 text-sm font-medium focus:ring-1 focus:ring-[#BB962C] focus:border-[#BB962C] outline-none appearance-none"
-                  >
-                    <option value="" disabled>Select Course</option>
-                    {COURSES[activeTab].map(c => <option key={c} value={c}>{c}</option>)}
-                  </select>
+              {/* Options as Pills */}
+              <div className="space-y-3 mt-4">
+                {activeTab === 'Study In India' && (
+                  <div>
+                    <p className="text-xs font-semibold text-gray-700 dark:text-gray-300 mb-2">Select City*</p>
+                    <div className="flex flex-wrap gap-1.5">
+                      {CITIES.map(c => (
+                        <button
+                          key={c}
+                          type="button"
+                          onClick={() => setFormData({...formData, city: c})}
+                          className={`px-3 py-1.5 rounded-full border text-xs font-medium transition-all ${
+                            formData.city === c 
+                            ? 'border-brand-blue bg-brand-blue/10 text-brand-blue dark:bg-brand-blue/20 dark:text-white' 
+                            : 'border-gray-200 text-gray-600 hover:border-brand-blue/50 dark:border-slate-600 dark:text-gray-300'
+                          }`}
+                        >
+                          {c}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                )}
 
-                  <select 
-                    value={formData.targetCountry}
-                    onChange={e => setFormData({...formData, targetCountry: e.target.value})}
-                    required
-                    disabled={activeTab === 'Study In India'}
-                    className="w-full px-4 py-2.5 rounded-lg border border-gray-200 dark:border-slate-700 bg-gray-50 dark:bg-slate-800 text-sm font-medium focus:ring-1 focus:ring-[#BB962C] focus:border-[#BB962C] outline-none appearance-none disabled:opacity-50"
-                  >
-                    {COUNTRIES[activeTab].map(c => <option key={c} value={c}>{c}</option>)}
-                  </select>
+                <div>
+                  <p className="text-xs font-semibold text-gray-700 dark:text-gray-300 mb-2">Select Course*</p>
+                  <div className="flex flex-wrap gap-1.5">
+                    {COURSES[activeTab].map(c => (
+                      <button
+                        key={c}
+                        type="button"
+                        onClick={() => setFormData({...formData, course: c})}
+                        className={`px-3 py-1.5 rounded-full border text-xs font-medium transition-all ${
+                          formData.course === c 
+                          ? 'border-brand-blue bg-brand-blue/10 text-brand-blue dark:bg-brand-blue/20 dark:text-white' 
+                          : 'border-gray-200 text-gray-600 hover:border-brand-blue/50 dark:border-slate-600 dark:text-gray-300'
+                        }`}
+                      >
+                        {c}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                {activeTab !== 'Study In India' && (
+                  <div>
+                    <p className="text-xs font-semibold text-gray-700 dark:text-gray-300 mb-2">Select Country*</p>
+                    <div className="flex flex-wrap gap-1.5">
+                      {COUNTRIES[activeTab].map(c => (
+                        <button
+                          key={c}
+                          type="button"
+                          onClick={() => setFormData({...formData, targetCountry: c})}
+                          className={`px-3 py-1.5 rounded-full border text-xs font-medium transition-all ${
+                            formData.targetCountry === c 
+                            ? 'border-brand-blue bg-brand-blue/10 text-brand-blue dark:bg-brand-blue/20 dark:text-white' 
+                            : 'border-gray-200 text-gray-600 hover:border-brand-blue/50 dark:border-slate-600 dark:text-gray-300'
+                          }`}
+                        >
+                          {c}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                )}
               </div>
 
               {/* Submit Button */}
               <button 
                 type="submit" 
                 disabled={loading}
-                className="w-full py-3.5 bg-[#BB962C] hover:bg-[#a68525] text-white rounded-xl font-black text-sm uppercase tracking-widest shadow-lg shadow-orange-900/10 transition-all flex items-center justify-center disabled:opacity-70 mt-2"
+                className="w-full py-3.5 bg-[#D92D4B] hover:bg-opacity-90 text-white rounded-xl font-bold text-lg transition-all shadow-lg flex items-center justify-center disabled:bg-gray-400 mt-4"
               >
-                {loading ? (
-                  <span className="flex items-center gap-2">
-                    <i className="fa-solid fa-spinner fa-spin"></i> Processing...
-                  </span>
-                ) : (
-                  "Get Started Now"
-                )}
+                {loading ? <i className="fa-solid fa-spinner fa-spin mr-2"></i> : null}
+                {loading ? 'Processing...' : 'Submit'}
               </button>
 
               {/* Footer Text */}
               <div className="text-[10px] text-center text-gray-400 dark:text-gray-500 leading-relaxed pt-2">
-                By submitting, you agree to our <Link to="/terms-conditions" onClick={onClose} className="underline hover:text-[#01304A] dark:hover:text-white">Terms</Link> & <Link to="/privacy-policy" onClick={onClose} className="underline hover:text-[#01304A] dark:hover:text-white">Privacy Policy</Link>.
+                By submitting, you agree to our <Link to="/terms-conditions" onClick={onClose} className="underline hover:text-brand-blue dark:hover:text-white">Terms</Link> & <Link to="/privacy-policy" onClick={onClose} className="underline hover:text-brand-blue dark:hover:text-white">Privacy Policy</Link>.
               </div>
             </form>
           )}

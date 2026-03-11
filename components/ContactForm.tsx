@@ -1,6 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { db, collection, addDoc, serverTimestamp } from '../firebase.ts';
+import { User, Phone, Mail } from 'lucide-react';
 
 const CITIES = [
   "New Delhi", "Mumbai", "Bangalore", "Chennai", "Hyderabad", "Kolkata", "Pune", 
@@ -12,13 +13,13 @@ const TABS = ['Study Abroad', 'MBBS Abroad', 'Study In India'] as const;
 type TabType = typeof TABS[number];
 
 const COURSES: Record<TabType, string[]> = {
-  'Study Abroad': ["MBA/Management", "Engineering (B.Tech/MS)", "Science", "Arts & Humanities", "Medical (Non-MBBS)", "Other"],
+  'Study Abroad': ["Masters", "Bachelors", "MBA", "Engineering", "Other"],
   'MBBS Abroad': ["MBBS", "BDS", "Pharmacy", "Nursing"],
-  'Study In India': ["MBBS", "B.Tech/Engineering", "MBA/PGDM", "MD/MS", "BBA", "BCA", "Other"]
+  'Study In India': ["MBBS", "B.Tech", "MBA", "MD/MS", "BBA", "BCA", "Other"]
 };
 
 const COUNTRIES: Record<TabType, string[]> = {
-  'Study Abroad': ["USA", "UK", "Canada", "Australia", "Germany", "Ireland", "New Zealand", "Dubai", "Singapore"],
+  'Study Abroad': ["Germany", "USA", "UAE", "France", "Ireland", "UK", "Canada", "Australia", "Other"],
   'MBBS Abroad': ["Russia", "Georgia", "Kazakhstan", "Kyrgyzstan", "Uzbekistan", "Philippines", "Bangladesh", "Nepal", "Egypt"],
   'Study In India': ["India"]
 };
@@ -41,12 +42,21 @@ const ContactForm: React.FC = () => {
     setFormData(prev => ({
       ...prev,
       course: '',
-      targetCountry: COUNTRIES[activeTab][0]
+      targetCountry: ''
     }));
   }, [activeTab]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!formData.course) {
+      alert("Please select a course/degree.");
+      return;
+    }
+    if (!formData.targetCountry && activeTab !== 'Study In India') {
+      alert("Please select a target country.");
+      return;
+    }
+
     setLoading(true);
     
     try {
@@ -95,7 +105,7 @@ const ContactForm: React.FC = () => {
   };
 
   return (
-    <div className="relative">
+    <div className="relative bg-white dark:bg-slate-800 rounded-2xl p-6 md:p-8 shadow-xl border border-gray-100 dark:border-slate-700">
       {submitted ? (
         <div className="text-center py-10 animate-fade-in">
           <div className="w-20 h-20 bg-green-100 dark:bg-green-900/30 text-green-600 rounded-full flex items-center justify-center mx-auto mb-6">
@@ -106,12 +116,13 @@ const ContactForm: React.FC = () => {
         </div>
       ) : (
         <form onSubmit={handleSubmit} className="space-y-6">
-          <div>
-            <h3 className="text-3xl font-black text-brand-blue dark:text-white mb-2">Book Free Consultation</h3>
-            <p className="text-gray-500 font-medium text-base mb-6">Select your preference and get expert guidance.</p>
+          <div className="text-center mb-6">
+            <h3 className="text-2xl md:text-3xl font-black text-brand-blue dark:text-white mb-2 leading-tight">
+              Take the 1st step towards your study abroad journey
+            </h3>
             
             {/* Tabs */}
-            <div className="flex bg-gray-100 dark:bg-slate-700 p-1 rounded-xl w-fit mb-6 overflow-x-auto max-w-full">
+            <div className="flex bg-gray-100 dark:bg-slate-700 p-1 rounded-xl w-fit mx-auto mt-6 overflow-x-auto max-w-full">
                {TABS.map(tab => (
                  <button
                    key={tab}
@@ -129,82 +140,141 @@ const ContactForm: React.FC = () => {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-            <div className="md:col-span-2">
+          <div className="space-y-4">
+            {/* Name Input */}
+            <div className="relative">
+              <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                <User className="h-5 w-5 text-gray-400" />
+              </div>
               <input 
                 type="text" 
                 required 
                 disabled={loading}
                 value={formData.name}
                 onChange={(e) => setFormData({...formData, name: e.target.value})}
-                className="w-full px-6 py-4 rounded-xl border border-gray-200 dark:border-slate-700 dark:bg-slate-900 dark:text-white focus:ring-2 focus:ring-brand-blue outline-none transition-all font-medium text-sm" 
-                placeholder="Full Name" 
+                className="w-full pl-11 pr-4 py-3.5 rounded-xl border border-gray-200 dark:border-slate-600 dark:bg-slate-700 dark:text-white focus:ring-2 focus:ring-brand-blue outline-none transition-all font-medium text-sm" 
+                placeholder="Name*" 
               />
             </div>
             
-            <input 
-              type="email" 
-              required 
-              disabled={loading}
-              value={formData.email}
-              onChange={(e) => setFormData({...formData, email: e.target.value})}
-              className="w-full px-6 py-4 rounded-xl border border-gray-200 dark:border-slate-700 dark:bg-slate-900 dark:text-white focus:ring-2 focus:ring-brand-blue outline-none transition-all font-medium text-sm" 
-              placeholder="Email Address" 
-            />
-            
-            <input 
-              type="tel" 
-              required 
-              disabled={loading}
-              value={formData.phone}
-              onChange={(e) => setFormData({...formData, phone: e.target.value})}
-              className="w-full px-6 py-4 rounded-xl border border-gray-200 dark:border-slate-700 dark:bg-slate-900 dark:text-white focus:ring-2 focus:ring-brand-blue outline-none transition-all font-medium text-sm" 
-              placeholder="Phone Number" 
-            />
+            {/* Phone Input */}
+            <div className="flex gap-2">
+              <div className="flex items-center justify-center px-3 py-3.5 rounded-xl border border-gray-200 dark:border-slate-600 dark:bg-slate-700 bg-gray-50 dark:text-white font-medium text-sm shrink-0">
+                <span className="mr-2">🇮🇳</span> +91
+              </div>
+              <div className="relative flex-1">
+                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                  <Phone className="h-5 w-5 text-gray-400" />
+                </div>
+                <input 
+                  type="tel" 
+                  required 
+                  disabled={loading}
+                  value={formData.phone}
+                  onChange={(e) => setFormData({...formData, phone: e.target.value})}
+                  className="w-full pl-11 pr-4 py-3.5 rounded-xl border border-gray-200 dark:border-slate-600 dark:bg-slate-700 dark:text-white focus:ring-2 focus:ring-brand-blue outline-none transition-all font-medium text-sm" 
+                  placeholder="Mobile*" 
+                />
+              </div>
+            </div>
+
+            {/* Email Input */}
+            <div className="relative">
+              <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                <Mail className="h-5 w-5 text-gray-400" />
+              </div>
+              <input 
+                type="email" 
+                required 
+                disabled={loading}
+                value={formData.email}
+                onChange={(e) => setFormData({...formData, email: e.target.value})}
+                className="w-full pl-11 pr-4 py-3.5 rounded-xl border border-gray-200 dark:border-slate-600 dark:bg-slate-700 dark:text-white focus:ring-2 focus:ring-brand-blue outline-none transition-all font-medium text-sm" 
+                placeholder="Email*" 
+              />
+            </div>
 
             {/* City - Only for Study In India */}
             {activeTab === 'Study In India' && (
-              <select 
-                  value={formData.city}
-                  onChange={e => setFormData({...formData, city: e.target.value})}
-                  required
-                  className="w-full px-6 py-4 rounded-xl border border-gray-200 dark:border-slate-700 dark:bg-slate-900 dark:text-white focus:ring-2 focus:ring-brand-blue outline-none transition-all font-medium text-sm appearance-none"
-              >
-                  <option value="" disabled>Select City</option>
-                  {CITIES.map(c => <option key={c} value={c}>{c}</option>)}
-              </select>
+              <div className="pt-2">
+                <p className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3">Which city are you from?*</p>
+                <div className="flex flex-wrap gap-2">
+                  {CITIES.map(c => (
+                    <button
+                      key={c}
+                      type="button"
+                      onClick={() => setFormData({...formData, city: c})}
+                      className={`px-4 py-2 rounded-full border text-sm font-medium transition-all ${
+                        formData.city === c 
+                        ? 'border-brand-blue bg-brand-blue/10 text-brand-blue dark:bg-brand-blue/20 dark:text-white' 
+                        : 'border-gray-200 text-gray-600 hover:border-brand-blue/50 dark:border-slate-600 dark:text-gray-300'
+                      }`}
+                    >
+                      {c}
+                    </button>
+                  ))}
+                </div>
+              </div>
             )}
 
-            <select 
-                value={formData.course}
-                onChange={e => setFormData({...formData, course: e.target.value})}
-                required
-                className="w-full px-6 py-4 rounded-xl border border-gray-200 dark:border-slate-700 dark:bg-slate-900 dark:text-white focus:ring-2 focus:ring-brand-blue outline-none transition-all font-medium text-sm appearance-none"
-            >
-                <option value="" disabled>Select Course</option>
-                {COURSES[activeTab].map(c => <option key={c} value={c}>{c}</option>)}
-            </select>
-
-            <div className="md:col-span-2">
-              <select 
-                value={formData.targetCountry}
-                disabled={loading || activeTab === 'Study In India'}
-                onChange={(e) => setFormData({...formData, targetCountry: e.target.value})}
-                className="w-full px-6 py-4 rounded-xl border border-gray-200 dark:border-slate-700 dark:bg-slate-900 dark:text-white focus:ring-2 focus:ring-brand-blue outline-none transition-all appearance-none font-medium text-sm disabled:opacity-70 disabled:bg-gray-100 dark:disabled:bg-slate-800"
-              >
-                {COUNTRIES[activeTab].map(c => <option key={c} value={c}>{c}</option>)}
-              </select>
+            {/* Course/Degree Selection */}
+            <div className="pt-2">
+              <p className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3">Which Degree do you want to pursue?*</p>
+              <div className="flex flex-wrap gap-2">
+                {COURSES[activeTab].map(c => (
+                  <button
+                    key={c}
+                    type="button"
+                    onClick={() => setFormData({...formData, course: c})}
+                    className={`px-4 py-2 rounded-full border text-sm font-medium transition-all ${
+                      formData.course === c 
+                      ? 'border-brand-blue bg-brand-blue/10 text-brand-blue dark:bg-brand-blue/20 dark:text-white' 
+                      : 'border-gray-200 text-gray-600 hover:border-brand-blue/50 dark:border-slate-600 dark:text-gray-300'
+                    }`}
+                  >
+                    {c}
+                  </button>
+                ))}
+              </div>
             </div>
+
+            {/* Country Selection */}
+            {activeTab !== 'Study In India' && (
+              <div className="pt-2">
+                <p className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3">Which country are you planning to study in?*</p>
+                <div className="flex flex-wrap gap-2">
+                  {COUNTRIES[activeTab].map(c => (
+                    <button
+                      key={c}
+                      type="button"
+                      onClick={() => setFormData({...formData, targetCountry: c})}
+                      className={`px-4 py-2 rounded-full border text-sm font-medium transition-all ${
+                        formData.targetCountry === c 
+                        ? 'border-brand-blue bg-brand-blue/10 text-brand-blue dark:bg-brand-blue/20 dark:text-white' 
+                        : 'border-gray-200 text-gray-600 hover:border-brand-blue/50 dark:border-slate-600 dark:text-gray-300'
+                      }`}
+                    >
+                      {c}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
 
-          <button 
-            type="submit" 
-            disabled={loading}
-            className="w-full py-5 bg-brand-gold text-white rounded-xl font-bold text-sm uppercase tracking-widest hover:bg-opacity-90 transition-all shadow-xl shadow-brand-gold/20 flex items-center justify-center disabled:bg-gray-400"
-          >
-            {loading ? <i className="fa-solid fa-spinner fa-spin mr-2"></i> : null}
-            {loading ? 'Processing...' : 'Submit Application'}
-          </button>
+          <div className="pt-4">
+            <p className="text-xs text-center text-gray-500 dark:text-gray-400 mb-4">
+              By submitting this form, you agree to the <a href="#" className="underline hover:text-brand-blue">Terms of Use</a> and <a href="#" className="underline hover:text-brand-blue">Privacy Policy</a>
+            </p>
+            <button 
+              type="submit" 
+              disabled={loading}
+              className="w-full py-4 bg-[#D92D4B] text-white rounded-xl font-bold text-lg hover:bg-opacity-90 transition-all shadow-lg flex items-center justify-center disabled:bg-gray-400"
+            >
+              {loading ? <i className="fa-solid fa-spinner fa-spin mr-2"></i> : null}
+              {loading ? 'Processing...' : 'Submit'}
+            </button>
+          </div>
         </form>
       )}
     </div>
