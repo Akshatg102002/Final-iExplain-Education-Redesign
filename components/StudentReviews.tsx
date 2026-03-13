@@ -22,7 +22,7 @@ const StudentReviews: React.FC = () => {
           {STUDENT_REVIEWS.map((review) => (
             <div
               key={review.id}
-              className="bg-gray-50 dark:bg-slate-800 p-8 rounded-[2rem] shadow-sm border border-gray-100 dark:border-slate-700 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 flex flex-col min-w-[85vw] md:min-w-0 snap-center shrink-0"
+              className="bg-gray-50 dark:bg-slate-800 p-8 rounded-[2rem] shadow-sm border border-gray-100 dark:border-slate-700 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 flex flex-col w-full md:w-auto snap-center shrink-0"
             >
               <div className="flex items-center mb-6">
                 <img

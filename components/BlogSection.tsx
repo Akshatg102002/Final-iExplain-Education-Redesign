@@ -68,7 +68,7 @@ const BlogSection: React.FC = () => {
               <Link 
                 key={post.id} 
                 to={`/blog/${createSlug(post.category || 'General')}/${createSlug(post.title)}`}
-                className="group bg-white dark:bg-slate-800 rounded-[2rem] overflow-hidden shadow-sm border border-gray-100 dark:border-slate-700 hover:shadow-2xl transition-all min-w-[85vw] md:min-w-0 snap-center shrink-0"
+                className="group bg-white dark:bg-slate-800 rounded-[2rem] overflow-hidden shadow-sm border border-gray-100 dark:border-slate-700 hover:shadow-2xl transition-all w-full md:w-auto snap-center shrink-0"
               >
                 <div className="aspect-[16/10] overflow-hidden">
                   <img 

@@ -29,7 +29,7 @@ const AwardsAchievements: React.FC = () => {
           {certificates.map((cert, index) => (
             <div
               key={index}
-              className="bg-white dark:bg-slate-800 p-4 rounded-[2rem] shadow-sm border border-gray-100 dark:border-slate-700 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 flex flex-col items-center min-w-[85vw] md:min-w-0 snap-center shrink-0"
+              className="bg-white dark:bg-slate-800 p-4 rounded-[2rem] shadow-sm border border-gray-100 dark:border-slate-700 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 flex flex-col items-center w-full md:w-auto snap-center shrink-0"
             >
               <div className="w-full aspect-[4/3] rounded-2xl overflow-hidden bg-gray-100 dark:bg-slate-700">
                 <img 
