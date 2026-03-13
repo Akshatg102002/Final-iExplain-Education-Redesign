@@ -43,7 +43,7 @@ const BlogSection: React.FC = () => {
   }, []);
 
   return (
-    <section id="blogs" className="py-24 bg-gray-50 dark:bg-slate-900/50">
+    <section id="blogs" className="py-12 bg-gray-50 dark:bg-slate-900/50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-3xl lg:text-5xl font-black text-brand-blue dark:text-white mb-6 tracking-tight">Educational <span className="text-brand-gold">Insights</span></h2>

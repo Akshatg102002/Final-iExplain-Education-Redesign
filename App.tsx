@@ -141,14 +141,14 @@ const PolicyPage = ({ title, content }: { title: string, content: string }) => {
 // --- SERVICES LIST PAGE ---
 const ServicesPage = () => {
   return (
-    <div className="py-20 bg-gray-50 dark:bg-slate-900 font-sans">
+    <div className="py-12 bg-gray-50 dark:bg-slate-900 font-sans">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <span className="inline-block px-4 py-1.5 rounded-full bg-brand-gold/10 text-brand-gold text-[10px] font-black uppercase tracking-[0.2em] mb-4">What We Do</span>
           <h1 className="text-4xl lg:text-5xl font-black text-brand-blue dark:text-white mb-6 tracking-tight">
             Our Premium <span className="text-brand-gold">Services</span>
           </h1>
-          <p className="text-lg text-gray-600 dark:text-gray-400 font-medium max-w-2xl mx-auto leading-relaxed">
+          <p className="text-lg text-gray-600 dark:text-gray-400 font-medium max-w-2xl mx-auto leading-relaxed text-justify md:text-center">
             From initial counseling to landing in your dream destination, we are with you at every step of your journey.
           </p>
         </div>
@@ -163,8 +163,8 @@ const ServicesPage = () => {
               <div className="w-16 h-16 bg-blue-50 dark:bg-slate-700 rounded-2xl flex items-center justify-center text-brand-blue dark:text-white text-2xl mb-6 group-hover:bg-brand-blue group-hover:text-white transition-colors">
                 <i className={service.icon}></i>
               </div>
-              <h3 className="text-xl font-bold text-brand-blue dark:text-white mb-3">{service.title}</h3>
-              <p className="text-sm text-gray-500 dark:text-gray-400 font-medium leading-relaxed mb-6 flex-grow">
+              <h3 className="text-xl font-bold text-brand-blue dark:text-white mb-3 text-center md:text-left">{service.title}</h3>
+              <p className="text-sm text-gray-500 dark:text-gray-400 font-medium leading-relaxed mb-6 flex-grow text-justify md:text-left">
                 {service.fullDesc || service.desc}
               </p>
               <div className="flex items-center text-brand-gold font-black text-[10px] uppercase tracking-widest group-hover:translate-x-2 transition-transform">

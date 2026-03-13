@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { POPULAR_COLLEGES, COUNTRY_ICONS } from '../data.ts';
 import * as Flags from 'country-flag-icons/react/3x2';
 import { 
@@ -14,6 +14,24 @@ const PopularColleges: React.FC = () => {
   const [selectedCountry, setSelectedCountry] = useState('Russia');
   const [colleges, setColleges] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    let interval: NodeJS.Timeout;
+    if (scrollRef.current && window.innerWidth < 768) {
+      interval = setInterval(() => {
+        if (scrollRef.current) {
+          const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
+          if (scrollLeft + clientWidth >= scrollWidth - 10) {
+            scrollRef.current.scrollTo({ left: 0, behavior: 'smooth' });
+          } else {
+            scrollRef.current.scrollBy({ left: 100, behavior: 'smooth' });
+          }
+        }
+      }, 3000);
+    }
+    return () => clearInterval(interval);
+  }, [activeTab, colleges.length]);
 
   useEffect(() => {
     const fetchColleges = async () => {
@@ -73,7 +91,7 @@ const PopularColleges: React.FC = () => {
   const hasContent = availableCountries.length > 0;
 
   return (
-    <section className="py-16 bg-white dark:bg-slate-900 overflow-hidden font-sans">
+    <section className="py-12 bg-white dark:bg-slate-900 overflow-hidden font-sans">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* Heading + Tabs — always visible */}
@@ -108,7 +126,7 @@ const PopularColleges: React.FC = () => {
           <>
             {/* Country Selector — only shows countries that have data for the active tab */}
             <div className="relative mb-12">
-              <div className="flex items-center justify-center space-x-8 overflow-x-auto no-scrollbar pb-6 px-4">
+              <div ref={scrollRef} className="flex items-center justify-start md:justify-center space-x-8 overflow-x-auto no-scrollbar pb-6 px-4 snap-x snap-mandatory [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
                 {availableCountries.map(([countryName, flagCode]) => {
                   const FlagComponent = Flags[flagCode as keyof typeof Flags];
                   const isSelected = selectedCountry === countryName;
@@ -116,7 +134,7 @@ const PopularColleges: React.FC = () => {
                     <button
                       key={countryName}
                       onClick={() => setSelectedCountry(countryName)}
-                      className={`flex flex-col items-center shrink-0 group transition-all ${
+                      className={`flex flex-col items-center shrink-0 group transition-all snap-center ${
                         isSelected ? 'scale-110' : 'hover:scale-105'
                       }`}
                     >

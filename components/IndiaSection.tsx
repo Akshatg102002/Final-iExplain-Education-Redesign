@@ -4,10 +4,10 @@ import { INDIA_COURSES } from '../data.ts';
 
 const IndiaSection: React.FC = () => {
   return (
-    <section className="py-16 bg-gray-50 dark:bg-slate-800/50">
+    <section className="py-12 bg-gray-50 dark:bg-slate-800/50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-3xl lg:text-5xl font-black text-brand-blue dark:text-white mb-6 tracking-tight">Study in India - <span className="text-brand-gold">Admission Open</span></h2>
+          <h2 className="text-2xl lg:text-4xl font-black text-brand-blue dark:text-white mb-6 tracking-tight">Study in India</h2>
           <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto font-medium leading-relaxed">
             Get comprehensive information about Medical, Management, and Engineering courses in India's top colleges.
           </p>

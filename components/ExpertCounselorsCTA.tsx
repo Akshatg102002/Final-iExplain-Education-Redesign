@@ -2,7 +2,7 @@ import React from 'react';
 
 const ExpertCounselorsCTA: React.FC = () => {
   return (
-    <section className="py-20 bg-brand-blue relative overflow-hidden font-sans">
+    <section className="py-12 bg-brand-blue relative overflow-hidden font-sans">
       {/* Background elements */}
       <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20"></div>
       <div className="absolute top-0 right-0 w-96 h-96 bg-brand-gold rounded-full blur-[120px] opacity-20 -mr-20 -mt-20 pointer-events-none"></div>
@@ -27,17 +27,17 @@ const ExpertCounselorsCTA: React.FC = () => {
             href="https://wa.me/919773847799" 
             target="_blank" 
             rel="noreferrer"
-            className="w-full sm:w-auto px-10 py-5 bg-[#25D366] text-white rounded-2xl font-black text-sm uppercase tracking-widest hover:bg-[#20bd5a] hover:-translate-y-1 transition-all shadow-xl shadow-[#25D366]/30 flex items-center justify-center gap-4 group"
+            className="w-full sm:w-auto px-6 py-3 bg-[#25D366] text-white rounded-xl font-black text-xs uppercase tracking-widest hover:bg-[#20bd5a] hover:-translate-y-1 transition-all shadow-xl shadow-[#25D366]/30 flex items-center justify-center gap-3 group"
           >
-            <i className="fa-brands fa-whatsapp text-2xl group-hover:scale-110 transition-transform"></i>
+            <i className="fa-brands fa-whatsapp text-xl group-hover:scale-110 transition-transform"></i>
             WhatsApp Us
           </a>
           
           <a 
             href="tel:+919773847799"
-            className="w-full sm:w-auto px-10 py-5 bg-white text-brand-blue rounded-2xl font-black text-sm uppercase tracking-widest hover:bg-gray-50 hover:-translate-y-1 transition-all shadow-xl shadow-black/10 flex items-center justify-center gap-4 group"
+            className="w-full sm:w-auto px-6 py-3 bg-white text-brand-blue rounded-xl font-black text-xs uppercase tracking-widest hover:bg-gray-50 hover:-translate-y-1 transition-all shadow-xl shadow-black/10 flex items-center justify-center gap-3 group"
           >
-            <i className="fa-solid fa-phone text-xl text-brand-gold group-hover:scale-110 transition-transform"></i>
+            <i className="fa-solid fa-phone text-lg text-brand-gold group-hover:scale-110 transition-transform"></i>
             Call Now
           </a>
         </div>

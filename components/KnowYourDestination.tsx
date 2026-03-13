@@ -6,7 +6,7 @@ import { createSlug } from '../utils.ts';
 
 const KnowYourDestination: React.FC = () => {
   return (
-    <section className="py-16 bg-white dark:bg-slate-900 font-sans">
+    <section className="py-12 bg-white dark:bg-slate-900 font-sans">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-3xl lg:text-5xl font-black text-brand-blue dark:text-white mb-6 tracking-tight">
@@ -18,12 +18,12 @@ const KnowYourDestination: React.FC = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="flex overflow-x-auto md:grid md:grid-cols-3 lg:grid-cols-4 gap-6 pb-4 snap-x snap-mandatory [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
           {KNOW_YOUR_DESTINATIONS.map((dest, i) => (
             <Link 
               key={i} 
               to={`/study-abroad/${createSlug(dest.name)}`}
-              className="group relative h-64 rounded-[1.5rem] overflow-hidden shadow-lg cursor-pointer transform transition-transform hover:scale-[1.02]"
+              className="group relative h-64 rounded-[1.5rem] overflow-hidden shadow-lg cursor-pointer transform transition-transform hover:scale-[1.02] min-w-[70vw] md:min-w-0 snap-center shrink-0"
             >
               <img 
                 src={dest.image} 

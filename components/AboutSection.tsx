@@ -10,7 +10,7 @@ const AboutSection: React.FC<AboutSectionProps> = ({ compact = false }) => {
   return (
     <div className="bg-white dark:bg-slate-900 font-sans">
       {/* Introduction */}
-      <section id="about" className="py-20 relative overflow-hidden">
+      <section id="about" className="py-12 relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="lg:grid lg:grid-cols-2 lg:gap-24 items-start">
             <div>
@@ -44,7 +44,7 @@ const AboutSection: React.FC<AboutSectionProps> = ({ compact = false }) => {
       {!compact && (
         <>
           {/* Vision & Mission */}
-          <section className="py-20 bg-brand-light dark:bg-slate-800/50">
+          <section className="py-12 bg-brand-light dark:bg-slate-800/50">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
                 {/* Vision */}
@@ -80,7 +80,7 @@ const AboutSection: React.FC<AboutSectionProps> = ({ compact = false }) => {
           </section>
 
           {/* Core Values */}
-          <section className="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <section className="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">
               <h2 className="text-3xl lg:text-5xl font-black text-brand-blue dark:text-white mb-6 uppercase tracking-tight">Core <span className="text-brand-gold">Values</span></h2>
               <div className="w-16 h-1 bg-brand-gold mx-auto rounded-full"></div>
@@ -99,7 +99,7 @@ const AboutSection: React.FC<AboutSectionProps> = ({ compact = false }) => {
           </section>
 
           {/* Team Section */}
-          <section className="py-24 bg-gray-50 dark:bg-slate-800/50">
+          <section className="py-16 bg-gray-50 dark:bg-slate-800/50">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <div className="text-center mb-16">
                 <h2 className="text-3xl lg:text-5xl font-black text-brand-blue dark:text-white mb-6 uppercase tracking-tight">Leadership <span className="text-brand-gold">Team</span></h2>

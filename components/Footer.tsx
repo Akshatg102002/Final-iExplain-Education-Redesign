@@ -51,7 +51,7 @@ const Footer: React.FC<FooterProps> = ({ logoUrl, helpline, email }) => {
                 <ul className="space-y-3">
                 {mbbsCountries.map((country) => (
                     <li key={country}>
-                    <Link to={`/mbbs-abroad/${createSlug(country)}`} className="text-xs font-medium text-gray-500 dark:text-gray-400 hover:text-brand-blue dark:hover:text-white hover:pl-1 transition-all block">
+                    <Link to={`/mbbs-abroad/${createSlug(country)}`} className="text-sm font-medium text-gray-500 dark:text-gray-400 hover:text-brand-blue dark:hover:text-white hover:pl-1 transition-all block">
                         {country}
                     </Link>
                     </li>
@@ -65,7 +65,7 @@ const Footer: React.FC<FooterProps> = ({ logoUrl, helpline, email }) => {
                 <ul className="space-y-3">
                 {studyCountries.map((country) => (
                     <li key={country}>
-                    <Link to={`/study-abroad/${createSlug(country)}`} className="text-xs font-medium text-gray-500 dark:text-gray-400 hover:text-brand-blue dark:hover:text-white hover:pl-1 transition-all block">
+                    <Link to={`/study-abroad/${createSlug(country)}`} className="text-sm font-medium text-gray-500 dark:text-gray-400 hover:text-brand-blue dark:hover:text-white hover:pl-1 transition-all block">
                         {country}
                     </Link>
                     </li>
@@ -93,7 +93,7 @@ const Footer: React.FC<FooterProps> = ({ logoUrl, helpline, email }) => {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-12">
                 {FOOTER_COLLEGES.mbbs.map((section, idx) => (
                     <div key={idx}>
-                    <h5 className="text-[10px] font-black uppercase text-brand-gold tracking-[0.2em] mb-4">{section.country}</h5>
+                    <h5 className="text-xs font-black uppercase text-brand-gold tracking-[0.2em] mb-4">{section.country}</h5>
                     <ul className="space-y-2.5">
                         {section.names.map((name, i) => (
                         <li key={i}>
@@ -114,7 +114,7 @@ const Footer: React.FC<FooterProps> = ({ logoUrl, helpline, email }) => {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-12">
                 {FOOTER_COLLEGES.study.map((section, idx) => (
                     <div key={idx}>
-                    <h5 className="text-[10px] font-black uppercase text-brand-gold tracking-[0.2em] mb-4">{section.country}</h5>
+                    <h5 className="text-xs font-black uppercase text-brand-gold tracking-[0.2em] mb-4">{section.country}</h5>
                     <ul className="space-y-2.5">
                         {section.names.map((name, i) => (
                         <li key={i}>

@@ -4,25 +4,25 @@ import { Link } from 'react-router-dom';
 
 const WhoWeAre: React.FC = () => {
   return (
-    <section className="py-20 bg-white dark:bg-slate-900 font-sans">
+    <section className="py-12 bg-white dark:bg-slate-900 font-sans">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col lg:flex-row items-center gap-12">
           {/* Text Content */}
           <div className="lg:w-1/2 order-2 lg:order-1">
-            <div className="mb-6">
+            <div className="mb-4 text-center lg:text-left">
               <span className="inline-block px-4 py-1.5 rounded-full bg-brand-gold/10 text-brand-gold text-[10px] font-black uppercase tracking-[0.2em] mb-4">
                 About Us
               </span>
-              <h2 className="text-3xl lg:text-5xl font-black text-brand-blue dark:text-white mb-6 tracking-tight">
+              <h2 className="text-3xl lg:text-5xl font-black text-brand-blue dark:text-white mb-4 tracking-tight">
                 {WHO_WE_ARE_CONTENT.title}
               </h2>
             </div>
-            <div className="space-y-6 text-gray-600 dark:text-gray-300 text-lg leading-relaxed font-medium">
+            <div className="space-y-4 text-gray-600 dark:text-gray-300 text-lg leading-relaxed font-medium text-justify lg:text-left">
               {WHO_WE_ARE_CONTENT.description.map((paragraph, index) => (
                 <p key={index}>{paragraph}</p>
               ))}
             </div>
-            <div className="mt-8">
+            <div className="mt-6 text-center lg:text-left">
               <Link to="/about" className="inline-flex items-center text-brand-gold font-black uppercase tracking-widest text-xs hover:underline">
                 Read More About Us <i className="fa-solid fa-arrow-right ml-2"></i>
               </Link>

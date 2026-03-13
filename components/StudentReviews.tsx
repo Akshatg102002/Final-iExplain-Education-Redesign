@@ -4,7 +4,7 @@ import { STUDENT_REVIEWS } from '../home_content.ts';
 
 const StudentReviews: React.FC = () => {
   return (
-    <section className="py-20 bg-white dark:bg-slate-900 font-sans">
+    <section className="py-12 bg-white dark:bg-slate-900 font-sans">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <span className="inline-block px-4 py-1.5 rounded-full bg-brand-gold/10 text-brand-gold text-[10px] font-black uppercase tracking-[0.2em] mb-4">
