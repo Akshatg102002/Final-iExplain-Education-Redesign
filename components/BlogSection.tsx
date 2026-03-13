@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { BLOG_POSTS } from '../data.ts';
 import { Link } from 'react-router-dom';
 import { 
@@ -14,6 +14,31 @@ const createSlug = (text: string) => text ? text.toLowerCase().replace(/[^a-z0-9
 const BlogSection: React.FC = () => {
   const [posts, setPosts] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    let interval: NodeJS.Timeout;
+    if (scrollRef.current && window.innerWidth < 768) {
+      interval = setInterval(() => {
+        if (scrollRef.current) {
+          const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
+          if (scrollLeft + clientWidth >= scrollWidth - 10) {
+            scrollRef.current.scrollTo({ left: 0, behavior: 'smooth' });
+          } else {
+            scrollRef.current.scrollBy({ left: clientWidth, behavior: 'smooth' });
+          }
+        }
+      }, 4000);
+    }
+    return () => clearInterval(interval);
+  }, [posts]);
+
+  const scroll = (direction: 'left' | 'right') => {
+    if (scrollRef.current) {
+      const { clientWidth } = scrollRef.current;
+      scrollRef.current.scrollBy({ left: direction === 'left' ? -clientWidth : clientWidth, behavior: 'smooth' });
+    }
+  };
 
   useEffect(() => {
     const fetchBlogs = async () => {
@@ -63,13 +88,14 @@ const BlogSection: React.FC = () => {
             <div className="w-10 h-10 border-4 border-brand-gold border-t-transparent rounded-full animate-spin"></div>
           </div>
         ) : (
-          <div className="flex overflow-x-auto md:grid md:grid-cols-2 lg:grid-cols-3 gap-6 pb-4 snap-x snap-mandatory [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
-            {posts.slice(0, 3).map((post: any) => (
-              <Link 
-                key={post.id} 
-                to={`/blog/${createSlug(post.category || 'General')}/${createSlug(post.title)}`}
-                className="group bg-white dark:bg-slate-800 rounded-[2rem] overflow-hidden shadow-sm border border-gray-100 dark:border-slate-700 hover:shadow-2xl transition-all w-full md:w-auto snap-center shrink-0"
-              >
+          <div className="relative">
+            <div ref={scrollRef} className="flex overflow-x-auto md:grid md:grid-cols-2 lg:grid-cols-3 gap-6 pb-4 snap-x snap-mandatory [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+              {posts.slice(0, 3).map((post: any) => (
+                <Link 
+                  key={post.id} 
+                  to={`/blog/${createSlug(post.category || 'General')}/${createSlug(post.title)}`}
+                  className="group bg-white dark:bg-slate-800 rounded-[2rem] overflow-hidden shadow-sm border border-gray-100 dark:border-slate-700 hover:shadow-2xl transition-all w-full md:w-auto snap-center shrink-0"
+                >
                 <div className="aspect-[16/10] overflow-hidden">
                   <img 
                     src={post.img} 
@@ -94,6 +120,25 @@ const BlogSection: React.FC = () => {
               </Link>
             ))}
           </div>
+          
+          {/* Mobile Navigation Arrows */}
+          <div className="flex justify-center gap-4 mt-4 md:hidden">
+            <button 
+              onClick={() => scroll('left')} 
+              className="w-10 h-10 rounded-full bg-white dark:bg-slate-800 shadow-md flex items-center justify-center text-brand-blue dark:text-white border border-gray-100 dark:border-slate-700 active:scale-95 transition-transform"
+              aria-label="Previous post"
+            >
+              <i className="fa-solid fa-chevron-left"></i>
+            </button>
+            <button 
+              onClick={() => scroll('right')} 
+              className="w-10 h-10 rounded-full bg-white dark:bg-slate-800 shadow-md flex items-center justify-center text-brand-blue dark:text-white border border-gray-100 dark:border-slate-700 active:scale-95 transition-transform"
+              aria-label="Next post"
+            >
+              <i className="fa-solid fa-chevron-right"></i>
+            </button>
+          </div>
+        </div>
         )}
       </div>
     </section>

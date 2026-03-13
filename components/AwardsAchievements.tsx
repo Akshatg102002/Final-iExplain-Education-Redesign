@@ -1,7 +1,33 @@
 
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 
 const AwardsAchievements: React.FC = () => {
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    let interval: NodeJS.Timeout;
+    if (scrollRef.current && window.innerWidth < 768) {
+      interval = setInterval(() => {
+        if (scrollRef.current) {
+          const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
+          if (scrollLeft + clientWidth >= scrollWidth - 10) {
+            scrollRef.current.scrollTo({ left: 0, behavior: 'smooth' });
+          } else {
+            scrollRef.current.scrollBy({ left: clientWidth, behavior: 'smooth' });
+          }
+        }
+      }, 4000);
+    }
+    return () => clearInterval(interval);
+  }, []);
+
+  const scroll = (direction: 'left' | 'right') => {
+    if (scrollRef.current) {
+      const { clientWidth } = scrollRef.current;
+      scrollRef.current.scrollBy({ left: direction === 'left' ? -clientWidth : clientWidth, behavior: 'smooth' });
+    }
+  };
+
   // Placeholder images for certificates - replace with actual certificate URLs
   const certificates = [
     "https://socialfoundationindia.org/wp-content/uploads/2026/03/C3.jpeg",
@@ -25,21 +51,41 @@ const AwardsAchievements: React.FC = () => {
           </p>
         </div>
 
-        <div className="flex overflow-x-auto md:grid md:grid-cols-2 lg:grid-cols-4 gap-6 pb-4 snap-x snap-mandatory [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
-          {certificates.map((cert, index) => (
-            <div
-              key={index}
-              className="bg-white dark:bg-slate-800 p-4 rounded-[2rem] shadow-sm border border-gray-100 dark:border-slate-700 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 flex flex-col items-center w-full md:w-auto snap-center shrink-0"
-            >
-              <div className="w-full aspect-[4/3] rounded-2xl overflow-hidden bg-gray-100 dark:bg-slate-700">
-                <img 
-                  src={cert} 
-                  alt={`Certificate ${index + 1}`} 
-                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
-                />
+        <div className="relative">
+          <div ref={scrollRef} className="flex overflow-x-auto md:grid md:grid-cols-2 lg:grid-cols-4 gap-6 pb-4 snap-x snap-mandatory [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+            {certificates.map((cert, index) => (
+              <div
+                key={index}
+                className="bg-white dark:bg-slate-800 p-4 rounded-[2rem] shadow-sm border border-gray-100 dark:border-slate-700 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 flex flex-col items-center w-full md:w-auto snap-center shrink-0"
+              >
+                <div className="w-full aspect-[4/3] rounded-2xl overflow-hidden bg-gray-100 dark:bg-slate-700">
+                  <img 
+                    src={cert} 
+                    alt={`Certificate ${index + 1}`} 
+                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                  />
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
+          
+          {/* Mobile Navigation Arrows */}
+          <div className="flex justify-center gap-4 mt-4 md:hidden">
+            <button 
+              onClick={() => scroll('left')} 
+              className="w-10 h-10 rounded-full bg-white dark:bg-slate-800 shadow-md flex items-center justify-center text-brand-blue dark:text-white border border-gray-100 dark:border-slate-700 active:scale-95 transition-transform"
+              aria-label="Previous certificate"
+            >
+              <i className="fa-solid fa-chevron-left"></i>
+            </button>
+            <button 
+              onClick={() => scroll('right')} 
+              className="w-10 h-10 rounded-full bg-white dark:bg-slate-800 shadow-md flex items-center justify-center text-brand-blue dark:text-white border border-gray-100 dark:border-slate-700 active:scale-95 transition-transform"
+              aria-label="Next certificate"
+            >
+              <i className="fa-solid fa-chevron-right"></i>
+            </button>
+          </div>
         </div>
       </div>
     </section>
