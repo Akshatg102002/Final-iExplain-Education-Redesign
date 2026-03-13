@@ -63,12 +63,12 @@ const BlogSection: React.FC = () => {
             <div className="w-10 h-10 border-4 border-brand-gold border-t-transparent rounded-full animate-spin"></div>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+          <div className="flex overflow-x-auto md:grid md:grid-cols-2 lg:grid-cols-3 gap-6 pb-4 snap-x snap-mandatory [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
             {posts.slice(0, 3).map((post: any) => (
               <Link 
                 key={post.id} 
                 to={`/blog/${createSlug(post.category || 'General')}/${createSlug(post.title)}`}
-                className="group bg-white dark:bg-slate-800 rounded-[2rem] overflow-hidden shadow-sm border border-gray-100 dark:border-slate-700 hover:shadow-2xl transition-all"
+                className="group bg-white dark:bg-slate-800 rounded-[2rem] overflow-hidden shadow-sm border border-gray-100 dark:border-slate-700 hover:shadow-2xl transition-all min-w-[85vw] md:min-w-0 snap-center shrink-0"
               >
                 <div className="aspect-[16/10] overflow-hidden">
                   <img 

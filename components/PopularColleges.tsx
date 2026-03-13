@@ -161,7 +161,7 @@ const PopularColleges: React.FC = () => {
 
             {/* College Cards */}
             {filteredColleges.length > 0 && (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 animate-fade-in">
+              <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 animate-fade-in">
                 {filteredColleges.map((college, i) => (
                   <div
                     key={college.id ?? i}
@@ -178,8 +178,8 @@ const PopularColleges: React.FC = () => {
                         }}
                       />
                     </div>
-                    <div className="p-5 text-center bg-gray-50 dark:bg-slate-800/50 border-t border-gray-100 dark:border-slate-700 mt-auto min-h-[80px] flex items-center justify-center">
-                      <h3 className="text-sm font-bold text-brand-blue dark:text-white line-clamp-2">
+                    <div className="p-3 sm:p-5 text-center bg-gray-50 dark:bg-slate-800/50 border-t border-gray-100 dark:border-slate-700 mt-auto min-h-[60px] sm:min-h-[80px] flex items-center justify-center">
+                      <h3 className="text-xs sm:text-sm font-bold text-brand-blue dark:text-white line-clamp-2">
                         {college.name}
                       </h3>
                     </div>
