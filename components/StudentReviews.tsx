@@ -77,22 +77,20 @@ const StudentReviews: React.FC = () => {
           </div>
           
           {/* Mobile Navigation Arrows */}
-          <div className="flex justify-center gap-4 mt-4 md:hidden">
-            <button 
-              onClick={() => scroll('left')} 
-              className="w-10 h-10 rounded-full bg-white dark:bg-slate-800 shadow-md flex items-center justify-center text-brand-blue dark:text-white border border-gray-100 dark:border-slate-700 active:scale-95 transition-transform"
-              aria-label="Previous review"
-            >
-              <i className="fa-solid fa-chevron-left"></i>
-            </button>
-            <button 
-              onClick={() => scroll('right')} 
-              className="w-10 h-10 rounded-full bg-white dark:bg-slate-800 shadow-md flex items-center justify-center text-brand-blue dark:text-white border border-gray-100 dark:border-slate-700 active:scale-95 transition-transform"
-              aria-label="Next review"
-            >
-              <i className="fa-solid fa-chevron-right"></i>
-            </button>
-          </div>
+          <button 
+            onClick={() => scroll('left')} 
+            className="absolute left-2 top-1/2 -translate-y-1/2 w-10 h-14 rounded-2xl bg-white/30 backdrop-blur-md shadow-sm flex items-center justify-center text-white md:hidden z-10 active:scale-95 transition-transform"
+            aria-label="Previous review"
+          >
+            <i className="fa-solid fa-chevron-left"></i>
+          </button>
+          <button 
+            onClick={() => scroll('right')} 
+            className="absolute right-2 top-1/2 -translate-y-1/2 w-10 h-14 rounded-2xl bg-white/30 backdrop-blur-md shadow-sm flex items-center justify-center text-white md:hidden z-10 active:scale-95 transition-transform"
+            aria-label="Next review"
+          >
+            <i className="fa-solid fa-chevron-right"></i>
+          </button>
         </div>
       </div>
     </section>

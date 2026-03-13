@@ -90,7 +90,7 @@ const Footer: React.FC<FooterProps> = ({ logoUrl, helpline, email }) => {
             {/* MBBS Colleges Grid */}
             <div className="mb-16">
             <h3 className="text-2xl font-black text-brand-blue dark:text-white mb-10">Top MBBS Abroad Colleges</h3>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-12">
+            <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-x-4 sm:gap-x-8 gap-y-12">
                 {FOOTER_COLLEGES.mbbs.map((section, idx) => (
                     <div key={idx}>
                     <h5 className="text-xs font-black uppercase text-brand-gold tracking-[0.2em] mb-4">{section.country}</h5>
@@ -111,7 +111,7 @@ const Footer: React.FC<FooterProps> = ({ logoUrl, helpline, email }) => {
             {/* Study Abroad Colleges Grid */}
             <div>
             <h3 className="text-2xl font-black text-brand-blue dark:text-white mb-10">Top Study Abroad Colleges</h3>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-12">
+            <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-x-4 sm:gap-x-8 gap-y-12">
                 {FOOTER_COLLEGES.study.map((section, idx) => (
                     <div key={idx}>
                     <h5 className="text-xs font-black uppercase text-brand-gold tracking-[0.2em] mb-4">{section.country}</h5>
