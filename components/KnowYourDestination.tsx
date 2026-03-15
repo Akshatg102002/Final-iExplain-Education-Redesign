@@ -18,12 +18,12 @@ const KnowYourDestination: React.FC = () => {
           </p>
         </div>
 
-        <div className="flex overflow-x-auto md:grid md:grid-cols-3 lg:grid-cols-4 gap-6 pb-4 snap-x snap-mandatory [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6 pb-4">
           {KNOW_YOUR_DESTINATIONS.map((dest, i) => (
             <Link 
               key={i} 
               to={`/study-abroad/${createSlug(dest.name)}`}
-              className="group relative h-64 rounded-[1.5rem] overflow-hidden shadow-lg cursor-pointer transform transition-transform hover:scale-[1.02] min-w-[70vw] md:min-w-0 snap-center shrink-0"
+              className="group relative h-48 md:h-64 rounded-[1.5rem] overflow-hidden shadow-lg cursor-pointer transform transition-transform hover:scale-[1.02]"
             >
               <img 
                 src={dest.image} 

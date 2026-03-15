@@ -6,25 +6,32 @@ const AwardsAchievements: React.FC = () => {
 
   useEffect(() => {
     let interval: NodeJS.Timeout;
-    if (scrollRef.current && window.innerWidth < 768) {
-      interval = setInterval(() => {
-        if (scrollRef.current) {
-          const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
-          if (scrollLeft + clientWidth >= scrollWidth - 10) {
-            scrollRef.current.scrollTo({ left: 0, behavior: 'smooth' });
-          } else {
-            scrollRef.current.scrollBy({ left: clientWidth, behavior: 'smooth' });
+    
+    const startAutoSlide = () => {
+      if (window.innerWidth < 768) {
+        interval = setInterval(() => {
+          if (scrollRef.current) {
+            const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
+            // gap-6 is 24px
+            if (scrollLeft + clientWidth >= scrollWidth - 24) {
+              scrollRef.current.scrollTo({ left: 0, behavior: 'smooth' });
+            } else {
+              scrollRef.current.scrollBy({ left: clientWidth + 24, behavior: 'smooth' });
+            }
           }
-        }
-      }, 4000);
-    }
+        }, 4000);
+      }
+    };
+
+    startAutoSlide();
+
     return () => clearInterval(interval);
   }, []);
 
   const scroll = (direction: 'left' | 'right') => {
     if (scrollRef.current) {
       const { clientWidth } = scrollRef.current;
-      scrollRef.current.scrollBy({ left: direction === 'left' ? -clientWidth : clientWidth, behavior: 'smooth' });
+      scrollRef.current.scrollBy({ left: direction === 'left' ? -(clientWidth + 24) : (clientWidth + 24), behavior: 'smooth' });
     }
   };
 

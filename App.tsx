@@ -82,7 +82,7 @@ const ContactMapSection = () => {
                     <div className="w-12 h-12 bg-white/10 rounded-2xl flex items-center justify-center text-brand-gold text-xl shrink-0">
                        <i className="fa-solid fa-phone"></i>
                     </div>
-                    <div>
+                    <div className="min-w-0 flex-1">
                        <p className="text-[10px] font-black uppercase tracking-widest text-white/50 mb-1">Call Us</p>
                        <p className="text-xl font-bold">{hq.phone}</p>
                     </div>
@@ -92,9 +92,9 @@ const ContactMapSection = () => {
                     <div className="w-12 h-12 bg-white/10 rounded-2xl flex items-center justify-center text-brand-gold text-xl shrink-0">
                        <i className="fa-solid fa-envelope"></i>
                     </div>
-                    <div>
+                    <div className="min-w-0 flex-1">
                        <p className="text-[10px] font-black uppercase tracking-widest text-white/50 mb-1">Email Us</p>
-                       <p className="text-xl font-bold">info@iexplaineducation.in</p>
+                       <p className="text-xl font-bold break-all sm:break-normal">{email || 'info@iexplaineducation.in'}</p>
                     </div>
                  </div>
 
@@ -102,7 +102,7 @@ const ContactMapSection = () => {
                     <div className="w-12 h-12 bg-white/10 rounded-2xl flex items-center justify-center text-brand-gold text-xl shrink-0">
                        <i className="fa-solid fa-clock"></i>
                     </div>
-                    <div>
+                    <div className="min-w-0 flex-1">
                        <p className="text-[10px] font-black uppercase tracking-widest text-white/50 mb-1">Working Hours</p>
                        <p className="text-lg font-bold">Mon - Sat: 10:00 AM - 7:00 PM</p>
                     </div>
