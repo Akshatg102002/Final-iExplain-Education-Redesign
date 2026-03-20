@@ -94,7 +94,7 @@ const ContactMapSection = () => {
                     </div>
                     <div className="min-w-0 flex-1">
                        <p className="text-[10px] font-black uppercase tracking-widest text-white/50 mb-1">Email Us</p>
-                       <p className="text-xl font-bold break-all sm:break-normal">{'info@iexplaineducation.in'}</p>
+                       <p className="text-xl font-bold break-all sm:break-normal">{email || 'info@iexplaineducation.in'}</p>
                     </div>
                  </div>
 
@@ -112,7 +112,7 @@ const ContactMapSection = () => {
           </div>
 
           {/* RHS: Contact Form */}
-          <div className="lg:w-1/2 p-4 lg:p-4">
+          <div className="lg:w-1/2 p-12 lg:p-16">
             <ContactForm />
           </div>
         </div>

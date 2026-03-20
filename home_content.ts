@@ -4,26 +4,33 @@ export const WHO_WE_ARE_CONTENT = {
   description: [
     "At iExplain Education, we are a trusted education consultancy dedicated to guiding students toward the right academic opportunities in India and abroad. We specialize in MBBS Abroad, MBBS in India, Study Abroad programs, MBA, B.Tech, and various other professional courses across top universities worldwide.",
     "Our mission is to make the admission journey simple, transparent, and stress-free for students and parents. From choosing the right country, university, and course to handling documentation, application processing, and visa guidance, we provide complete end-to-end support.",
-  
+    "We understand that every student has different dreams and career goals. That’s why our experienced counselors offer personalized guidance based on academic background, budget, and long-term aspirations.",
+    "At iExplain Education, we don’t just help with admissions — we help students build successful global careers."
   ],
   image: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1471&q=80" // Placeholder image
 };
 
 export const AIRPORT_DIARIES = [
-  { id: 1, image: "https://socialfoundationindia.org/wp-content/uploads/2026/03/A16.jpeg" },
-  { id: 2, image: "https://socialfoundationindia.org/wp-content/uploads/2026/03/A15.jpeg" },
-  { id: 3, image: "https://socialfoundationindia.org/wp-content/uploads/2026/03/A14.jpeg" },
-  { id: 4, image: "https://socialfoundationindia.org/wp-content/uploads/2026/03/A13.jpeg" },
-  { id: 5, image: "https://socialfoundationindia.org/wp-content/uploads/2026/03/A12-1.jpeg" },
-  { id: 6, image: "https://socialfoundationindia.org/wp-content/uploads/2026/03/A11-1.jpeg" },
-  { id: 7, image: "https://socialfoundationindia.org/wp-content/uploads/2026/03/A10-1.jpeg" },
-  { id: 8, image: "https://socialfoundationindia.org/wp-content/uploads/2026/03/A8-1.jpeg" },
-  { id: 9, image: "https://socialfoundationindia.org/wp-content/uploads/2026/03/A7-1.jpeg" },
-  { id: 10, image: "https://socialfoundationindia.org/wp-content/uploads/2026/03/A6-1.jpeg" },
-  { id: 11, image: "https://socialfoundationindia.org/wp-content/uploads/2026/03/A5-1.jpeg" },
-  { id: 12, image: "https://socialfoundationindia.org/wp-content/uploads/2026/03/A4-1.jpeg" },
-  { id: 13, image: "https://socialfoundationindia.org/wp-content/uploads/2026/03/A2-1.jpeg" },
-  { id: 14, image: "https://socialfoundationindia.org/wp-content/uploads/2026/03/A1-1.jpeg" }
+  {
+    id: 1,
+    image: "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&q=80&w=800",
+    caption: "Students departing for MBBS in Russia"
+  },
+  {
+    id: 2,
+    image: "https://images.unsplash.com/photo-1569154941061-e231b4725ef1?auto=format&fit=crop&q=80&w=800",
+    caption: "Arrival at Tashkent International Airport"
+  },
+  {
+    id: 3,
+    image: "https://images.unsplash.com/photo-1530521954074-e64f6810b32d?auto=format&fit=crop&q=80&w=800",
+    caption: "Happy faces at Delhi Airport before departure"
+  },
+  {
+    id: 4,
+    image: "https://images.unsplash.com/photo-1517639493569-5666a780fd6c?auto=format&fit=crop&q=80&w=800",
+    caption: "Group photo with counselors at the airport"
+  }
 ];
 
 export const STUDENT_REVIEWS = [
@@ -43,31 +50,17 @@ export const STUDENT_REVIEWS = [
   },
   {
     id: 3,
-    name: "Mohit Sharma",
+    name: "Afsana Shaikh",
     review:
-      "I had an outstanding experience with this consultancy. From the very beginning, their team demonstrated deep expertise, clear communication, and a genuine commitment to understanding our needs. They provided practical, well-researched solutions and guided us through every step with professionalism and efficiency. I highly recommend them to anyone looking for reliable and results-driven support. Truly a 5-star experience!",
-    avatar: "https://randomuser.me/api/portraits/men/32.jpg"
+      "I am Afsana Shaikh from Maharashtra, and I am delighted to recommend Mr. Sunil Baranwal from iExplain Education for his outstanding assistance in helping me secure admission in ISM Bishkek, Kyrgyzstan for my MBBS studies. From the very beginning, Mr. Baranwal's expertise and dedication shone through, providing me with invaluable guidance throughout the admission process.",
+    avatar: "https://socialfoundationindia.org/wp-content/uploads/2026/03/Afsana-Shaikh.jpeg"
   },
   {
     id: 4,
-    name: "Samiya Ansari",
+    name: "Mohit Malik",
     review:
-      "iExplain Education counselors are the best. They helped me in my MBBS journey from abroad and provided proper guidance and support whenever I needed it. I'm very happy that I chose the right consultancy for my future.",
-    avatar: "https://pbs.twimg.com/profile_images/1233002001195245569/5Tgd5cJv_400x400.jpg"
-  },
-  {
-    id: 5,
-    name: "Nilaksh Ujjainwal",
-    review:
-      "I had a great experience with iExplain Education while applying for my MA Fine Arts course in the UK. They guided me through every step of the process with clarity and patience, from choosing the right university to preparing my documents and application. Their support made the entire journey smooth and stress-free.",
-    avatar: "https://randomuser.me/api/portraits/men/45.jpg"
-  },
-  {
-    id: 6,
-    name: "Pooja",
-    review:
-      "My name is Pooja, and I am from Gurugram. I am very grateful to iExplain Education for their excellent guidance during the NEET-UG counselling process. With their clear explanations, proper support, and honest advice, I successfully got admission in MMU, Sadhopur. The team explained every step patiently and cleared all my doubts.",
-    avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9EcpC1cg2y2iXdkNBdKoVQWGh71DYy4krzA&s"
+      "Thank you so much for making my visa application process so simple. The team members especially Sakshi Ma’am and Sushant Sir are so cooperative, helpful and nice. They helped me reach the UK and make my dream come true.",
+    avatar: "https://socialfoundationindia.org/wp-content/uploads/2026/03/Mohit-malik.jpeg"
   }
 ];
 

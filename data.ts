@@ -18,52 +18,20 @@ export const TERMS_CONTENT = `
 `;
 
 export const OFFICE_ADDRESSES: Office[] = [
-  {
-    state: "Uttar Pradesh",
-    city: "Noida (HQ)",
+  { 
+    state: "Uttar Pradesh", 
+    city: "Noida (HQ)", 
     slug: "noida-hq",
-    address: "iExplain Education Pvt Ltd, C-7, Ground Floor, Sector-02, Noida - 201301",
-    phone: "+91 97738 47799",
-    lat: 28.5708,
+    address: "#301, World Trade Tower (WTT), Sector 16, Noida - 201301", 
+    phone: "+91 97738 47799", 
+    lat: 28.5708, 
     lng: 77.3260,
     mapEmbed: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3503.957388755013!2d77.3235652755026!3d28.571068875701777!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390ce50742d4a53d%3A0xc682914104085489!2sWave%20Silver%20Tower!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
   },
-  {
-    state: "Uttarakhand",
-    city: "Dehradun",
-    slug: "dehradun",
-    address: "First Floor, A1 Tower, Chakrata Rd, beside Ballupur Flyover, near Royal Enfield Showroom, Ballupur Chowk, Ram Vihar, Ballupur, Dehradun, Uttarakhand 248001",
-    phone: "+91 97738 47799",
-    lat: 30.3165,
-    lng: 78.0322
-  },
-  {
-    state: "Maharashtra",
-    city: "Pune",
-    slug: "pune",
-    address: "5th Floor, Sai Platinum, 501, Laxmi Rd, near Vijay Talkies, Sadashiv Peth, Pune, Maharashtra 411030",
-    phone: "+91 97738 47799",
-    lat: 18.5204,
-    lng: 73.8567
-  },
-  {
-    state: "Bihar",
-    city: "Patna",
-    slug: "patna",
-    address: "2nd Floor, M. Complex, Phulwari Sharif, Khagaul Road, Near Mahaveer Cancer Sansthan & Research Centre, Patna - 801505",
-    phone: "+91 97738 47799",
-    lat: 25.5941,
-    lng: 85.1376
-  },
-  {
-    state: "Karnataka",
-    city: "Bangalore",
-    slug: "bangalore",
-    address: "Sai Sumukh Building, 3rd Floor, Near Biryani Zest, Sahakarnagar, Bangalore - 560092",
-    phone: "+91 97738 47799",
-    lat: 13.0620,
-    lng: 77.5860
-  }
+  { state: "Uttarakhand", city: "Dehradun", slug: "dehradun", address: "3rd Floor, Puspa Tower, 52 Subhash Road, Dehradun", phone: "+91 97738 47799", lat: 30.3165, lng: 78.0322 },
+  { state: "Maharashtra", city: "Pune", slug: "pune", address: "601, Karan Victoria, Shivaji Nagar, Pune - 411005", phone: "+91 97738 47799", lat: 18.5204, lng: 73.8567 },
+  { state: "Rajasthan", city: "Kota", slug: "kota", address: "Pratham Residency, New Jawahar Nagar, Kota, Rajasthan", phone: "+91 97738 47799", lat: 25.2138, lng: 75.8648 },
+  { state: "Bihar", city: "Patna", slug: "patna", address: "3rd Floor, Sudama Bhawan, Hira Panna Lane, Boring Road, Patna", phone: "+91 97738 47799", lat: 25.5941, lng: 85.1376 }
 ];
 
 export const FOOTER_COLLEGES = {
@@ -310,26 +278,21 @@ export const MEGA_MENU_DATA = {
     { name: "UK", link: "/study-abroad/uk", code: "GB" },
     { name: "Canada", link: "/study-abroad/canada", code: "CA" },
     { name: "Australia", link: "/study-abroad/australia", code: "AU" },
-    { name: "New Zealand", link: "/study-abroad/newZealand", code: "NZ" },
+    { name: "New Zealand", link: "/study-abroad/new-zealand", code: "NZ" },
     { name: "Dubai", link: "/study-abroad/dubai", code: "AE" },
-    { name: "Ireland", link: "/study-abroad/ireland", code: "IE" },
     { name: "Europe", link: "/study-abroad/europe", code: "EU" }
   ],
- "MBBS ABROAD": [
-  { name: "Russia", link: "/mbbs-abroad/russia", code: "RU" },
-  { name: "Georgia", link: "/mbbs-abroad/georgia", code: "GE" },
-  { name: "Kazakhstan", link: "/mbbs-abroad/kazakhstan", code: "KZ" },
-  { name: "Kyrgyzstan", link: "/mbbs-abroad/kyrgyzstan", code: "KG" },
-  { name: "Uzbekistan", link: "/mbbs-abroad/uzbekistan", code: "UZ" },
-  { name: "Philippines", link: "/mbbs-abroad/philippines", code: "PH" },
-  { name: "Bangladesh", link: "/mbbs-abroad/bangladesh", code: "BD" },
-  { name: "Nepal", link: "/mbbs-abroad/nepal", code: "NP" },
-  { name: "China", link: "/mbbs-abroad/china", code: "CN" },
-  { name: "Egypt", link: "/mbbs-abroad/egypt", code: "EG" }
-],
+  "MBBS ABROAD": [
+    { name: "Eastern Europe", link: "/mbbs-abroad/eastern-europe", code: "EU" },
+    { name: "Central Asia", link: "/mbbs-abroad/central-asia", code: "KZ" },
+    { name: "Philippines", link: "/mbbs-abroad/philippines", code: "PH" },
+    { name: "Bangladesh", link: "/mbbs-abroad/bangladesh", code: "BD" },
+    { name: "Nepal", link: "/mbbs-abroad/nepal", code: "NP" },
+    { name: "China", link: "/mbbs-abroad/china", code: "CN" },
+    { name: "Egypt", link: "/mbbs-abroad/egypt", code: "EG" }
+  ],
   "STUDY IN INDIA": [
     { name: "MBBS", link: "/study-india/mbbs", icon: "fa-solid fa-user-doctor" },
-    { name: "MD/MS", link: "/study-india/md-ms", icon: "fa-solid fa-stethoscope" },
     { name: "B.Tech", link: "/study-india/btech", icon: "fa-solid fa-microchip" },
     { name: "MBA", link: "/study-india/mba", icon: "fa-solid fa-briefcase" },
     { name: "BBA", link: "/study-india/bba", icon: "fa-solid fa-chart-line" },
@@ -446,127 +409,137 @@ export const EXAMS_DETAILED = {
 };
 
 export const ROADMAP_STEPS = [
-  {
+  { 
     step: "01",
-    title: "Counseling",
+    title: "Counseling", 
     desc: "Our expert counseling services are designed to guide students who want to pursue MBBS in India, MBBS Abroad, and Study Abroad programs. We provide personalized career guidance based on your academic profile, budget, and future goals.",
     icon: "fa-solid fa-comments"
   },
-  {
+  { 
     step: "02",
-    title: "Choose Your Destination & Course",
+    title: "Choose Your Destination & Course", 
     desc: "Selecting the right destination and course is the foundation of a successful career. At iExplain Education, we help you explore the best countries and programs based on your academic background, career goals, and budget.",
     icon: "fa-solid fa-earth-americas"
   },
-  {
+  { 
     step: "03",
-    title: "University Selection",
+    title: "University Selection", 
     desc: "Selecting the right university is one of the most important decisions in a student’s academic journey. At iExplain Education, we carefully analyze your academic background, career goals, preferred location, and budget to recommend the most suitable universities.",
     icon: "fa-solid fa-building-columns"
   },
-  {
+  { 
     step: "04",
-    title: "Admission – Application & Offer Letter",
+    title: "Admission – Application & Offer Letter", 
     desc: "Our team provides complete assistance throughout the admission process. We help students accurately fill out application forms, prepare and verify required documents, and submit applications to the selected universities within deadlines.",
     icon: "fa-solid fa-file-signature"
   },
-  {
+  { 
     step: "05",
-    title: "Visa – Visa Filing & Interview",
+    title: "Visa – Visa Filing & Interview", 
     desc: "We provide complete assistance with the visa process to ensure a smooth transition to your chosen destination. Our team guides you through accurate visa filing, document preparation, financial documentation, and appointment scheduling.",
     icon: "fa-solid fa-passport"
   },
-  {
+  { 
     step: "06",
-    title: "Departure",
+    title: "Departure", 
     desc: "We ensure your journey begins smoothly with complete departure assistance. Our team helps you with flight booking guidance to secure the best routes and affordable fares according to your travel schedule. We also assist in arranging foreign exchange (Forex), international SIM cards, and essential travel guidance.",
     icon: "fa-solid fa-plane-departure"
   }
 ];
 
 export const INDIA_COURSES = [
-  { id: "mbbs", title: "MBBS", desc: "Bachelor of Medicine & Bachelor of Surgery", icon: "fa-solid fa-user-doctor" },
-  { id: "mdms", title: "MD / MS", desc: "Postgraduate Medical Specializations", icon: "fa-solid fa-stethoscope" },
-  { id: "engineering", title: "Engineering", desc: "B.Tech in CS, IT, ECE & more", icon: "fa-solid fa-microchip" },
-  { id: "management", title: "Management", desc: "MBA, BBA, PGDM Programs", icon: "fa-solid fa-chart-pie" }
+  { id: "mbbs", title: "MBBS", desc: "Top Govt & Private Colleges", icon: "fa-solid fa-user-doctor" },
+  { id: "engineering", title: "Engineering", desc: "B.Tech in CS, IT, ECE", icon: "fa-solid fa-microchip" },
+  { id: "management", title: "Management", desc: "MBA, BBA, PGDM", icon: "fa-solid fa-chart-pie" },
+  { id: "law", title: "Law", desc: "LLB, BA LLB", icon: "fa-solid fa-scale-balanced" }
 ];
 
 
 export const STATS = [
-  { label: "Year of Experience", value: "10+" },
-  { label: "Expert Counselors", value: "40+" },
-  { label: "Partnered Institutions", value: "50+" },
-  { label: "Students Counseled", value: "10,000+" }
+  { label: "Students Counseled", value: "10,000+" },
+  { label: "Partner Universities", value: "500+" },
+  { label: "Years of Experience", value: "15+" }
 ];
 
 export const POPULAR_COLLEGES: College[] = [
   // --- MBBS ABROAD ---
   // Russia
-  // Russia
-  { name: "Kazan Federal University", country: "Russia", category: "MBBS Abroad", image: "https://socialfoundationindia.org/wp-content/uploads/2026/03/Kazan-Federal-University.webp" },
-  { name: "Bashkir State Medical University", country: "Russia", category: "MBBS Abroad", image: "https://socialfoundationindia.org/wp-content/uploads/2026/03/Bashkir-State-Medical-University.webp" },
-  { name: "Orenburg State Medical University", country: "Russia", category: "MBBS Abroad", image: "https://socialfoundationindia.org/wp-content/uploads/2026/03/Orenburg-State-Medical-University.webp" },
-  { name: "Crimea Federal University", country: "Russia", category: "MBBS Abroad", image: "https://socialfoundationindia.org/wp-content/uploads/2026/03/Crimea-Federal-University.webp" },
-
+  { name: "Kazan Federal University", country: "Russia", category: "MBBS Abroad", image: "https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&q=80&w=600" },
+  { name: "Bashkir State Medical University", country: "Russia", category: "MBBS Abroad", image: "https://www.ruseducation.in/wp-content/uploads/2022/01/Bashkir-State-Medical-University.webp" },
+  { name: "Orenburg State Medical University", country: "Russia", category: "MBBS Abroad", image: "https://images.unsplash.com/photo-1559135197-8a45ea74d367?auto=format&fit=crop&q=80&w=600" },
+  { name: "Crimea Federal University", country: "Russia", category: "MBBS Abroad", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSvJuVumuwTMTGSGfSzzLKYgVzkA8k-kJHb_w&s" },
+  { name: "First Moscow State Medical University", country: "Russia", category: "MBBS Abroad", image: "https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&q=80&w=600" },
   // Georgia
-  { name: "Tbilisi State Medical University", country: "Georgia", category: "MBBS Abroad", image: "https://socialfoundationindia.org/wp-content/uploads/2026/03/Tbilisi-State-Medical-University.webp" },
-  { name: "Batumi Shota Rustaveli State University", country: "Georgia", category: "MBBS Abroad", image: "https://socialfoundationindia.org/wp-content/uploads/2026/03/Batumi-Shota-Rustaveli-State-University.webp" },
-  { name: "David Tvildiani Medical University", country: "Georgia", category: "MBBS Abroad", image: "https://socialfoundationindia.org/wp-content/uploads/2026/03/David-Tvildiani-Medical-University.webp" },
-  { name: "European University Georgia", country: "Georgia", category: "MBBS Abroad", image: "https://socialfoundationindia.org/wp-content/uploads/2026/03/European-University-Georgia.webp" },
-
+  { name: "Tbilisi State Medical University", country: "Georgia", category: "MBBS Abroad", image: "https://images.shiksha.com/mediadata/images/1702625100phpu2Kbnu.jpeg" },
+  { name: "Batumi Shota Rustaveli State University", country: "Georgia", category: "MBBS Abroad", image: "https://images.unsplash.com/photo-1559135197-8a45ea74d367?auto=format&fit=crop&q=80&w=600" },
+  { name: "David Tvildiani Medical University", country: "Georgia", category: "MBBS Abroad", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRO5z5QqOOgc6KWCqeUoBFkNNRqY64riK5QDQ&s" },
+  { name: "European University Georgia", country: "Georgia", category: "MBBS Abroad", image: "https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&q=80&w=600" },
+  // Philippines
+  { name: "University of Santo Tomas", country: "Philippines", category: "MBBS Abroad", image: "https://images.unsplash.com/photo-1544531586-fde5298cdd40?auto=format&fit=crop&q=80&w=600" },
+  { name: "AMA School of Medicine", country: "Philippines", category: "MBBS Abroad", image: "https://images.unsplash.com/photo-1559135197-8a45ea74d367?auto=format&fit=crop&q=80&w=600" },
+  { name: "Our Lady of Fatima University", country: "Philippines", category: "MBBS Abroad", image: "https://www.careerplus.org.in/philippines-medical-college/our-lady-of-fatima-university.jpg " },
+  { name: "University of the East Ramon Magsaysay", country: "Philippines", category: "MBBS Abroad", image: "https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&q=80&w=600" },
   // Bangladesh
-  { name: "Dhaka National Medical College", country: "Bangladesh", category: "MBBS Abroad", image: "https://socialfoundationindia.org/wp-content/uploads/2026/03/Dhaka-National-Medical-College.webp" },
-  { name: "Bangladesh Medical College", country: "Bangladesh", category: "MBBS Abroad", image: "https://socialfoundationindia.org/wp-content/uploads/2026/03/Bangladesh-Medical-College.webp" },
-  { name: "Jahurul Islam Medical College", country: "Bangladesh", category: "MBBS Abroad", image: "https://socialfoundationindia.org/wp-content/uploads/2026/03/Jahurul-Islam-Medical-College.webp" },
-  { name: "Holy Family Red Crescent Medical College", country: "Bangladesh", category: "MBBS Abroad", image: "https://socialfoundationindia.org/wp-content/uploads/2026/03/Holy-Family-Red-Crescent-Medical-College.webp" },
-
+  { name: "Dhaka National Medical College", country: "Bangladesh", category: "MBBS Abroad", image: "https://images.unsplash.com/photo-1544531586-fde5298cdd40?auto=format&fit=crop&q=80&w=600" },
+  { name: "Bangladesh Medical College", country: "Bangladesh", category: "MBBS Abroad", image: "https://images.unsplash.com/photo-1559135197-8a45ea74d367?auto=format&fit=crop&q=80&w=600" },
+  { name: "Jahurul Islam Medical College", country: "Bangladesh", category: "MBBS Abroad", image: "https://images.unsplash.com/photo-1559135197-8a45ea74d367?auto=format&fit=crop&q=80&w=600" },
+  { name: "Holy Family Red Crescent Medical College", country: "Bangladesh", category: "MBBS Abroad", image: "https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&q=80&w=600" },
+  // Nepal
+  { name: "Tribhuvan University Institute of Medicine", country: "Nepal", category: "MBBS Abroad", image: "https://images.unsplash.com/photo-1544531586-fde5298cdd40?auto=format&fit=crop&q=80&w=600" },
+  { name: "Kathmandu University School of Medical Sciences", country: "Nepal", category: "MBBS Abroad", image: "https://images.unsplash.com/photo-1559135197-8a45ea74d367?auto=format&fit=crop&q=80&w=600" },
+  { name: "B.P. Koirala Institute of Health Sciences", country: "Nepal", category: "MBBS Abroad", image: "https://images.unsplash.com/photo-1592280771800-bcf9de2312b4?auto=format&fit=crop&q=80&w=600" },
+  { name: "Patan Academy of Health Sciences", country: "Nepal", category: "MBBS Abroad", image: "https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&q=80&w=600" },
   // Kazakhstan
-  { name: "Al-Farabi Kazakh National University", country: "Kazakhstan", category: "MBBS Abroad", image: "https://socialfoundationindia.org/wp-content/uploads/2026/03/Al-Farabi-Kazakh-National-University.webp" },
-  { name: "Kazakh National Medical University", country: "Kazakhstan", category: "MBBS Abroad", image: "https://socialfoundationindia.org/wp-content/uploads/2026/03/Kazakh-National-Medical-University.webp" },
-  { name: "Astana Medical University", country: "Kazakhstan", category: "MBBS Abroad", image: "https://socialfoundationindia.org/wp-content/uploads/2026/03/Astana-Medical-University.webp" },
-  { name: "South Kazakhstan Medical Academy", country: "Kazakhstan", category: "MBBS Abroad", image: "https://socialfoundationindia.org/wp-content/uploads/2026/03/South-Kazakhstan-Medical-Academy.webp" },
-
+  { name: "Al-Farabi Kazakh National University", country: "Kazakhstan", category: "MBBS Abroad", image: "https://images.unsplash.com/photo-1544531586-fde5298cdd40?auto=format&fit=crop&q=80&w=600" },
+  { name: "Kazakh National Medical University", country: "Kazakhstan", category: "MBBS Abroad", image: "https://images.unsplash.com/photo-1559135197-8a45ea74d367?auto=format&fit=crop&q=80&w=600" },
+  { name: "Astana Medical University", country: "Kazakhstan", category: "MBBS Abroad", image: "https://images.unsplash.com/photo-1592280771800-bcf9de2312b4?auto=format&fit=crop&q=80&w=600" },
+  { name: "South Kazakhstan Medical Academy", country: "Kazakhstan", category: "MBBS Abroad", image: "https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&q=80&w=600" },
   // Uzbekistan
-  { name: "Tashkent Medical Academy", country: "Uzbekistan", category: "MBBS Abroad", image: "https://socialfoundationindia.org/wp-content/uploads/2026/03/Tashkent-Medical-Academy.webp" },
-  { name: "Samarkand State Medical University", country: "Uzbekistan", category: "MBBS Abroad", image: "https://socialfoundationindia.org/wp-content/uploads/2026/03/Samarkand-State-Medical-University.webp" },
-  { name: "Bukhara State Medical Institute", country: "Uzbekistan", category: "MBBS Abroad", image: "https://socialfoundationindia.org/wp-content/uploads/2026/03/Bukhara-State-Medical-Institute.webp" },
-  { name: "Andijan State Medical Institute", country: "Uzbekistan", category: "MBBS Abroad", image: "https://socialfoundationindia.org/wp-content/uploads/2026/03/Andijan-State-Medical-Institute.webp" },
+  { name: "Tashkent Medical Academy", country: "Uzbekistan", category: "MBBS Abroad", image: "https://images.unsplash.com/photo-1544531586-fde5298cdd40?auto=format&fit=crop&q=80&w=600" },
+  { name: "Samarkand State Medical University", country: "Uzbekistan", category: "MBBS Abroad", image: "https://images.unsplash.com/photo-1559135197-8a45ea74d367?auto=format&fit=crop&q=80&w=600" },
+  { name: "Bukhara State Medical Institute", country: "Uzbekistan", category: "MBBS Abroad", image: "https://images.unsplash.com/photo-1544531586-fde5298cdd40?auto=format&fit=crop&q=80&w=600" },
+  { name: "Andijan State Medical Institute", country: "Uzbekistan", category: "MBBS Abroad", image: "https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&q=80&w=600" },
 
+  // --- STUDY ABROAD ---
   // USA
-  { name: "Northeastern University", country: "USA", category: "Study Abroad", image: "https://socialfoundationindia.org/wp-content/uploads/2026/03/Northeastern-University.webp" },
-  { name: "Arizona State University", country: "USA", category: "Study Abroad", image: "https://socialfoundationindia.org/wp-content/uploads/2026/03/Arizona-State-University.webp" },
-  { name: "New York University", country: "USA", category: "Study Abroad", image: "https://socialfoundationindia.org/wp-content/uploads/2026/03/New-York-University.webp" },
-  { name: "University of Texas at Austin", country: "USA", category: "Study Abroad", image: "https://socialfoundationindia.org/wp-content/uploads/2026/03/University-of-Texas-at-Austin.webp" },
-
+  { name: "Northeastern University", country: "USA", category: "Study Abroad", image: "https://images.unsplash.com/photo-1544531586-fde5298cdd40?auto=format&fit=crop&q=80&w=600" },
+  { name: "Arizona State University", country: "USA", category: "Study Abroad", image: "https://images.unsplash.com/photo-1559135197-8a45ea74d367?auto=format&fit=crop&q=80&w=600" },
+  { name: "New York University", country: "USA", category: "Study Abroad", image: "https://uniplusglobal.com/media/university_images/New_York_University_439e3d1807.webp" },
+  { name: "University of Texas at Austin", country: "USA", category: "Study Abroad", image: "https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&q=80&w=600" },
+  { name: "University of Southern California", country: "USA", category: "Study Abroad", image: "https://images.unsplash.com/photo-1544531586-fde5298cdd40?auto=format&fit=crop&q=80&w=600" },
   // UK
-  { name: "University of Leeds", country: "UK", category: "Study Abroad", image: "https://socialfoundationindia.org/wp-content/uploads/2026/03/Parkinson-Building-University-of-Leeds.webp" },
-  { name: "University of Manchester", country: "UK", category: "Study Abroad", image: "https://socialfoundationindia.org/wp-content/uploads/2026/03/University-of-Manchester.webp" },
-  { name: "University of Birmingham", country: "UK", category: "Study Abroad", image: "https://socialfoundationindia.org/wp-content/uploads/2026/03/University-of-Birmingham.webp" },
-  { name: "University of Warwick", country: "UK", category: "Study Abroad", image: "https://socialfoundationindia.org/wp-content/uploads/2026/03/University-of-Warwick.webp" },
-
+  { name: "University of Leeds", country: "UK", category: "Study Abroad", image: "https://images.unsplash.com/photo-1559135197-8a45ea74d367?auto=format&fit=crop&q=80&w=600" },
+  { name: "University of Manchester", country: "UK", category: "Study Abroad", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSNInPUr5vU0dho3EQhK8ws6nP7kccU4TMzHQ&s" },
+  { name: "University of Birmingham", country: "UK", category: "Study Abroad", image: "https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&q=80&w=600" },
+  { name: "University of Warwick", country: "UK", category: "Study Abroad", image: "https://images.unsplash.com/photo-1544531586-fde5298cdd40?auto=format&fit=crop&q=80&w=600" },
+  { name: "Kings College London", country: "UK", category: "Study Abroad", image: "https://images.unsplash.com/photo-1559135197-8a45ea74d367?auto=format&fit=crop&q=80&w=600" },
   // Australia
-  { name: "University of Melbourne", country: "Australia", category: "Study Abroad", image: "https://socialfoundationindia.org/wp-content/uploads/2026/03/University-of-Melbourne.webp" },
-  { name: "Monash University", country: "Australia", category: "Study Abroad", image: "https://socialfoundationindia.org/wp-content/uploads/2026/03/Monash-University.webp" },
-  { name: "University of Sydney", country: "Australia", category: "Study Abroad", image: "https://socialfoundationindia.org/wp-content/uploads/2026/03/University-of-Sydney.webp" },
-  { name: "Deakin University", country: "Australia", category: "Study Abroad", image: "https://socialfoundationindia.org/wp-content/uploads/2026/03/Deakin-Univeresity.webp" },
-
+  { name: "University of Melbourne", country: "Australia", category: "Study Abroad", image: "https://www.unimelb.edu.au/__data/assets/image/0012/3798804/video.jpg" },
+  { name: "Monash University", country: "Australia", category: "Study Abroad", image: "https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&q=80&w=600" },
+  { name: "University of Sydney", country: "Australia", category: "Study Abroad", image: "https://images.unsplash.com/photo-1544531586-fde5298cdd40?auto=format&fit=crop&q=80&w=600" },
+  { name: "Deakin University", country: "Australia", category: "Study Abroad", image: "https://images.unsplash.com/photo-1559135197-8a45ea74d367?auto=format&fit=crop&q=80&w=600" },
+  { name: "RMIT University", country: "Australia", category: "Study Abroad", image: "https://www.rmit.edu.au/content/dam/rmit/rmit-images/marketing-only/about-sub-mastheads/City-Campus-Masthead-1920x960.jpg" },
   // Canada
-  { name: "University of Toronto", country: "Canada", category: "Study Abroad", image: "https://socialfoundationindia.org/wp-content/uploads/2026/03/University_of_Toronto.webp" },
-  { name: "University of British Columbia", country: "Canada", category: "Study Abroad", image: "https://socialfoundationindia.org/wp-content/uploads/2026/03/University-of-British-Columbia.webp" },
-  { name: "McGill University", country: "Canada", category: "Study Abroad", image: "https://socialfoundationindia.org/wp-content/uploads/2026/03/McGill-University.webp" },
-  { name: "York University", country: "Canada", category: "Study Abroad", image: "https://socialfoundationindia.org/wp-content/uploads/2026/03/York-University.webp" },
-
+  { name: "University of Toronto", country: "Canada", category: "Study Abroad", image: "https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&q=80&w=600" },
+  { name: "University of British Columbia", country: "Canada", category: "Study Abroad", image: "https://images.unsplash.com/photo-1544531586-fde5298cdd40?auto=format&fit=crop&q=80&w=600" },
+  { name: "McGill University", country: "Canada", category: "Study Abroad", image: "https://images.unsplash.com/photo-1559135197-8a45ea74d367?auto=format&fit=crop&q=80&w=600" },
+  { name: "York University", country: "Canada", category: "Study Abroad", image: "https://images.unsplash.com/photo-1592280771800-bcf9de2312b4?auto=format&fit=crop&q=80&w=600" },
+  { name: "Seneca College", country: "Canada", category: "Study Abroad", image: "https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&q=80&w=600" },
   // Ireland
-  { name: "Trinity College Dublin", country: "Ireland", category: "Study Abroad", image: "https://socialfoundationindia.org/wp-content/uploads/2026/03/Trinity-College-Dublin.webp" },
-  { name: "University College Dublin", country: "Ireland", category: "Study Abroad", image: "https://socialfoundationindia.org/wp-content/uploads/2026/03/University-College-Dublin.webp" },
-  { name: "Dublin City University", country: "Ireland", category: "Study Abroad", image: "https://socialfoundationindia.org/wp-content/uploads/2026/03/Dublin-City-University.webp" },
-  { name: "University of Limerick", country: "Ireland", category: "Study Abroad", image: "https://socialfoundationindia.org/wp-content/uploads/2026/03/University-of-Limerick.webp" },
-
+  { name: "Trinity College Dublin", country: "Ireland", category: "Study Abroad", image: "https://images.unsplash.com/photo-1544531586-fde5298cdd40?auto=format&fit=crop&q=80&w=600" },
+  { name: "University College Dublin", country: "Ireland", category: "Study Abroad", image: "https://images.unsplash.com/photo-1559135197-8a45ea74d367?auto=format&fit=crop&q=80&w=600" },
+  { name: "Dublin City University", country: "Ireland", category: "Study Abroad", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRcuIEI_sMygRQdUyGTXaSuq46og1TDBOVFOw&s" },
+  { name: "University of Limerick", country: "Ireland", category: "Study Abroad", image: "https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&q=80&w=600" },
   // New Zealand
-  { name: "University of Auckland", country: "New Zealand", category: "Study Abroad", image: "https://socialfoundationindia.org/wp-content/uploads/2026/03/University-of-Auckland.webp" },
-  { name: "University of Otago", country: "New Zealand", category: "Study Abroad", image: "https://socialfoundationindia.org/wp-content/uploads/2026/03/University-of-Otago.webp" },
-  { name: "Victoria University of Wellington", country: "New Zealand", category: "Study Abroad", image: "https://socialfoundationindia.org/wp-content/uploads/2026/03/Victoria-University-of-Wellington.webp" },
-  { name: "Auckland University of Technology", country: "New Zealand", category: "Study Abroad", image: "https://socialfoundationindia.org/wp-content/uploads/2026/03/Auckland-University-of-Technology.webp" },
+  { name: "University of Auckland", country: "New Zealand", category: "Study Abroad", image: "https://images.unsplash.com/photo-1544531586-fde5298cdd40?auto=format&fit=crop&q=80&w=600" },
+  { name: "University of Otago", country: "New Zealand", category: "Study Abroad", image: "https://images.unsplash.com/photo-1559135197-8a45ea74d367?auto=format&fit=crop&q=80&w=600" },
+  { name: "Victoria University of Wellington", country: "New Zealand", category: "Study Abroad", image: "https://www.ilwindia.com/wp-content/uploads/2019/08/Victoria-University-of-Wellington-New-Zealand.jpg" },
+  { name: "Auckland University of Technology", country: "New Zealand", category: "Study Abroad", image: "https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&q=80&w=600" },
+  // Dubai
+  { name: "University of Birmingham Dubai", country: "Dubai", category: "Study Abroad", image: "https://images.unsplash.com/photo-1544531586-fde5298cdd40?auto=format&fit=crop&q=80&w=600" },
+  { name: "Middlesex University Dubai", country: "Dubai", category: "Study Abroad", image: "https://images.unsplash.com/photo-1559135197-8a45ea74d367?auto=format&fit=crop&q=80&w=600" },
+  { name: "Heriot-Watt University Dubai", country: "Dubai", category: "Study Abroad", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2UPd23SmEbM0JSG0O36KbCG5p6oXxnO6dcA&s" },
+  { name: "Manipal Academy of Higher Education Dubai", country: "Dubai", category: "Study Abroad", image: "https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&q=80&w=600" }
 ];
 
 export const COUNTRY_ICONS: Record<string, string> = {
@@ -618,6 +591,11 @@ export const KNOW_YOUR_DESTINATIONS = [
     name: "Australia",
     path: "/study-abroad/australia",
     image: "https://images.unsplash.com/photo-1523482580672-f109ba8cb9be?auto=format&fit=crop&q=80&w=600"
+  },
+  {
+    name: "Philippines",
+    path: "/mbbs-abroad/philippines",
+    image: "https://images.unsplash.com/photo-1518509562904-e7ef99cdcc86?auto=format&fit=crop&q=80&w=600"
   },
   {
     name: "Uzbekistan",

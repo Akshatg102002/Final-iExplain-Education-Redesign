@@ -97,7 +97,7 @@ const PopularColleges: React.FC = () => {
         {/* Heading + Tabs — always visible */}
         <div className="text-center mb-12">
           <h2 className="text-3xl lg:text-5xl font-black text-brand-blue dark:text-white mb-6 tracking-tight">
-            Explore the <span className="text-brand-gold">World’s Top Universities</span>
+            Our <span className="text-brand-gold">Partners</span>
           </h2>
           <div className="w-16 h-1 bg-brand-gold mb-8 mx-auto rounded-full"></div>
 
