@@ -80,6 +80,7 @@ export interface ProgramDetailData {
 export interface MBBSDetailData {
   title: string;
   heroImage: string;
+  heroImageMobile:string;
   intro: {
     text: string;
     image: string;
@@ -152,6 +153,74 @@ export interface MBBSDetailData {
     teaching: string;
     practiceAbroad: string;
   };
+  faqs: {
+    question: string;
+    answer: string;
+  }[];
+}
+
+export interface StudyAbroadDetailData {
+  title: string;
+  heroImage: string;
+  heroImageMobile?: string;
+
+  intro: {
+    text: string;
+    image: string;
+  };
+
+  whyStudy: string[];
+
+  qualifications: {
+    name: string;
+    duration: string;
+    description: string;
+  }[];
+
+  courseStreams: {
+    stream: string;
+    courses: string[];
+    careers: string[];
+  }[];
+
+  topUniversities: {
+    name: string;
+    location: string;
+    description: string;
+  }[];
+
+  partTimeWork: {
+    hoursPerWeek: string;
+    details: string[];
+  };
+
+  postStudyWork: {
+    program: string;
+    duration: string;
+    description: string;
+  };
+
+  documentsRequired: string[];
+
+  intakes: {
+    intake: string;
+    months: string;
+    details: string;
+  }[];
+
+  cost: {
+    tuitionFees: string;
+    livingExpenses: string;
+    additionalCosts?: string;
+  };
+
+  whyChooseUs: string[];
+
+  lifeAndCareer: {
+    description: string;
+    points: string[];
+  };
+
   faqs: {
     question: string;
     answer: string;

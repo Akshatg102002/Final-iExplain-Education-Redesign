@@ -10,7 +10,7 @@ interface HeroProps {
 
 const Hero: React.FC<HeroProps> = ({ onBookSession }) => {
   return (
-    <section className="relative h-[80vh] min-h-[500px] max-h-[700px] flex items-center justify-center overflow-hidden">
+    <section className="relative min-h-[500px] max-h-[700px] lg:h-[80vh] flex items-center justify-center overflow-hidden py-12 lg:py-0">
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
         <img 

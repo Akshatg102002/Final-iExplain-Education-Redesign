@@ -9,8 +9,26 @@ interface ContactModalProps {
   onClose: () => void;
 }
 
-const COURSES = ["Masters", "Bachelors", "MBA", "MBBS", "B.Tech", "Engineering", "Medical", "Other"];
-const COUNTRIES = ["USA", "UK", "Canada", "Australia", "Germany", "Ireland", "Russia", "Georgia", "India", "Other"];
+const COURSES = [
+  "Undergraduate",
+  "Postgraduate",
+  "MBBS",
+  "MD/MS",
+  "Others"
+];
+
+const COUNTRIES = [
+  "India",
+  "Russia",
+  "Uzbekistan",
+  "Georgia",
+  "USA",
+  "UK",
+  "Australia",
+  "Canada",
+  "Others"
+];
+
 
 const ContactModal: React.FC<ContactModalProps> = ({ onClose }) => {
   const [loading, setLoading] = useState(false);
@@ -95,23 +113,23 @@ const ContactModal: React.FC<ContactModalProps> = ({ onClose }) => {
   };
 
   return (
-    <div 
+    <div
       className="fixed inset-0 z-[1000] flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm animate-fade-in"
       onClick={handleOverlayClick}
     >
       <div className="relative bg-white dark:bg-slate-900 w-full max-w-2xl rounded-2xl shadow-2xl overflow-hidden border border-gray-100 dark:border-slate-700 flex flex-col max-h-[95vh]">
-        
+
         {/* Compact Header */}
         <div className="bg-brand-blue p-5 flex items-center justify-between shrink-0">
-           <div className="flex items-center gap-4">
-              <img src={LOGO_URL} alt="Logo" className="h-8 w-auto brightness-100" />
-              <div className="h-6 w-px bg-white/20"></div>
-              <div>
-                 <h2 className="text-lg font-black text-white leading-none mb-1">Unlock Your College Journey</h2>
-                 <p className="text-[10px] text-white/70 font-medium uppercase tracking-wider">Free Counselling & Support</p>
-              </div>
-           </div>
-           <button 
+          <div className="flex items-center gap-4">
+            <img src={LOGO_URL} alt="Logo" className="h-8 w-auto brightness-100" />
+            <div className="h-6 w-px bg-white/20"></div>
+            <div>
+              <h2 className="text-lg font-black text-white leading-none mb-1">Unlock Your College Journey</h2>
+              <p className="text-[10px] text-white/70 font-medium uppercase tracking-wider">Free Counselling & Support</p>
+            </div>
+          </div>
+          <button
             onClick={onClose}
             className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-white hover:text-brand-blue transition-all"
           >
@@ -131,55 +149,62 @@ const ContactModal: React.FC<ContactModalProps> = ({ onClose }) => {
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="space-y-4">
-               
+
               {/* Inputs Grid - Compact */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  <div className="relative">
+                <div className="relative">
+                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <User className="h-4 w-4 text-gray-400" />
+                  </div>
+                  <input
+                    type="text"
+                    placeholder="Full Name*"
+                    required
+                    value={formData.name}
+                    onChange={e => setFormData({ ...formData, name: e.target.value })}
+                    className="w-full pl-9 pr-3 py-2.5 rounded-lg border border-gray-200 dark:border-slate-700 bg-gray-50 dark:bg-slate-800 text-sm font-medium focus:ring-1 focus:ring-[#BB962C] focus:border-[#BB962C] outline-none"
+                  />
+                </div>
+
+                <div className="relative">
+                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <Mail className="h-4 w-4 text-gray-400" />
+                  </div>
+                  <input
+                    type="email"
+                    placeholder="Email Address*"
+                    required
+                    value={formData.email}
+                    onChange={e => setFormData({ ...formData, email: e.target.value })}
+                    className="w-full pl-9 pr-3 py-2.5 rounded-lg border border-gray-200 dark:border-slate-700 bg-gray-50 dark:bg-slate-800 text-sm font-medium focus:ring-1 focus:ring-[#BB962C] focus:border-[#BB962C] outline-none"
+                  />
+                </div>
+
+                <div className="flex gap-2 sm:col-span-2">
+                  <div className="flex items-center justify-center px-3 py-2.5 rounded-lg border border-gray-200 dark:border-slate-700 bg-gray-50 dark:bg-slate-800 text-sm font-medium shrink-0">
+                    <span className="mr-1.5">🇮🇳</span> +91
+                  </div>
+                  <div className="relative flex-1">
                     <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                      <User className="h-4 w-4 text-gray-400" />
+                      <Phone className="h-4 w-4 text-gray-400" />
                     </div>
-                    <input 
-                      type="text" 
-                      placeholder="Full Name*" 
+                    <input
+                      type="tel"
+                      placeholder="Phone Number*"
                       required
-                      value={formData.name}
-                      onChange={e => setFormData({...formData, name: e.target.value})}
+                      maxLength={10}
+                      pattern="[0-9]{10}"
+                      value={formData.phone}
+                      onChange={(e) => {
+                        const value = e.target.value.replace(/\D/g, ""); // allow only digits
+                        if (value.length <= 10) {
+                          setFormData({ ...formData, phone: value });
+                        }
+                      }}
                       className="w-full pl-9 pr-3 py-2.5 rounded-lg border border-gray-200 dark:border-slate-700 bg-gray-50 dark:bg-slate-800 text-sm font-medium focus:ring-1 focus:ring-[#BB962C] focus:border-[#BB962C] outline-none"
                     />
                   </div>
-                  
-                  <div className="relative">
-                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                      <Mail className="h-4 w-4 text-gray-400" />
-                    </div>
-                    <input 
-                      type="email" 
-                      placeholder="Email Address*" 
-                      required
-                      value={formData.email}
-                      onChange={e => setFormData({...formData, email: e.target.value})}
-                      className="w-full pl-9 pr-3 py-2.5 rounded-lg border border-gray-200 dark:border-slate-700 bg-gray-50 dark:bg-slate-800 text-sm font-medium focus:ring-1 focus:ring-[#BB962C] focus:border-[#BB962C] outline-none"
-                    />
-                  </div>
-                  
-                  <div className="flex gap-2 sm:col-span-2">
-                    <div className="flex items-center justify-center px-3 py-2.5 rounded-lg border border-gray-200 dark:border-slate-700 bg-gray-50 dark:bg-slate-800 text-sm font-medium shrink-0">
-                      <span className="mr-1.5">🇮🇳</span> +91
-                    </div>
-                    <div className="relative flex-1">
-                      <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                        <Phone className="h-4 w-4 text-gray-400" />
-                      </div>
-                      <input 
-                        type="tel" 
-                        placeholder="Phone Number*" 
-                        required
-                        value={formData.phone}
-                        onChange={e => setFormData({...formData, phone: e.target.value})}
-                        className="w-full pl-9 pr-3 py-2.5 rounded-lg border border-gray-200 dark:border-slate-700 bg-gray-50 dark:bg-slate-800 text-sm font-medium focus:ring-1 focus:ring-[#BB962C] focus:border-[#BB962C] outline-none"
-                      />
-                    </div>
-                  </div>
+                </div>
               </div>
 
               {/* Options as Pills */}
@@ -191,12 +216,11 @@ const ContactModal: React.FC<ContactModalProps> = ({ onClose }) => {
                       <button
                         key={c}
                         type="button"
-                        onClick={() => setFormData({...formData, course: c})}
-                        className={`px-3 py-1.5 rounded-full border text-xs font-medium transition-all ${
-                          formData.course === c 
-                          ? 'border-brand-blue bg-brand-blue/10 text-brand-blue dark:bg-brand-blue/20 dark:text-white' 
-                          : 'border-gray-200 text-gray-600 hover:border-brand-blue/50 dark:border-slate-600 dark:text-gray-300'
-                        }`}
+                        onClick={() => setFormData({ ...formData, course: c })}
+                        className={`px-3 py-1.5 rounded-full border text-xs font-medium transition-all ${formData.course === c
+                            ? 'border-brand-blue bg-brand-blue/10 text-brand-blue dark:bg-brand-blue/20 dark:text-white'
+                            : 'border-gray-200 text-gray-600 hover:border-brand-blue/50 dark:border-slate-600 dark:text-gray-300'
+                          }`}
                       >
                         {c}
                       </button>
@@ -211,12 +235,11 @@ const ContactModal: React.FC<ContactModalProps> = ({ onClose }) => {
                       <button
                         key={c}
                         type="button"
-                        onClick={() => setFormData({...formData, targetCountry: c})}
-                        className={`px-3 py-1.5 rounded-full border text-xs font-medium transition-all ${
-                          formData.targetCountry === c 
-                          ? 'border-brand-blue bg-brand-blue/10 text-brand-blue dark:bg-brand-blue/20 dark:text-white' 
-                          : 'border-gray-200 text-gray-600 hover:border-brand-blue/50 dark:border-slate-600 dark:text-gray-300'
-                        }`}
+                        onClick={() => setFormData({ ...formData, targetCountry: c })}
+                        className={`px-3 py-1.5 rounded-full border text-xs font-medium transition-all ${formData.targetCountry === c
+                            ? 'border-brand-blue bg-brand-blue/10 text-brand-blue dark:bg-brand-blue/20 dark:text-white'
+                            : 'border-gray-200 text-gray-600 hover:border-brand-blue/50 dark:border-slate-600 dark:text-gray-300'
+                          }`}
                       >
                         {c}
                       </button>
@@ -226,8 +249,8 @@ const ContactModal: React.FC<ContactModalProps> = ({ onClose }) => {
               </div>
 
               {/* Submit Button */}
-              <button 
-                type="submit" 
+              <button
+                type="submit"
                 disabled={loading}
                 className="w-full py-3.5 bg-[#104264] hover:bg-opacity-90 text-white rounded-xl font-bold text-lg transition-all shadow-lg flex items-center justify-center disabled:bg-gray-400 mt-4"
               >
